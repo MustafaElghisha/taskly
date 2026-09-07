@@ -1,19 +1,55 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --blue-800: hsl(216, 100%, 30%);
+  --blue-700: hsl(216, 100%, 40%);
+  --blue-200: hsl(224, 100%, 92%);
+  --blue-100: hsl(232, 100%, 97%);
+  --blue-50: hsl(240, 100%, 99%);
+
+  --slate-800: hsl(215, 87%, 13%);
+  --slate-500: hsl(218, 22%, 40%);
+  --slate-200: hsl(231, 19%, 80%);
+
+  --green-300: hsl(150, 91%, 74%);
+  --red-500: hsl(0, 75%, 42%);
+  --yellow-500: hsl(42, 100%, 50%);
+
+  --primary-gradient: linear-gradient(
+    180deg,
+    var(--blue-800) 0%,
+    var(--blue-700) 100%
+  );
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+
+  --text-display-lg: 3.5rem;
+
+  --text-heading-lg: 2rem;
+
+  --text-title-md: 1.125rem;
+
+  --text-body-md: 0.875rem;
+
+  --text-label-sm: 0.6875rem;
+
+  --color-primary: var(--blue-800);
+  --color-primary-container: var(--blue-700);
+  --color-surface-medium: var(--blue-200);
+  --color-surface-low: var(--blue-100);
+  --color-background: var(--blue-50);
+
+  --color-success: var(--green-300);
+  --color-error: var(--red-500);
+  --color-warning: var(--yellow-500);
+}
+
+@utility bg-primary-gradient {
+  background-image: var(--primary-gradient);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
 }
