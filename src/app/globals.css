@@ -7,10 +7,6 @@
   --blue-100: hsl(232, 100%, 97%);
   --blue-50: hsl(240, 100%, 99%);
 
-  --slate-800: hsl(215, 87%, 13%);
-  --slate-500: hsl(218, 22%, 40%);
-  --slate-200: hsl(231, 19%, 80%);
-
   --green-300: hsl(150, 91%, 74%);
   --red-500: hsl(0, 75%, 42%);
   --yellow-500: hsl(42, 100%, 50%);
@@ -44,6 +40,10 @@
   --color-success: var(--green-300);
   --color-error: var(--red-500);
   --color-warning: var(--yellow-500);
+
+  --color-slate-800: hsl(215, 87%, 13%);
+  --color-slate-500: hsl(218, 22%, 40%);
+  --color-slate-200: hsl(231, 19%, 80%);
 }
 
 @utility bg-primary-gradient {
