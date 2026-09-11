@@ -1,7 +1,9 @@
+import LoginForm from "@/features/auth/components/LoginForm";
+
 export default function page() {
   return (
-    <>
-      <h1>LOGIN PAGE</h1>
-    </>
+    <div className="px-6 py-4 sm:py-36.75">
+      <LoginForm />
+    </div>
   );
 }
