@@ -1,6 +1,6 @@
 import { SignUpSchemaType } from "../schemas/SignUpSchema";
 
-export default async function signUp(data: SignUpSchemaType) {
+export async function signUp(data: SignUpSchemaType) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/signup`,
     {

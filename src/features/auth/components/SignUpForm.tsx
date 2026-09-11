@@ -13,9 +13,9 @@ import { useForm } from "react-hook-form";
 import EyeClosedIcon from "@/assets/icons/EyeClosedIcon.svg";
 import EyeOpenIcon from "@/assets/icons/EyeOpenIcon.svg";
 import { useRouter } from "next/navigation";
-import { SignUpSchema } from "../schemas/SignUpSchema";
+import { SignUpSchema } from "../lib/schemas/SignUpSchema";
 import PasswordRequirements from "./PasswordRequirements";
-import signUp from "../api/signUp";
+import { signUp } from "../lib/auth/signUp";
 
 export default function SignUpForm() {
   const {
@@ -104,7 +104,7 @@ export default function SignUpForm() {
         </Field>
         <Field>
           <FieldLabel htmlFor="jobTitle">
-            Job Title{" "}
+            Job Title
             <span className="hidden leading-0 tracking-normal text-slate-400 sm:inline">
               (Optional)
             </span>
@@ -134,7 +134,7 @@ export default function SignUpForm() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute top-9.75 right-3 cursor-pointer"
+              className="absolute top-11.5 right-3 cursor-pointer sm:top-9.75"
             >
               {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
             </button>
@@ -153,9 +153,7 @@ export default function SignUpForm() {
             )}
           </Field>
         </div>
-
         <PasswordRequirements watchPassword={watchPassword} />
-
         <Button type="submit">Create Account</Button>
         {errors.root && <FieldError>{errors.root.message}</FieldError>}
       </form>
