@@ -9,40 +9,13 @@ import {
 } from "@/components/ui/Field";
 import Input from "@/components/ui/Input";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { login } from "../lib/auth/login";
-import { LoginSchema } from "../lib/schemas/LoginSchema";
 import PasswordInput from "./PasswordInput";
+import { useLogin } from "../hooks/useLogin";
 
 export default function LoginForm() {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    clearErrors,
-    formState: { errors, isSubmitting },
-  } = useForm({ resolver: zodResolver(LoginSchema), mode: "onTouched" });
-
+  const { register, errors, isSubmitting, onSubmit } = useLogin();
   const [showPassword, setShowPassword] = useState(false);
-
-  const router = useRouter();
-
-  const onSubmit = handleSubmit(async (data) => {
-    clearErrors("root");
-
-    try {
-      await login(data);
-      router.push("/project");
-    } catch (error) {
-      setError("root", {
-        message:
-          error instanceof Error ? error.message : "Invalid email or password.",
-      });
-    }
-  });
 
   return (
     <div className="sm:shadow-form-container mx-auto flex max-w-120 flex-col items-center rounded-lg sm:bg-white sm:p-12">
