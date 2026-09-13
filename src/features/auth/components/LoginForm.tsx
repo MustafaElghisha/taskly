@@ -11,10 +11,10 @@ import Input from "@/components/ui/Input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { login } from "../lib/auth/login";
-import { LoginSchema, LoginSchemaType } from "../lib/schemas/LoginSchema";
+import { LoginSchema } from "../lib/schemas/LoginSchema";
 import PasswordInput from "./PasswordInput";
 
 export default function LoginForm() {
@@ -23,7 +23,7 @@ export default function LoginForm() {
     handleSubmit,
     setError,
     clearErrors,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({ resolver: zodResolver(LoginSchema), mode: "onTouched" });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -119,7 +119,9 @@ export default function LoginForm() {
             Forgot Password?
           </Link>
         </div>
-        <Button type="submit">Log In</Button>
+        <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Loading" : "Log In"}
+        </Button>
         {errors.root && <FieldError>{errors.root.message}</FieldError>}
       </form>
 

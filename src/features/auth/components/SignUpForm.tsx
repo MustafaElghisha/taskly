@@ -27,7 +27,7 @@ export default function SignUpForm() {
     clearErrors,
     getFieldState,
     trigger,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(SignUpSchema),
     mode: "onTouched",
@@ -152,7 +152,9 @@ export default function SignUpForm() {
         </div>
 
         <PasswordRequirements watchPassword={watchPassword} />
-        <Button type="submit">Create Account</Button>
+        <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Loading" : "Create Account"}
+        </Button>
         {errors.root && <FieldError>{errors.root.message}</FieldError>}
       </form>
 
