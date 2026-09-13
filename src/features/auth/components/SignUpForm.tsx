@@ -1,10 +1,12 @@
 "use client";
 
 import Button, { buttonVariants } from "@/components/ui/Button";
-import Field from "@/components/ui/Field";
-import FieldDescription from "@/components/ui/FieldDescription";
-import FieldError from "@/components/ui/FieldError";
-import FieldLabel from "@/components/ui/FieldLabel";
+import {
+  Field,
+  FieldLabel,
+  FieldDescription,
+  FieldError,
+} from "@/components/ui/Field";
 import Input from "@/components/ui/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
