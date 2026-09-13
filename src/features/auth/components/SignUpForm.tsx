@@ -48,6 +48,20 @@ export default function SignUpForm() {
 
   const router = useRouter();
 
+  const onSubmit = handleSubmit(async (data) => {
+    clearErrors("root");
+
+    try {
+      await signUp(data);
+      router.push("/login");
+    } catch (error) {
+      setError("root", {
+        message:
+          error instanceof Error ? error.message : "Something went wrong",
+      });
+    }
+  });
+
   return (
     <div className="sm:shadow-form-container mx-auto flex max-w-xl flex-col rounded-lg sm:items-center sm:bg-white sm:p-12">
       <div className="sm:text-center">
@@ -66,19 +80,7 @@ export default function SignUpForm() {
       </div>
 
       <form
-        onSubmit={handleSubmit(async (data) => {
-          clearErrors("root");
-
-          try {
-            await signUp(data);
-            router.push("/login");
-          } catch (error) {
-            setError("root", {
-              message:
-                error instanceof Error ? error.message : "Something went wrong",
-            });
-          }
-        })}
+        onSubmit={onSubmit}
         className="mt-10 mb-16 flex w-full flex-col gap-6 sm:mb-12"
       >
         <Field>

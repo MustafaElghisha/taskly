@@ -11,10 +11,10 @@ import Input from "@/components/ui/Input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { login } from "../lib/auth/login";
-import { LoginSchema } from "../lib/schemas/LoginSchema";
+import { LoginSchema, LoginSchemaType } from "../lib/schemas/LoginSchema";
 import PasswordInput from "./PasswordInput";
 
 export default function LoginForm() {
@@ -30,6 +30,20 @@ export default function LoginForm() {
 
   const router = useRouter();
 
+  const onSubmit = handleSubmit(async (data) => {
+    clearErrors("root");
+
+    try {
+      await login(data);
+      router.push("/project");
+    } catch (error) {
+      setError("root", {
+        message:
+          error instanceof Error ? error.message : "Invalid email or password.",
+      });
+    }
+  });
+
   return (
     <div className="sm:shadow-form-container mx-auto flex max-w-120 flex-col items-center rounded-lg sm:bg-white sm:p-12">
       <div className="text-center">
@@ -42,21 +56,7 @@ export default function LoginForm() {
       </div>
 
       <form
-        onSubmit={handleSubmit(async (data) => {
-          clearErrors("root");
-
-          try {
-            await login(data);
-            router.push("/project");
-          } catch (error) {
-            setError("root", {
-              message:
-                error instanceof Error
-                  ? error.message
-                  : "Invalid email or password.",
-            });
-          }
-        })}
+        onSubmit={onSubmit}
         className="mt-10 mb-16 flex w-full flex-col gap-6 sm:mb-16"
       >
         <Field>
