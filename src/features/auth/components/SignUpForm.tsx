@@ -8,59 +8,17 @@ import {
   FieldError,
 } from "@/components/ui/Field";
 import Input from "@/components/ui/Input";
-import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import { SignUpSchema } from "../lib/schemas/SignUpSchema";
+import { useState } from "react";
 import PasswordRequirements from "./PasswordRequirements";
-import { signUp } from "../lib/auth/signUp";
 import PasswordInput from "./PasswordInput";
+import { useSignUp } from "../hooks/useSignUp";
 
 export default function SignUpForm() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setError,
-    clearErrors,
-    getFieldState,
-    trigger,
-    formState: { errors, isSubmitting },
-  } = useForm({
-    resolver: zodResolver(SignUpSchema),
-    mode: "onTouched",
-    defaultValues: {
-      password: "",
-    },
-  });
-
-  const watchPassword = watch("password");
-
-  useEffect(() => {
-    if (getFieldState("confirmPassword").isDirty) {
-      trigger("confirmPassword");
-    }
-  }, [watchPassword, getFieldState, trigger]);
+  const { register, errors, isSubmitting, watchPassword, onSubmit } =
+    useSignUp();
 
   const [showPassword, setShowPassword] = useState(false);
-
-  const router = useRouter();
-
-  const onSubmit = handleSubmit(async (data) => {
-    clearErrors("root");
-
-    try {
-      await signUp(data);
-      router.push("/login");
-    } catch (error) {
-      setError("root", {
-        message:
-          error instanceof Error ? error.message : "Something went wrong",
-      });
-    }
-  });
 
   return (
     <div className="sm:shadow-form-container mx-auto flex max-w-xl flex-col rounded-lg sm:items-center sm:bg-white sm:p-12">
@@ -122,7 +80,6 @@ export default function SignUpForm() {
             placeholder="e.g. Project Manager"
           />
         </Field>
-
         <div className="flex flex-col gap-x-4 gap-y-6 sm:flex-row">
           <Field className="min-w-0 flex-1">
             <FieldLabel htmlFor="password">Password</FieldLabel>
@@ -150,7 +107,6 @@ export default function SignUpForm() {
             )}
           </Field>
         </div>
-
         <PasswordRequirements watchPassword={watchPassword} />
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Loading" : "Create Account"}
