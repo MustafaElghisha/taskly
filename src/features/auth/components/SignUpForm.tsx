@@ -12,12 +12,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import EyeClosedIcon from "@/assets/icons/EyeClosedIcon.svg";
-import EyeOpenIcon from "@/assets/icons/EyeOpenIcon.svg";
 import { useRouter } from "next/navigation";
 import { SignUpSchema } from "../lib/schemas/SignUpSchema";
 import PasswordRequirements from "./PasswordRequirements";
 import { signUp } from "../lib/auth/signUp";
+import PasswordInput from "./PasswordInput";
 
 export default function SignUpForm() {
   const {
@@ -121,29 +120,20 @@ export default function SignUpForm() {
             placeholder="e.g. Project Manager"
           />
         </Field>
+
         <div className="flex flex-col gap-x-4 gap-y-6 sm:flex-row">
-          <div className="relative min-w-0 flex-1">
-            <Field>
-              <FieldLabel htmlFor="password">Password</FieldLabel>
-              <Input
-                {...register("password")}
-                id="password"
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                aria-invalid={errors.password ? "true" : "false"}
-              />
-              {errors.password && (
-                <FieldError>{errors.password.message}</FieldError>
-              )}
-            </Field>
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute top-11.5 right-3 cursor-pointer sm:top-9.75"
-            >
-              {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
-            </button>
-          </div>
+          <Field className="min-w-0 flex-1">
+            <FieldLabel htmlFor="password">Password</FieldLabel>
+            <PasswordInput
+              {...register("password")}
+              showPassword={showPassword}
+              setShowPassword={setShowPassword}
+              aria-invalid={errors.password ? "true" : "false"}
+            />
+            {errors.password && (
+              <FieldError>{errors.password.message}</FieldError>
+            )}
+          </Field>
           <Field className="min-w-0 flex-1">
             <FieldLabel htmlFor="confirmPassword">Confirm Password</FieldLabel>
             <Input
@@ -158,6 +148,7 @@ export default function SignUpForm() {
             )}
           </Field>
         </div>
+
         <PasswordRequirements watchPassword={watchPassword} />
         <Button type="submit">Create Account</Button>
         {errors.root && <FieldError>{errors.root.message}</FieldError>}

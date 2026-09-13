@@ -9,14 +9,13 @@ import {
 } from "@/components/ui/Field";
 import Input from "@/components/ui/Input";
 import Link from "next/link";
-import EyeClosedIcon from "@/assets/icons/EyeClosedIcon.svg";
-import EyeOpenIcon from "@/assets/icons/EyeOpenIcon.svg";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { login } from "../lib/auth/login";
 import { LoginSchema } from "../lib/schemas/LoginSchema";
+import PasswordInput from "./PasswordInput";
 
 export default function LoginForm() {
   const {
@@ -85,24 +84,16 @@ export default function LoginForm() {
                 Forgot?
               </Link>
             </div>
-            <Input
+            <PasswordInput
               {...register("password")}
-              id="password"
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
+              showPassword={showPassword}
+              setShowPassword={setShowPassword}
               aria-invalid={errors.password ? "true" : "false"}
             />
             {errors.password && (
               <FieldError>{errors.password.message}</FieldError>
             )}
           </Field>
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute top-11.5 right-3 cursor-pointer sm:top-9.75"
-          >
-            {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
-          </button>
         </div>
         <div className="flex items-center justify-between">
           <Field className="flex flex-row items-center gap-2 ps-1">
