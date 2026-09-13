@@ -32,6 +32,9 @@ export default function SignUpForm() {
   } = useForm({
     resolver: zodResolver(SignUpSchema),
     mode: "onTouched",
+    defaultValues: {
+      password: "",
+    },
   });
 
   const watchPassword = watch("password");

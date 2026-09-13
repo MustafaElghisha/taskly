@@ -10,7 +10,7 @@ export default function PasswordRequirements({
 }: PasswordRequirementsProps) {
   const passwordRequirements = [
     {
-      satisfied: watchPassword?.trim().length >= 8,
+      satisfied: watchPassword.trim().length >= 8,
       label: "At least 8 characters",
     },
     {
@@ -18,7 +18,7 @@ export default function PasswordRequirements({
       label: "One uppercase, lowercase, and digit",
     },
     {
-      satisfied: /[!@#%^&*]/.test(watchPassword),
+      satisfied: /[!@#$%^&*]/.test(watchPassword),
       label: "One special character",
     },
   ];
