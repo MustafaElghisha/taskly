@@ -20,7 +20,7 @@ const useLogin = () => {
 
     try {
       await login(data);
-      router.push("/project");
+      router.replace("/project");
     } catch (error) {
       setError("root", {
         message:
