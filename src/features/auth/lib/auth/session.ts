@@ -1,85 +1,90 @@
-const STORAGE_KEY = "auth_session";
+"use server";
 
-export type Session = {
-  access_token: string;
-  refresh_token: string;
-  expires_at: number;
-  createdAt: number;
-  rememberMe: boolean;
+import { cookies } from "next/headers";
+
+const options = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "lax",
+  path: "/",
+} as const;
+
+const refreshTokenOptions = {
+  ...options,
+  maxAge: 60 * 60 * 24 * 30,
 };
 
-export function saveSession(
-  session: Omit<Session, "rememberMe" | "createdAt">,
-  rememberMe: boolean,
-) {
-  const storage = rememberMe ? localStorage : sessionStorage;
-  storage.setItem(
-    STORAGE_KEY,
-    JSON.stringify({ ...session, rememberMe, createdAt: Date.now() }),
-  );
+const accessTokenOptions = {
+  ...options,
+  maxAge: 60 * 60,
+};
+
+export async function setAccessToken(accessToken: string) {
+  const cookieStore = await cookies();
+  cookieStore.set("access_token", accessToken, accessTokenOptions);
 }
 
-export function getSession(): Session | null {
-  return (
-    JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "null") ??
-    JSON.parse(sessionStorage.getItem(STORAGE_KEY) ?? "null")
-  );
+export async function setRefreshToken(refreshToken: string) {
+  const cookieStore = await cookies();
+  cookieStore.set("refresh_token", refreshToken, refreshTokenOptions);
 }
 
-export function clearSession() {
-  localStorage.removeItem(STORAGE_KEY);
-  sessionStorage.removeItem(STORAGE_KEY);
+export async function getAccessToken() {
+  const cookieStore = await cookies();
+  return cookieStore.get("access_token")?.value ?? null;
 }
 
-export function isTokenExpired(session: Session): boolean {
-  return Date.now() / 1000 >= session.expires_at;
+export async function getRefreshToken() {
+  const cookieStore = await cookies();
+  return cookieStore.get("refresh_token")?.value ?? null;
 }
 
-export async function refreshAccessToken(
-  session: Session,
-): Promise<string | null> {
-  if (!session.rememberMe) {
-    if (isTokenExpired(session)) {
-      clearSession();
-      return null;
-    }
-    return session.access_token;
-  }
+export async function clearRefreshToken() {
+  const cookieStore = await cookies();
+  cookieStore.delete("refresh_token");
+}
 
-  const monthOver = Date.now() - session.createdAt > 30 * 24 * 60 * 60 * 1000;
-  if (isTokenExpired(session) && monthOver) {
-    clearSession();
+export async function refreshAccessToken() {
+  const cookieStore = await cookies();
+
+  const refreshToken = await getRefreshToken();
+  if (!refreshToken) {
     return null;
   }
 
-  if (isTokenExpired(session)) {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/token?grant_type=refresh_token`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          apikey: `${process.env.NEXT_PUBLIC_SUPABASE_API_KEY}`,
-        },
-        body: JSON.stringify({ refresh_token: session.refresh_token }),
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/token?grant_type=refresh_token`,
+    {
+      method: "POST",
+      headers: {
+        apikey: process.env.NEXT_PUBLIC_SUPABASE_API_KEY!,
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify({
+        refresh_token: refreshToken,
+      }),
+      cache: "no-store",
+    },
+  );
+  const authResponse = await response.json();
+  if (!response.ok) {
+    cookieStore.delete("access_token");
+    cookieStore.delete("refresh_token");
 
-    if (!res.ok) {
-      clearSession();
-      return null;
-    }
-
-    const data = await res.json();
-    const updated: Session = {
-      ...session,
-      access_token: data.access_token,
-      refresh_token: data.refresh_token,
-      expires_at: data.expires_at,
-    };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-    return updated.access_token;
+    return null;
   }
 
-  return session.access_token;
+  cookieStore.set(
+    "access_token",
+    authResponse.access_token,
+    accessTokenOptions,
+  );
+
+  cookieStore.set(
+    "refresh_token",
+    authResponse.refresh_token,
+    refreshTokenOptions,
+  );
+
+  return authResponse.access_token;
 }
