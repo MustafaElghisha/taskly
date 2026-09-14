@@ -30,6 +30,8 @@
 
   --text-label-sm: 0.6875rem;
 
+  --text-label-xs: 0.625rem;
+
   --color-primary: var(--blue-800);
   --color-primary-container: var(--blue-700);
   --color-surface-medium: var(--blue-200);
