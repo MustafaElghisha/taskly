@@ -24,6 +24,8 @@ import ProjectsIcon from "@/assets/icons/ProjectsIcon.svg";
 import ProjectIcon from "@/assets/icons/ProjectIcon.svg";
 import StatisticsIcon from "@/assets/icons/StatisticsIcon.svg";
 import ArrowIcon from "@/assets/icons/ArrowIcon.svg";
+import { useLogout } from "@/features/auth/hooks/useLogout";
+import { FieldError } from "./ui/Field";
 
 const NAV_ITEMS = [
   {
@@ -50,6 +52,8 @@ export default function MainSidebar({
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isPopoverOpen, setisPopoverOpen] = useState(false);
   const [isAccordionOpen, setIsAccordionOpen] = useState(true);
+
+  const { handleLogout, isLoggingOut, error } = useLogout();
 
   const toggleCollapsed = () => {
     if (isCollapsed) {
@@ -177,10 +181,16 @@ export default function MainSidebar({
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton isCollapsed={isCollapsed} className="text-error">
+            <SidebarMenuButton
+              isCollapsed={isCollapsed}
+              onClick={handleLogout}
+              className="text-error"
+              disabled={isLoggingOut}
+            >
               <LogoutIcon />
-              {!isCollapsed && "Logout"}
+              {!isCollapsed && (isLoggingOut ? "Logging Out" : "Logout")}
             </SidebarMenuButton>
+            {error && <FieldError>{error.message}</FieldError>}
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>

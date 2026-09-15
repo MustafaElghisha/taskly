@@ -1,3 +1,5 @@
+import "server-only";
+
 import { getAccessToken, refreshAccessToken } from "./session";
 
 export async function authenticatedFetch(

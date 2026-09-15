@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import MainLayoutClient from "@/components/MainLayoutClient";
 import { getUserData } from "@/lib/getUserData";
 
@@ -6,7 +7,17 @@ type MainLayoutProps = {
 };
 
 export default async function MainLayout({ children }: MainLayoutProps) {
-  const user = await getUserData();
+  let user;
+
+  try {
+    user = await getUserData();
+  } catch (error) {
+    if (error instanceof Error && error.message === "UNAUTHENTICATED") {
+      redirect("/login");
+    }
+
+    throw error;
+  }
 
   return <MainLayoutClient user={user}>{children}</MainLayoutClient>;
 }
