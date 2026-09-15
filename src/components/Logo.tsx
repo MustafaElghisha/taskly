@@ -1,11 +1,23 @@
 import LogoIcon from "@/assets/icons/LogoIcon.svg";
-export default function Logo() {
+import { cn } from "@/lib/utils";
+
+type LogoProps = { isCollapsed?: boolean; className?: string };
+
+export default function Logo({ isCollapsed, className }: LogoProps) {
   return (
-    <div className="flex items-center gap-2">
+    <div
+      className={cn(
+        "flex items-center gap-2",
+        isCollapsed && "p-2.25",
+        className,
+      )}
+    >
       <LogoIcon />
-      <span className="text-xl leading-7 font-bold tracking-tight text-slate-800">
-        TASKLY
-      </span>
+      {!isCollapsed && (
+        <span className="text-xl leading-7 font-bold tracking-tight text-slate-800">
+          TASKLY
+        </span>
+      )}
     </div>
   );
 }
