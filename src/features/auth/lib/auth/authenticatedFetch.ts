@@ -1,5 +1,3 @@
-"use server";
-
 import { getAccessToken, refreshAccessToken } from "./session";
 
 export async function authenticatedFetch(
@@ -19,6 +17,7 @@ export async function authenticatedFetch(
   let response = await fetch(input, {
     ...init,
     headers: {
+      apikey: process.env.NEXT_PUBLIC_SUPABASE_API_KEY!,
       ...init.headers,
       Authorization: `Bearer ${accessToken}`,
     },
@@ -38,6 +37,7 @@ export async function authenticatedFetch(
   response = await fetch(input, {
     ...init,
     headers: {
+      apikey: process.env.NEXT_PUBLIC_SUPABASE_API_KEY!,
       ...init.headers,
       Authorization: `Bearer ${accessToken}`,
     },
