@@ -1,7 +1,7 @@
 "use server";
 
-import { authenticatedFetch } from "./authenticatedFetch";
-import { clearAccessToken, clearRefreshToken } from "./session";
+import { authenticatedFetch } from "../lib/auth/authenticatedFetch";
+import { clearAccessToken, clearRefreshToken } from "../lib/auth/session";
 
 export default async function logout() {
   try {
