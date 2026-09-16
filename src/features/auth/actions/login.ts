@@ -1,7 +1,11 @@
 "use server";
 
-import { LoginSchemaType } from "../schemas/LoginSchema";
-import { clearRefreshToken, setAccessToken, setRefreshToken } from "./session";
+import {
+  setAccessToken,
+  setRefreshToken,
+  clearRefreshToken,
+} from "../lib/auth/session";
+import { LoginSchemaType } from "../lib/schemas/LoginSchema";
 
 export async function login({ email, password, rememberMe }: LoginSchemaType) {
   const response = await fetch(
