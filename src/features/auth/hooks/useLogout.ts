@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import logout from "../lib/auth/logout";
+import logout from "../actions/logout";
 
 export function useLogout() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);

@@ -2,8 +2,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { SignUpSchema } from "../lib/schemas/SignUpSchema";
 import { useRouter } from "next/navigation";
-import { signUp } from "../lib/auth/signUp";
 import { useEffect } from "react";
+import { signUp } from "../actions/signUp";
 
 const useSignUp = () => {
   const {
