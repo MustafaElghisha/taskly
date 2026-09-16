@@ -1,8 +1,8 @@
 "use server";
 
-import { SignUpSchemaType } from "../schemas/SignUpSchema";
+import { signUpInput } from "../schemas/signUpSchema";
 
-export async function signUp(data: SignUpSchemaType) {
+export async function signUp(data: signUpInput) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/signup`,
     {

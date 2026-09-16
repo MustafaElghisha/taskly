@@ -1,9 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { SignUpSchema } from "../schemas/SignUpSchema";
+
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { signUp } from "../actions/signUp";
+import { signUpInputSchema } from "../schemas/signUpSchema";
 
 const useSignUp = () => {
   const {
@@ -16,7 +17,7 @@ const useSignUp = () => {
     trigger,
     formState: { errors, isSubmitting },
   } = useForm({
-    resolver: zodResolver(SignUpSchema),
+    resolver: zodResolver(signUpInputSchema),
     mode: "onTouched",
     defaultValues: {
       password: "",

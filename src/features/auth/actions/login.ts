@@ -5,9 +5,9 @@ import {
   setRefreshToken,
   clearRefreshToken,
 } from "@/lib/auth/session";
-import { LoginSchemaType } from "../schemas/LoginSchema";
+import { loginInput } from "../schemas/loginSchema";
 
-export async function login({ email, password, rememberMe }: LoginSchemaType) {
+export async function login({ email, password, rememberMe }: loginInput) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/token?grant_type=password`,
     {

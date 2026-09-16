@@ -1,8 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { LoginSchema } from "../schemas/LoginSchema";
 import { useRouter } from "next/navigation";
 import { login } from "../actions/login";
+import { loginInputSchema } from "../schemas/loginSchema";
 
 const useLogin = () => {
   const {
@@ -11,7 +11,7 @@ const useLogin = () => {
     setError,
     clearErrors,
     formState: { errors, isSubmitting },
-  } = useForm({ resolver: zodResolver(LoginSchema), mode: "onTouched" });
+  } = useForm({ resolver: zodResolver(loginInputSchema), mode: "onTouched" });
 
   const router = useRouter();
 
