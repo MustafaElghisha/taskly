@@ -3,20 +3,7 @@
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
-import {
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuLink,
-} from "./ui/Sidebar";
-import Logo from "./Logo";
-import { Separator } from "./ui/Separator";
 
-import ProjectMenu from "./ProjectMenu";
 import LogoutIcon from "@/assets/icons/LogoutIcon.svg";
 import CollapseIcon from "@/assets/icons/CollapseIcon.svg";
 import CloseIcon from "@/assets/icons/CloseIcon.svg";
@@ -25,7 +12,20 @@ import ProjectIcon from "@/assets/icons/ProjectIcon.svg";
 import StatisticsIcon from "@/assets/icons/StatisticsIcon.svg";
 import ArrowIcon from "@/assets/icons/ArrowIcon.svg";
 import { useLogout } from "@/features/auth/hooks/useLogout";
-import { FieldError } from "./ui/Field";
+import Logo from "@/components/Logo";
+import { FieldError } from "@/components/ui/Field";
+import { Separator } from "@/components/ui/Separator";
+import {
+  SidebarHeader,
+  SidebarContent,
+  SidebarGroup,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuLink,
+  SidebarMenuButton,
+  SidebarFooter,
+} from "@/components/ui/Sidebar";
+import ProjectMenu from "./ProjectMenu";
 
 const NAV_ITEMS = [
   {
