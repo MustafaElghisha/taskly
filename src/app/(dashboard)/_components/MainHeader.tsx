@@ -1,7 +1,8 @@
 import BurgerMenuIcon from "@/assets/icons/BurgerMenuIcon.svg";
-import UserInfo from "./UserInfo";
-import { Separator } from "./ui/Separator";
+import { Separator } from "@/components/ui/Separator";
+
 import { UserData } from "@/lib/getUserData";
+import UserInfo from "./UserInfo";
 
 type MainHeaderProps = {
   toggleSidebar: () => void;
