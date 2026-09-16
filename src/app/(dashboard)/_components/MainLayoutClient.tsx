@@ -1,10 +1,10 @@
 "use client";
 
-import MainHeader from "@/components/MainHeader";
-import MainSidebar from "@/components/MainSidebar";
-import MobileNavigation from "@/components/MobileNavigation";
+import MobileNavigation from "@/app/(dashboard)/_components/MobileNavigation";
 import { UserData } from "@/lib/getUserData";
 import { useState } from "react";
+import MainSidebar from "./MainSidebar";
+import MainHeader from "./MainHeader";
 
 type MainLayoutProps = { children: React.ReactNode; user: UserData };
 
