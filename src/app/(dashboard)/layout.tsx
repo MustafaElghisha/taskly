@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import MainLayoutClient from "@/components/MainLayoutClient";
+import MainLayoutClient from "@/app/(dashboard)/_components/MainLayoutClient";
 import { getUserData } from "@/lib/getUserData";
 
 type MainLayoutProps = {
