@@ -1,3 +1,5 @@
+"use server";
+
 import { SignUpSchemaType } from "../schemas/SignUpSchema";
 
 export async function signUp(data: SignUpSchemaType) {

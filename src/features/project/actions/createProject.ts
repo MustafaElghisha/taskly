@@ -1,6 +1,6 @@
 "use server";
 
-import { authenticatedFetch } from "@/features/auth/lib/auth/authenticatedFetch";
+import { authenticatedFetch } from "@/lib/auth/authenticatedFetch";
 
 export async function createProject(data: {
   title: string;

@@ -4,7 +4,7 @@ import {
   setAccessToken,
   setRefreshToken,
   clearRefreshToken,
-} from "../lib/auth/session";
+} from "@/lib/auth/session";
 import { LoginSchemaType } from "../schemas/LoginSchema";
 
 export async function login({ email, password, rememberMe }: LoginSchemaType) {

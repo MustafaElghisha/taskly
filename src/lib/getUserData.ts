@@ -1,4 +1,6 @@
-import { authenticatedFetch } from "@/features/auth/lib/auth/authenticatedFetch";
+"use server";
+
+import { authenticatedFetch } from "@/lib/auth/authenticatedFetch";
 
 export type UserData = {
   name: string;
