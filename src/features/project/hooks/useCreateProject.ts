@@ -2,8 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { createProjectSchema } from "../schemas/createProjectSchema";
 import { createProject } from "../actions/createProject";
+import { createProjectInputSchema } from "../schemas/createProjectSchema";
 
 const useCreateProject = () => {
   const {
@@ -15,7 +15,7 @@ const useCreateProject = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({
-    resolver: zodResolver(createProjectSchema),
+    resolver: zodResolver(createProjectInputSchema),
     mode: "onTouched",
     defaultValues: {
       title: "",

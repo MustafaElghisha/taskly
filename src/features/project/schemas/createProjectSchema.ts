@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const createProjectSchema = z.object({
+export const createProjectInputSchema = z.object({
   title: z
     .string()
     .trim()
@@ -15,4 +15,4 @@ export const createProjectSchema = z.object({
     .optional(),
 });
 
-export type CreateProject = z.infer<typeof createProjectSchema>;
+export type CreateProjectInput = z.infer<typeof createProjectInputSchema>;
