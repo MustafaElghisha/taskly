@@ -5,7 +5,7 @@ import {
   setRefreshToken,
   clearRefreshToken,
 } from "../lib/auth/session";
-import { LoginSchemaType } from "../lib/schemas/LoginSchema";
+import { LoginSchemaType } from "../schemas/LoginSchema";
 
 export async function login({ email, password, rememberMe }: LoginSchemaType) {
   const response = await fetch(

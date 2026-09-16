@@ -1,4 +1,4 @@
-import { SignUpSchemaType } from "../lib/schemas/SignUpSchema";
+import { SignUpSchemaType } from "../schemas/SignUpSchema";
 
 export async function signUp(data: SignUpSchemaType) {
   const response = await fetch(

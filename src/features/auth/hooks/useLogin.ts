@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { LoginSchema } from "../lib/schemas/LoginSchema";
+import { LoginSchema } from "../schemas/LoginSchema";
 import { useRouter } from "next/navigation";
 import { login } from "../actions/login";
 
