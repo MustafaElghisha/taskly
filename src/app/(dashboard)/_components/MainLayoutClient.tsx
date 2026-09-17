@@ -5,6 +5,7 @@ import { UserData } from "@/lib/getUserData";
 import { useState } from "react";
 import MainSidebar from "./MainSidebar";
 import MainHeader from "./MainHeader";
+import MainBreadCrump from "./MainBreadCrump";
 
 type MainLayoutProps = { children: React.ReactNode; user: UserData };
 
@@ -28,7 +29,10 @@ export default function MainLayoutClient({ children, user }: MainLayoutProps) {
           user={user}
         />
 
-        <main className="min-h-0 flex-1 overflow-y-auto">{children}</main>
+        <main className="min-h-0 flex-1 scrollbar-none overflow-y-auto">
+          <MainBreadCrump />
+          {children}
+        </main>
 
         <MobileNavigation />
       </div>
