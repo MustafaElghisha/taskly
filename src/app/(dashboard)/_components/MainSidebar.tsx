@@ -94,7 +94,7 @@ export default function MainSidebar({
     <aside
       id="main-navigation"
       className={cn(
-        "bg-surface-low fixed flex h-dvh w-full min-w-3xs shrink-0 flex-col gap-10 p-4 sm:static sm:w-fit sm:translate-x-0!",
+        "bg-surface-low fixed z-10 flex h-dvh w-full min-w-3xs shrink-0 flex-col gap-10 p-4 sm:static sm:w-fit sm:translate-x-0!",
         isSidebarOpen ? "translate-x-0" : "-translate-x-full",
         isCollapsed && "min-w-0 items-center px-5",
       )}
