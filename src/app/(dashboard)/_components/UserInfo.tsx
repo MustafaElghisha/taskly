@@ -1,7 +1,4 @@
-type UserInfoProps = {
-  name: string;
-  jobTitle?: string;
-};
+import { User } from "@/types";
 
 const getAvatarName = (name: string) => {
   const names = name.split(" ");
@@ -10,7 +7,7 @@ const getAvatarName = (name: string) => {
     : names[0].slice(0, 2);
 };
 
-export default function UserInfo({ name, jobTitle }: UserInfoProps) {
+export default function UserInfo({ name, jobTitle }: User) {
   return (
     <div className="flex gap-3.75">
       <div className="hidden flex-col items-end justify-center sm:flex">

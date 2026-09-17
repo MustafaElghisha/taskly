@@ -2,12 +2,7 @@
 
 import { authenticatedFetch } from "@/lib/auth/authenticatedFetch";
 
-export type UserData = {
-  name: string;
-  jobTitle?: string;
-};
-
-export async function getUserData(): Promise<UserData> {
+export async function getUserData() {
   const response = await authenticatedFetch(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/user`,
   );
@@ -19,7 +14,7 @@ export async function getUserData(): Promise<UserData> {
   const user = await response.json();
 
   return {
-    name: user.user_metadata.name,
-    jobTitle: user.user_metadata.department,
+    name: user.user_metadata.name as string,
+    jobTitle: user.user_metadata.department as string,
   };
 }

@@ -1,13 +1,13 @@
 "use client";
 
 import MobileNavigation from "@/app/(dashboard)/_components/MobileNavigation";
-import { UserData } from "@/lib/getUserData";
 import { useState } from "react";
 import MainSidebar from "./MainSidebar";
 import MainHeader from "./MainHeader";
 import MainBreadCrump from "./MainBreadCrump";
+import { User } from "@/types";
 
-type MainLayoutProps = { children: React.ReactNode; user: UserData };
+type MainLayoutProps = { children: React.ReactNode; user: User };
 
 export default function MainLayoutClient({ children, user }: MainLayoutProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
