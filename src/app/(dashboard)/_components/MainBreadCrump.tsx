@@ -22,6 +22,8 @@ export default function MainBreadCrump() {
   const routeSegments = pathName.split("/");
   routeSegments.shift();
 
+  if (routeSegments.length === 1) return null;
+
   return (
     <BreadCrump className="hidden px-8 pt-6 sm:block">
       <BreadCrumpList>
