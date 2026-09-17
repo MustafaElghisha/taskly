@@ -12,8 +12,9 @@ import {
 import Input from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { Separator } from "@/components/ui/Separator";
-import Button from "@/components/ui/Button";
+import Button, { buttonVariants } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export default function CreateProjectForm() {
   const { register, errors, onSubmit, isSubmitting, watchDescription } =
@@ -81,9 +82,12 @@ export default function CreateProjectForm() {
             </FieldDescription>
           </Field>
           <div className="flex flex-col-reverse items-center justify-between gap-y-7 pt-4 sm:flex-row">
-            <Button variant={"ghost"} type="button">
+            <Link
+              href={"/project"}
+              className={buttonVariants({ variant: "ghost" })}
+            >
               Back
-            </Button>
+            </Link>
             <Button
               type="submit"
               disabled={isSubmitting}
