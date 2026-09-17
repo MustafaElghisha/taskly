@@ -4,7 +4,6 @@
   --blue-800: hsl(216, 100%, 30%);
   --blue-700: hsl(216, 100%, 40%);
   --blue-200: hsl(224, 100%, 92%);
-  --blue-150: hsl(227, 100%, 95%);
   --blue-100: hsl(232, 100%, 97%);
   --blue-50: hsl(240, 100%, 99%);
 
@@ -52,8 +51,10 @@
   --color-slate-400: hsl(230, 7%, 49%);
   --color-slate-200: hsl(231, 19%, 80%);
 
+  --color-blue-150: hsl(227, 100%, 95%);
+  --color-red-100: hsl(6, 100%, 92%);
+
   --shadow-form-container: 0px 24px 48px 0px hsla(215, 87%, 13%, 0.06);
-  --color-blue-150: var(--blue-150);
 }
 
 @utility bg-primary-gradient {
