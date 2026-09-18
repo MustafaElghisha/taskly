@@ -47,7 +47,7 @@ export default async function ProjectPage() {
         className={buttonVariants({
           variant: "primary",
           className:
-            "fixed right-6 bottom-20 rounded-xl p-5.25! leading-0 sm:hidden",
+            "fixed right-5 bottom-21 rounded-xl p-5.25! leading-0 sm:hidden",
         })}
       >
         <AddIcon />
