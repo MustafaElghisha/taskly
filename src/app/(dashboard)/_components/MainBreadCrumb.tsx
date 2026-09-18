@@ -2,12 +2,12 @@ import { usePathname } from "next/navigation";
 
 import {
   BreadcrumbSeparator,
-  BreadCrump,
-  BreadCrumpItem,
-  BreadCrumpLink,
-  BreadCrumpList,
-  BreadCrumpPage,
-} from "@/components/ui/BreadCrump";
+  BreadCrumb,
+  BreadCrumbItem,
+  BreadCrumbLink,
+  BreadCrumbList,
+  BreadCrumbPage,
+} from "@/components/ui/BreadCrumb";
 import { Fragment } from "react/jsx-runtime";
 
 const getRouteUrl = (pathName: string, route: string) => {
@@ -16,7 +16,7 @@ const getRouteUrl = (pathName: string, route: string) => {
   return routeUrl;
 };
 
-export default function MainBreadCrump() {
+export default function MainBreadCrumb() {
   const pathName = usePathname();
 
   const routeSegments = pathName.split("/");
@@ -25,27 +25,27 @@ export default function MainBreadCrump() {
   if (routeSegments.length === 1) return null;
 
   return (
-    <BreadCrump className="hidden px-8 pt-6 sm:block">
-      <BreadCrumpList>
+    <BreadCrumb className="hidden px-8 pt-6 sm:block">
+      <BreadCrumbList>
         {routeSegments.map((route) => {
           const isLast = route === routeSegments.at(-1);
 
           return (
             <Fragment key={route}>
-              <BreadCrumpItem>
+              <BreadCrumbItem>
                 {isLast ? (
-                  <BreadCrumpPage>{route}</BreadCrumpPage>
+                  <BreadCrumbPage>{route}</BreadCrumbPage>
                 ) : (
-                  <BreadCrumpLink href={getRouteUrl(pathName, route)}>
+                  <BreadCrumbLink href={getRouteUrl(pathName, route)}>
                     {route}
-                  </BreadCrumpLink>
+                  </BreadCrumbLink>
                 )}
-              </BreadCrumpItem>
+              </BreadCrumbItem>
               {!isLast && <BreadcrumbSeparator />}
             </Fragment>
           );
         })}
-      </BreadCrumpList>
-    </BreadCrump>
+      </BreadCrumbList>
+    </BreadCrumb>
   );
 }

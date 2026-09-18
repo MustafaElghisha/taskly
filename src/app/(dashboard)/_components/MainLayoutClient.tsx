@@ -4,7 +4,7 @@ import MobileNavigation from "@/app/(dashboard)/_components/MobileNavigation";
 import { useState } from "react";
 import MainSidebar from "./MainSidebar";
 import MainHeader from "./MainHeader";
-import MainBreadCrump from "./MainBreadCrump";
+import MainBreadCrumb from "./MainBreadCrumb";
 import { User } from "@/types";
 
 type MainLayoutProps = { children: React.ReactNode; user: User };
@@ -30,7 +30,7 @@ export default function MainLayoutClient({ children, user }: MainLayoutProps) {
         />
 
         <main className="min-h-0 flex-1 scrollbar-none overflow-y-auto">
-          <MainBreadCrump />
+          <MainBreadCrumb />
           {children}
         </main>
 

@@ -3,14 +3,14 @@ import Link from "next/link";
 
 import ChevronRightIcon from "@/assets/icons/ChevronRightIcon.svg";
 
-function BreadCrump({
+function BreadCrumb({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"nav">) {
-  return <nav aria-label="breadcrump" className={cn(className)} {...props} />;
+  return <nav aria-label="BreadCrumb" className={cn(className)} {...props} />;
 }
 
-function BreadCrumpList({
+function BreadCrumbList({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"ol">) {
@@ -25,21 +25,21 @@ function BreadCrumpList({
   );
 }
 
-function BreadCrumpItem({
+function BreadCrumbItem({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"li">) {
   return <li className={cn(className)} {...props} />;
 }
 
-function BreadCrumpLink({
+function BreadCrumbLink({
   className,
   ...props
 }: React.ComponentPropsWithRef<typeof Link>) {
   return <Link className={cn("text-slate-600/60", className)} {...props} />;
 }
 
-function BreadCrumpPage({
+function BreadCrumbPage({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"span">) {
@@ -63,10 +63,10 @@ function BreadcrumbSeparator({
 }
 
 export {
-  BreadCrump,
-  BreadCrumpList,
-  BreadCrumpItem,
-  BreadCrumpLink,
-  BreadCrumpPage,
+  BreadCrumb,
+  BreadCrumbList,
+  BreadCrumbItem,
+  BreadCrumbLink,
+  BreadCrumbPage,
   BreadcrumbSeparator,
 };
