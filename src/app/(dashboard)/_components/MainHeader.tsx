@@ -1,13 +1,13 @@
 import BurgerMenuIcon from "@/assets/icons/BurgerMenuIcon.svg";
 import { Separator } from "@/components/ui/Separator";
 
-import { UserData } from "@/lib/getUserData";
 import UserInfo from "./UserInfo";
+import { User } from "@/types";
 
 type MainHeaderProps = {
   toggleSidebar: () => void;
   isSidebarOpen: boolean;
-  user: UserData;
+  user: User;
 };
 
 export default function MainHeader({
