@@ -2,8 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
-
 import LogoutIcon from "@/assets/icons/LogoutIcon.svg";
 import CollapseIcon from "@/assets/icons/CollapseIcon.svg";
 import CloseIcon from "@/assets/icons/CloseIcon.svg";
@@ -11,7 +9,6 @@ import ProjectsIcon from "@/assets/icons/ProjectsIcon.svg";
 import ProjectIcon from "@/assets/icons/ProjectIcon.svg";
 import StatisticsIcon from "@/assets/icons/StatisticsIcon.svg";
 import ArrowIcon from "@/assets/icons/ArrowIcon.svg";
-import { useLogout } from "@/features/auth/hooks/useLogout";
 import Logo from "@/components/Logo";
 import { FieldError } from "@/components/ui/Field";
 import { Separator } from "@/components/ui/Separator";
@@ -25,7 +22,10 @@ import {
   SidebarMenuButton,
   SidebarFooter,
 } from "@/components/ui/Sidebar";
-import ProjectMenu from "./ProjectMenu";
+import ProjectMenuPopover from "./ProjectMenuPopover";
+import { useSidebar } from "../_hooks/useSidebar";
+import { useClickOutside } from "../_hooks/useClickOutside";
+import ProjectMenuAccordion from "./ProjectMenuAccordion";
 
 const NAV_ITEMS = [
   {
@@ -49,54 +49,29 @@ export default function MainSidebar({
   toggleSidebar,
   isSidebarOpen,
 }: SidebarProps) {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isPopoverOpen, setisPopoverOpen] = useState(false);
-  const [isAccordionOpen, setIsAccordionOpen] = useState(true);
+  const {
+    isCollapsed,
+    toggleCollapsed,
+    isPopoverOpen,
+    setIsPopoverOpen,
+    isAccordionOpen,
+    toggleActiveProject,
+    error,
+    isLoggingOut,
+    handleLogout,
+  } = useSidebar();
 
-  const { handleLogout, isLoggingOut, error } = useLogout();
-
-  const toggleCollapsed = () => {
-    if (isCollapsed) {
-      setisPopoverOpen(false);
-    } else {
-      setIsAccordionOpen(false);
-    }
-    setIsCollapsed(!isCollapsed);
-  };
-
-  const toggleActiveProject = () => {
-    if (isCollapsed) {
-      setisPopoverOpen(!isPopoverOpen);
-    } else {
-      setIsAccordionOpen(!isAccordionOpen);
-    }
-  };
+  const { ref } = useClickOutside<HTMLLIElement>(() => setIsPopoverOpen(false));
 
   const pathname = usePathname();
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 640px)");
-
-    const handleChange = (e: MediaQueryListEvent | MediaQueryList) => {
-      if (e.matches) {
-        setIsCollapsed(false);
-      }
-    };
-
-    handleChange(mediaQuery);
-
-    mediaQuery.addEventListener("change", handleChange);
-
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
 
   return (
     <aside
       id="main-navigation"
       className={cn(
-        "bg-surface-low fixed z-10 flex h-dvh w-full min-w-3xs shrink-0 flex-col gap-10 p-4 sm:static sm:w-fit sm:translate-x-0!",
+        "bg-surface-low fixed z-10 flex h-dvh w-full shrink-0 flex-col gap-10 p-4 sm:static sm:max-w-3xs sm:translate-x-0!",
         isSidebarOpen ? "translate-x-0" : "-translate-x-full",
-        isCollapsed && "min-w-0 items-center px-5",
+        isCollapsed && "w-fit min-w-0 items-center px-5",
       )}
     >
       <SidebarHeader>
@@ -131,6 +106,7 @@ export default function MainSidebar({
                 "bg-surface-medium relative flex flex-col items-start rounded-t-md",
                 isCollapsed && "rounded-sm bg-white",
               )}
+              ref={ref}
             >
               <SidebarMenuButton
                 isCollapsed={isCollapsed}
@@ -139,7 +115,9 @@ export default function MainSidebar({
                 <ProjectIcon />
                 {!isCollapsed && (
                   <>
-                    <span className="truncate">Active Project Na...</span>
+                    <span className="line-clamp-1 flex-1 text-start">
+                      Active Project Name
+                    </span>
                     <ArrowIcon
                       className={cn(
                         "ml-auto",
@@ -149,19 +127,8 @@ export default function MainSidebar({
                   </>
                 )}
               </SidebarMenuButton>
-              <div
-                className={cn(
-                  "absolute bottom-0 grid w-full translate-y-full rounded-b-sm bg-white",
-                  isAccordionOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
-                )}
-              >
-                <ProjectMenu className="overflow-hidden" />
-              </div>
-              {isCollapsed && isPopoverOpen && (
-                <div className="bg-surface-medium absolute top-0 -right-5 min-w-3xs translate-x-full rounded-e-sm">
-                  <ProjectMenu />
-                </div>
-              )}
+              <ProjectMenuAccordion isAccordionOpen={isAccordionOpen} />
+              {isCollapsed && isPopoverOpen && <ProjectMenuPopover />}
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
