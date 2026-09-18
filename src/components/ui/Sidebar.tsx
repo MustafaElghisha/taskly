@@ -46,7 +46,7 @@ function SidebarMenu({
 function SidebarMenuItem({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<"li">) {
+}: React.ComponentPropsWithRef<"li">) {
   return <li className={cn("", className)} {...props} />;
 }
 
