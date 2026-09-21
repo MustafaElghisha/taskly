@@ -29,7 +29,7 @@ export default function MainLayoutClient({ children, user }: MainLayoutProps) {
           user={user}
         />
 
-        <main className="min-h-0 flex-1 scrollbar-none overflow-y-auto">
+        <main className="flex-1 scrollbar-none overflow-y-auto">
           <MainBreadCrumb />
           {children}
         </main>
