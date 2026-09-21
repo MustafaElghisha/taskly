@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import MainLayoutClient from "@/app/(dashboard)/_components/MainLayoutClient";
-import { getUserData } from "@/lib/getUserData";
+import { getUserData } from "@/app/(dashboard)/_actions/getUserData";
 
 type MainLayoutProps = {
   children: React.ReactNode;
