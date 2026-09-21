@@ -16,7 +16,7 @@ export default function MainHeader({
   user,
 }: MainHeaderProps) {
   return (
-    <div>
+    <>
       <header className="ml-auto flex w-full items-center justify-between px-6 py-5 sm:justify-end sm:px-8 sm:py-3">
         <div className="flex items-center gap-4 sm:hidden">
           <button
@@ -36,6 +36,6 @@ export default function MainHeader({
         <UserInfo name={user.name} jobTitle={user.jobTitle} />
       </header>
       <Separator />
-    </div>
+    </>
   );
 }
