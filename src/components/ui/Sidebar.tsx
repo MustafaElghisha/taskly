@@ -17,23 +17,23 @@ function SidebarContent({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
-  return <div className={cn("flex flex-col", className)} {...props} />;
+  return (
+    <div className={cn("flex flex-1 flex-col gap-4", className)} {...props} />
+  );
 }
 
 function SidebarFooter({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
-  return <div className={cn("mt-auto pt-6", className)} {...props} />;
+  return <div className={cn("mt-auto", className)} {...props} />;
 }
 
 function SidebarGroup({
   className,
   ...props
 }: React.ComponentPropsWithRef<"div">) {
-  return (
-    <div className={cn("py-4 first:pt-0 last:pb-0", className)} {...props} />
-  );
+  return <div className={cn("", className)} {...props} />;
 }
 
 function SidebarMenu({
