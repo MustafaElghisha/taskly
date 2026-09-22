@@ -1,13 +1,12 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+
 import LogoutIcon from "@/assets/icons/LogoutIcon.svg";
 import CollapseIcon from "@/assets/icons/CollapseIcon.svg";
 import CloseIcon from "@/assets/icons/CloseIcon.svg";
-import ProjectsIcon from "@/assets/icons/ProjectsIcon.svg";
 import ProjectIcon from "@/assets/icons/ProjectIcon.svg";
-import StatisticsIcon from "@/assets/icons/StatisticsIcon.svg";
 import ArrowIcon from "@/assets/icons/ArrowIcon.svg";
 import Logo from "@/components/Logo";
 import { FieldError } from "@/components/ui/Field";
@@ -26,19 +25,8 @@ import ProjectMenuPopover from "./ProjectMenuPopover";
 import { useSidebar } from "../_hooks/useSidebar";
 import { useClickOutside } from "../_hooks/useClickOutside";
 import ProjectMenuAccordion from "./ProjectMenuAccordion";
-
-const NAV_ITEMS = [
-  {
-    title: "Projects",
-    url: "/project",
-    Icon: ProjectsIcon,
-  },
-  {
-    title: "My Statistics",
-    url: "/",
-    Icon: StatisticsIcon,
-  },
-];
+import { NAV_ITEMS } from "../_constants/routes";
+import { useProject } from "@/features/project/hooks/useProject";
 
 type SidebarProps = {
   toggleSidebar: () => void;
@@ -64,32 +52,36 @@ export default function MainSidebar({
   const { ref } = useClickOutside<HTMLLIElement>(() => setIsPopoverOpen(false));
 
   const pathname = usePathname();
+  const { projectId } = useParams();
+  const { project } = useProject();
+  const isCurrentProject = project?.id === projectId;
 
   return (
     <aside
       id="main-navigation"
       className={cn(
-        "bg-surface-low fixed z-10 flex h-dvh w-full shrink-0 flex-col gap-10 p-4 sm:static sm:max-w-3xs sm:translate-x-0!",
+        "bg-surface-low fixed z-10 flex h-dvh w-full shrink-0 flex-col gap-8 p-4 sm:static sm:max-w-3xs sm:translate-x-0!",
         isSidebarOpen ? "translate-x-0" : "-translate-x-full",
         isCollapsed && "w-fit min-w-0 items-center px-5",
       )}
     >
-      <SidebarHeader>
+      <SidebarHeader className="sm:ps-1">
         <Logo isCollapsed={isCollapsed} className="p-1" />
         <button className="cursor-pointer sm:hidden" onClick={toggleSidebar}>
           <CloseIcon />
         </button>
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent className={cn(!isCollapsed && "overflow-y-auto")}>
         <SidebarGroup>
           <SidebarMenu>
-            {NAV_ITEMS.map(({ title, url, Icon }) => (
-              <SidebarMenuItem key={url}>
+            {NAV_ITEMS.map(({ title, segment, Icon }) => (
+              <SidebarMenuItem key={segment}>
                 <SidebarMenuLink
-                  href={url}
+                  href={`/${segment}`}
                   isCollapsed={isCollapsed}
-                  isActive={pathname === url}
+                  isActive={pathname === `/${segment}`}
+                  className="capitalize"
                 >
                   <Icon />
                   {!isCollapsed && title}
@@ -98,40 +90,44 @@ export default function MainSidebar({
             ))}
           </SidebarMenu>
         </SidebarGroup>
-        <Separator />
-        <SidebarGroup>
-          <SidebarMenu>
-            <SidebarMenuItem
-              className={cn(
-                "bg-surface-medium relative flex flex-col items-start rounded-t-md",
-                isCollapsed && "rounded-sm bg-white",
-              )}
-              ref={ref}
-            >
-              <SidebarMenuButton
-                isCollapsed={isCollapsed}
-                onClick={toggleActiveProject}
-              >
-                <ProjectIcon />
-                {!isCollapsed && (
-                  <>
-                    <span className="line-clamp-1 flex-1 text-start">
-                      Active Project Name
-                    </span>
-                    <ArrowIcon
-                      className={cn(
-                        "ml-auto",
-                        !isAccordionOpen && "rotate-180",
-                      )}
-                    />
-                  </>
+
+        {projectId && <Separator />}
+
+        {projectId && (
+          <SidebarGroup>
+            <SidebarMenu>
+              <SidebarMenuItem
+                className={cn(
+                  "bg-surface-medium relative flex flex-col items-start rounded-t-md",
+                  isCollapsed && "rounded-sm bg-white",
                 )}
-              </SidebarMenuButton>
-              <ProjectMenuAccordion isAccordionOpen={isAccordionOpen} />
-              {isCollapsed && isPopoverOpen && <ProjectMenuPopover />}
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroup>
+                ref={ref}
+              >
+                <SidebarMenuButton
+                  isCollapsed={isCollapsed}
+                  onClick={toggleActiveProject}
+                >
+                  <ProjectIcon />
+                  {!isCollapsed && (
+                    <>
+                      <span className="line-clamp-1 flex-1 text-start">
+                        {isCurrentProject && project?.name}
+                      </span>
+                      <ArrowIcon
+                        className={cn(
+                          "ml-auto",
+                          !isAccordionOpen && "rotate-180",
+                        )}
+                      />
+                    </>
+                  )}
+                </SidebarMenuButton>
+                <ProjectMenuAccordion isAccordionOpen={isAccordionOpen} />
+                {isCollapsed && isPopoverOpen && <ProjectMenuPopover />}
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroup>
+        )}
       </SidebarContent>
 
       <SidebarFooter>
