@@ -2,7 +2,7 @@
 
 import { authenticatedFetch } from "@/lib/auth/authenticatedFetch";
 
-export async function getUserData() {
+export async function getUser() {
   const response = await authenticatedFetch(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/user`,
   );
