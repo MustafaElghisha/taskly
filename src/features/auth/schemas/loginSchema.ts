@@ -10,4 +10,4 @@ export const loginInputSchema = z.object({
   rememberMe: z.boolean().default(false),
 });
 
-export type loginInput = z.infer<typeof loginInputSchema>;
+export type LoginInput = z.infer<typeof loginInputSchema>;
