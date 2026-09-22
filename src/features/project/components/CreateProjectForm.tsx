@@ -44,17 +44,17 @@ export default function CreateProjectForm() {
           onSubmit={onSubmit}
         >
           <Field>
-            <FieldLabel htmlFor="project-title">
+            <FieldLabel htmlFor="project-name">
               Project TITLE <span className="text-error">*</span>
             </FieldLabel>
             <Input
-              id="project-title"
+              id="project-name"
               type="text"
               placeholder="e.g. Tasks Management project"
-              aria-invalid={errors.title ? "true" : "false"}
-              {...register("title")}
+              aria-invalid={errors.name ? "true" : "false"}
+              {...register("name")}
             />
-            {errors.title && <FieldError>{errors.title.message}</FieldError>}
+            {errors.name && <FieldError>{errors.name.message}</FieldError>}
           </Field>
           <Field>
             <div className="flex items-center justify-between">

@@ -1,7 +1,7 @@
 import z from "zod";
 
 export const createProjectInputSchema = z.object({
-  title: z
+  name: z
     .string()
     .trim()
     .nonempty("Project title is required.")

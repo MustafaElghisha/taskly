@@ -18,7 +18,7 @@ const useCreateProject = () => {
     resolver: zodResolver(createProjectInputSchema),
     mode: "onTouched",
     defaultValues: {
-      title: "",
+      name: "",
       description: "",
     },
   });

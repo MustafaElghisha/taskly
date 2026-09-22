@@ -3,7 +3,7 @@
 import { authenticatedFetch } from "@/lib/auth/authenticatedFetch";
 
 export async function createProject(data: {
-  title: string;
+  name: string;
   description?: string;
 }) {
   const response = await authenticatedFetch(
@@ -15,7 +15,7 @@ export async function createProject(data: {
         Prefer: "return=minimal",
       },
       body: JSON.stringify({
-        name: data.title,
+        name: data.name,
         description: data.description,
       }),
     },
