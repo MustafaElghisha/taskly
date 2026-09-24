@@ -53,6 +53,7 @@
 
   --color-blue-150: hsl(227, 100%, 95%);
   --color-red-100: hsl(6, 100%, 92%);
+  --color-green-900: hsla(159, 100%, 16%, 1);
 
   --shadow-form-container: 0px 24px 48px 0px hsla(215, 87%, 13%, 0.06);
 }
