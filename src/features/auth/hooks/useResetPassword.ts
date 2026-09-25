@@ -19,8 +19,8 @@ const useResetPassword = () => {
     trigger,
     formState: { errors, isSubmitting },
   } = useForm<ResetPasswordInput>({
-    resolver: zodResolver(resetPasswordInputSchema),
     mode: "onTouched",
+    resolver: zodResolver(resetPasswordInputSchema),
     defaultValues: {
       password: "",
       confirmPassword: "",

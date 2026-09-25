@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { signUp } from "../actions/signUp";
-import { signUpInputSchema } from "../schemas/signUpSchema";
+import { SignUpInput, signUpInputSchema } from "../schemas/signUpSchema";
 
 const useSignUp = () => {
   const {
@@ -16,11 +16,15 @@ const useSignUp = () => {
     getFieldState,
     trigger,
     formState: { errors, isSubmitting },
-  } = useForm({
-    resolver: zodResolver(signUpInputSchema),
+  } = useForm<SignUpInput>({
     mode: "onTouched",
+    resolver: zodResolver(signUpInputSchema),
     defaultValues: {
+      name: "",
+      email: "",
+      jobTitle: "",
       password: "",
+      confirmPassword: "",
     },
   });
 

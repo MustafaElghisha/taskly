@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { login } from "../actions/login";
-import { loginInputSchema } from "../schemas/loginSchema";
+import { LoginInput, loginInputSchema } from "../schemas/loginSchema";
 
 const useLogin = () => {
   const {
@@ -11,7 +11,15 @@ const useLogin = () => {
     setError,
     clearErrors,
     formState: { errors, isSubmitting },
-  } = useForm({ resolver: zodResolver(loginInputSchema), mode: "onTouched" });
+  } = useForm<LoginInput>({
+    mode: "onTouched",
+    resolver: zodResolver(loginInputSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      rememberMe: false,
+    },
+  });
 
   const router = useRouter();
 
