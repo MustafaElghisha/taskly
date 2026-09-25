@@ -26,17 +26,14 @@ const useLogin = () => {
   const onSubmit = handleSubmit(async (data) => {
     clearErrors("root");
 
-    try {
-      await login(data);
-      router.replace("/project");
-    } catch (error) {
-      setError("root", {
-        message:
-          error instanceof Error
-            ? error.message
-            : "Something went wrong. Please try again.",
-      });
+    const result = await login(data);
+
+    if (!result.success) {
+      setError("root", { message: result.error });
+      return;
     }
+
+    router.replace("/project");
   });
 
   return { register, errors, isSubmitting, onSubmit };
