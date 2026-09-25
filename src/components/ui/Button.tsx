@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "class-variance-authority";
 
 export const buttonVariants = cva(
-  "flex cursor-pointer items-center justify-center gap-3 disabled:pointer-events-none",
+  "flex cursor-pointer items-center justify-center gap-3 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
