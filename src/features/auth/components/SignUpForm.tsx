@@ -69,7 +69,7 @@ export default function SignUpForm() {
         <Field>
           <FieldLabel htmlFor="jobTitle">
             Job Title
-            <span className="hidden leading-0 tracking-normal text-slate-400 sm:inline">
+            <span className="hidden ps-0.5 leading-0 tracking-normal text-slate-400 sm:inline">
               (Optional)
             </span>
           </FieldLabel>
@@ -109,7 +109,7 @@ export default function SignUpForm() {
         </div>
         <PasswordRequirements watchPassword={watchPassword} />
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Loading" : "Create Account"}
+          {isSubmitting ? "Creating..." : "Create Account"}
         </Button>
         {errors.root && <FieldError>{errors.root.message}</FieldError>}
       </form>
