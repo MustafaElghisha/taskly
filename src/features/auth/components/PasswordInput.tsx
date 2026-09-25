@@ -2,6 +2,7 @@ import EyeClosedIcon from "@/assets/icons/EyeClosedIcon.svg";
 import EyeOpenIcon from "@/assets/icons/EyeOpenIcon.svg";
 
 import Input from "@/components/ui/Input";
+import { cn } from "@/lib/utils";
 
 type PasswordInputProps = React.ComponentProps<typeof Input> & {
   showPassword: boolean;
@@ -9,6 +10,7 @@ type PasswordInputProps = React.ComponentProps<typeof Input> & {
 };
 
 export default function PasswordInput({
+  className,
   showPassword,
   setShowPassword,
   ...props
@@ -16,7 +18,7 @@ export default function PasswordInput({
   return (
     <div className="relative flex items-center">
       <Input
-        className="w-full"
+        className={cn("w-full", className)}
         id="password"
         type={showPassword ? "text" : "password"}
         placeholder="Password"
