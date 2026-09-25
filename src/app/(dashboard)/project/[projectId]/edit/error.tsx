@@ -5,7 +5,7 @@ import NoConnectionIcon from "@/assets/icons/NoConnectionIcon.svg";
 
 export default function Error({ retry }: { retry: () => void }) {
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-6">
+    <div className="flex min-h-dvh flex-col items-center justify-center gap-6">
       <div className="flex items-center justify-center rounded-xl bg-red-100 p-5">
         <NoConnectionIcon />
       </div>
