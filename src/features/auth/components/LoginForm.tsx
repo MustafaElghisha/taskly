@@ -48,7 +48,7 @@ export default function LoginForm() {
             <div className="flex items-center justify-between">
               <FieldLabel htmlFor="password">Password</FieldLabel>
               <Link
-                href="/"
+                href="/forgot-password"
                 className={buttonVariants({
                   variant: "secondary",
                   className: "text-label-sm leading-4.25 font-bold sm:hidden",
@@ -83,7 +83,7 @@ export default function LoginForm() {
             </FieldLabel>
           </Field>
           <Link
-            href="/"
+            href="/forgot-password"
             className={buttonVariants({
               variant: "secondary",
               className: "hidden sm:block",
@@ -93,7 +93,7 @@ export default function LoginForm() {
           </Link>
         </div>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Loading" : "Log In"}
+          {isSubmitting ? "Logging In..." : "Log In"}
         </Button>
         {errors.root && <FieldError>{errors.root.message}</FieldError>}
       </form>
