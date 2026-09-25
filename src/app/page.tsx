@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import HandleReset from "@/features/auth/components/HandleReset";
 
 export default function Home() {
-  redirect("/project");
+  return <HandleReset />;
 }
