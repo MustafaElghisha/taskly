@@ -2,7 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { accessTokenOptions, refreshTokenOptions } from "./lib/auth/session";
 
 const protectedRoutes = ["/project"];
-const publicRoutes = ["/login", "/sign-up"];
+const publicRoutes = [
+  "/login",
+  "/sign-up",
+  "/forgot-password",
+  "/reset-password",
+  "/",
+];
 
 function matchesRoute(pathname: string, routes: string[]) {
   return routes.some(
@@ -59,6 +65,7 @@ export default async function proxy(req: NextRequest) {
 
   const accessToken = req.cookies.get("access_token")?.value;
   const refreshToken = req.cookies.get("refresh_token")?.value;
+  const tempAccessToken = req.cookies.get("temp_access_token")?.value;
 
   const isProtectedRoute = matchesRoute(pathname, protectedRoutes);
   const isPublicRoute = matchesRoute(pathname, publicRoutes);
@@ -81,6 +88,13 @@ export default async function proxy(req: NextRequest) {
 
   if (isPublicRoute && (accessToken || refreshToken)) {
     return NextResponse.redirect(new URL("/project", req.url));
+  }
+
+  if (pathname === "/reset-password") {
+    if (!tempAccessToken) {
+      return NextResponse.redirect(new URL("/login", req.url));
+    }
+    return NextResponse.next();
   }
 
   return NextResponse.next();
