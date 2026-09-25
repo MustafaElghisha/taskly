@@ -63,7 +63,9 @@ export default function ResetPasswordForm() {
         <Button type="submit" disabled={isSubmitting} className="rounded-xs">
           {isSubmitting ? "Updating..." : "Update Password"}
         </Button>
-        {errors.root && <FieldError>{errors.root.message}</FieldError>}
+        {errors.root && (
+          <FieldError className="self-center">{errors.root.message}</FieldError>
+        )}
       </form>
 
       <Link

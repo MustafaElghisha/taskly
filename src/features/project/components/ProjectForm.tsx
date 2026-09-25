@@ -125,7 +125,7 @@ export default function ProjectForm({
           </div>
           <Field className="flex items-center">
             {errors.root && (
-              <FieldError className="text-center">
+              <FieldError className="self-center">
                 {errors.root.message}
               </FieldError>
             )}

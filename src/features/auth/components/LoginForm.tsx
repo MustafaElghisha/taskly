@@ -95,7 +95,9 @@ export default function LoginForm() {
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Logging In..." : "Log In"}
         </Button>
-        {errors.root && <FieldError>{errors.root.message}</FieldError>}
+        {errors.root && (
+          <FieldError className="self-center">{errors.root.message}</FieldError>
+        )}
       </form>
 
       <div className="flex items-center justify-center gap-2">
