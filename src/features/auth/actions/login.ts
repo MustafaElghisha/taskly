@@ -22,11 +22,12 @@ export async function login({ email, password, rememberMe }: LoginInput) {
       }),
     },
   );
-  const authResponse = await response.json();
 
   if (!response.ok) {
-    throw new Error(authResponse.msg ?? "Invalid email or password.");
+    throw new Error("Invalid email or password.");
   }
+
+  const authResponse = await response.json();
 
   await setAccessToken(authResponse.access_token);
 

@@ -32,7 +32,9 @@ const useLogin = () => {
     } catch (error) {
       setError("root", {
         message:
-          error instanceof Error ? error.message : "Invalid email or password.",
+          error instanceof Error
+            ? error.message
+            : "Something went wrong. Please try again.",
       });
     }
   });
