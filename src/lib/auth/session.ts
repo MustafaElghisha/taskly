@@ -29,6 +29,11 @@ export async function setRefreshToken(refreshToken: string) {
   cookieStore.set("refresh_token", refreshToken, refreshTokenOptions);
 }
 
+export async function setTempAccessToken(tempAccessToken: string) {
+  const cookieStore = await cookies();
+  cookieStore.set("temp_access_token", tempAccessToken, accessTokenOptions);
+}
+
 export async function getAccessToken() {
   const cookieStore = await cookies();
   return cookieStore.get("access_token")?.value ?? null;
@@ -39,6 +44,11 @@ export async function getRefreshToken() {
   return cookieStore.get("refresh_token")?.value ?? null;
 }
 
+export async function getTempAccessToken() {
+  const cookieStore = await cookies();
+  return cookieStore.get("temp_access_token")?.value ?? null;
+}
+
 export async function clearRefreshToken() {
   const cookieStore = await cookies();
   cookieStore.delete("refresh_token");
@@ -47,4 +57,9 @@ export async function clearRefreshToken() {
 export async function clearAccessToken() {
   const cookieStore = await cookies();
   cookieStore.delete("access_token");
+}
+
+export async function clearTempAccessToken() {
+  const cookieStore = await cookies();
+  cookieStore.delete("temp_access_token");
 }
