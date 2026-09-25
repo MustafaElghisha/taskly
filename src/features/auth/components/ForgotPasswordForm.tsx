@@ -7,9 +7,15 @@ import ArrowLeftIcon from "@/assets/icons/ArrowLeftIcon.svg";
 import SuccessIcon from "@/assets/icons/SuccessIcon.svg";
 import { Separator } from "@/components/ui/Separator";
 import { useForgotPassword } from "../hooks/useForgotPassword";
+import { useResend } from "../hooks/useResend";
+import { formatTime } from "../utils/formatTime";
+import Link from "next/link";
 
 export default function ForgotPasswordForm() {
-  const { errors, isSubmitting, register, onSubmit } = useForgotPassword();
+  const { register, errors, onSubmit, isSubmitting, isSubmitted, submitCount } =
+    useForgotPassword();
+
+  const { secondsRemaining, handleSendReset } = useResend(onSubmit);
 
   return (
     <div className="mx-auto flex max-w-md flex-col items-center gap-6">
@@ -22,7 +28,10 @@ export default function ForgotPasswordForm() {
             No worries, we&apos;ll send you reset instructions.
           </p>
         </div>
-        <form className="flex flex-col gap-4 sm:gap-6">
+        <form
+          onSubmit={handleSendReset}
+          className="flex flex-col gap-4 sm:gap-6"
+        >
           <Field>
             <FieldLabel htmlFor="email">Email Address</FieldLabel>
             <Input
@@ -37,48 +46,58 @@ export default function ForgotPasswordForm() {
           </Field>
           <Button
             type="submit"
-            onClick={onSubmit}
-            disabled={isSubmitting}
+            disabled={isSubmitting || submitCount >= 1}
             className="rounded-xs sm:rounded-sm"
           >
             {isSubmitting ? "Sending..." : "Send Reset Link"}
           </Button>
+          {errors.root && (
+            <FieldError className="self-center">
+              {errors.root.message}
+            </FieldError>
+          )}
         </form>
 
-        <Button
-          type="button"
-          variant={"ghost"}
-          className="text-primary gap-2 text-sm leading-5 font-medium sm:-mt-2 sm:font-medium"
-          disabled={isSubmitting}
+        <Link
+          href={"/login"}
+          className="text-primary flex items-center justify-center gap-2 text-sm leading-5 font-medium sm:-mt-2 sm:font-medium"
         >
           <ArrowLeftIcon />
           Back to log in
-        </Button>
+        </Link>
       </div>
 
-      <div className="bg-success/30 flex w-full flex-col gap-3 rounded-sm p-4">
-        <div className="flex gap-3">
-          <div>
-            <SuccessIcon />
+      {isSubmitted && (
+        <div className="bg-success/30 flex w-full flex-col gap-3 rounded-sm p-4">
+          <div className="flex gap-3">
+            <div>
+              <SuccessIcon />
+            </div>
+            <p className="max-w-xs text-xs leading-5 font-medium text-green-900">
+              If an account exists with this email, we&apos;ve sent a password
+              reset link.
+            </p>
           </div>
-          <p className="max-w-xs text-xs leading-5 font-medium text-green-900">
-            If an account exists with this email, we&apos;ve sent a password
-            reset link.
-          </p>
+          <Separator />
+          <div className="flex items-center justify-between">
+            <span className="text-2xs leading-4 font-bold tracking-widest text-green-900/60 uppercase">
+              Didn&apos;t receive email?
+            </span>
+            <Button
+              onClick={() => handleSendReset()}
+              disabled={isSubmitting || submitCount >= 4 || !!secondsRemaining}
+              variant={"ghost"}
+              className="text-primary text-2xs sm:text-2xs gap-1 leading-4 font-bold tracking-widest uppercase"
+            >
+              Resend
+              {secondsRemaining === 0 && <span>( {4 - submitCount} )</span>}
+              {secondsRemaining > 0 ? (
+                <span>in {formatTime(secondsRemaining)}</span>
+              ) : null}
+            </Button>
+          </div>
         </div>
-        <Separator />
-        <div className="flex items-center justify-between">
-          <span className="text-2xs leading-4 font-bold tracking-widest text-green-900/60 uppercase">
-            Didn&apos;t receive email?
-          </span>
-          <Button
-            variant={"ghost"}
-            className="text-primary text-2xs sm:text-2xs leading-4 font-bold tracking-widest uppercase"
-          >
-            Resend in 05:00
-          </Button>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

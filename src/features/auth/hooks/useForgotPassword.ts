@@ -14,7 +14,7 @@ const useForgotPassword = () => {
     setError,
     clearErrors,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitted, submitCount },
   } = useForm<ForgotPasswordInput>({
     mode: "onTouched",
     resolver: zodResolver(forgotPasswordInputSchema),
@@ -27,6 +27,7 @@ const useForgotPassword = () => {
     try {
       clearErrors("root");
       await forgotPassword(data);
+      return true;
     } catch (error) {
       setError("root", {
         message:
@@ -34,10 +35,12 @@ const useForgotPassword = () => {
             ? error.message
             : "Something went wrong. Please try again.",
       });
+
+      return false;
     }
   });
 
-  return { register, errors, isSubmitting, onSubmit };
+  return { register, errors, onSubmit, isSubmitting, isSubmitted, submitCount };
 };
 
 export { useForgotPassword };
