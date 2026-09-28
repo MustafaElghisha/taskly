@@ -1,11 +1,5 @@
+import { Avatar } from "@/components/ui/Avatar";
 import { User } from "@/types";
-
-const getAvatarName = (name: string) => {
-  const names = name.split(" ");
-  return names.length > 1
-    ? names[0][0] + names[names.length - 1][0]
-    : names[0].slice(0, 2);
-};
 
 export default function UserInfo({ name, jobTitle }: User) {
   return (
@@ -20,11 +14,7 @@ export default function UserInfo({ name, jobTitle }: User) {
           </span>
         )}
       </div>
-      <div className="bg-primary-container flex items-center justify-center rounded-xl p-2 sm:rounded-lg">
-        <span className="leading-6 font-bold text-white uppercase">
-          {getAvatarName(name)}
-        </span>
-      </div>
+      <Avatar name={name} />
     </div>
   );
 }
