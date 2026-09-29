@@ -6,6 +6,7 @@ import {
 } from "../schemas/createEpicSchema";
 import { createEpic } from "../actions/createEpic";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const useCreateEpic = (projectId: string) => {
   const {
@@ -34,6 +35,8 @@ const useCreateEpic = (projectId: string) => {
       setError("root", { message: res.message });
       return;
     }
+
+    toast.success(res.message);
 
     router.push(`/project/${projectId}/epics`);
   });

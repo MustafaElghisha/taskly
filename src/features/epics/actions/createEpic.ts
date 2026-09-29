@@ -37,7 +37,7 @@ export async function createEpic({
       };
     }
 
-    return { success: true, message: "A new Epic created successfully!" };
+    return { success: true, message: "Epic created successfully!" };
   } catch (error) {
     return {
       success: false,
