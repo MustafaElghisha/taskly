@@ -14,6 +14,7 @@ export type Project = {
 
 export const membersSchema = z.array(
   z.object({
+    user_id: z.string(),
     role: z.enum(["owner", "admin", "member", "viewer"]),
     email: z.email(),
     metadata: z.object({
