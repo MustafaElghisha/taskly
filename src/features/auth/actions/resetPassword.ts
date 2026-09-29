@@ -3,7 +3,7 @@
 import { clearTempAccessToken, getTempAccessToken } from "@/lib/auth/session";
 import { ResetPasswordInput } from "../schemas/resetPasswordSchema";
 
-export async function resetPassword(data: ResetPasswordInput) {
+export async function resetPassword({ password }: ResetPasswordInput) {
   const accessToken = await getTempAccessToken();
 
   try {
@@ -17,7 +17,7 @@ export async function resetPassword(data: ResetPasswordInput) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          password: data.password,
+          password,
         }),
       },
     );
@@ -33,6 +33,7 @@ export async function resetPassword(data: ResetPasswordInput) {
 
     return {
       success: true,
+      message: "Password reset successfully!",
     };
   } catch {
     return {

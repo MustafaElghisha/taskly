@@ -7,6 +7,7 @@ import {
   resetPasswordInputSchema,
 } from "../schemas/resetPasswordSchema";
 import { resetPassword } from "../actions/resetPassword";
+import { toast } from "sonner";
 
 const useResetPassword = () => {
   const {
@@ -23,7 +24,7 @@ const useResetPassword = () => {
     resolver: zodResolver(resetPasswordInputSchema),
   });
 
-  const watchPassword = watch("password");
+  const watchPassword = watch("password") ?? "";
 
   useEffect(() => {
     if (getFieldState("confirmPassword").isDirty) {
@@ -36,17 +37,17 @@ const useResetPassword = () => {
   const onSubmit = handleSubmit(async (data) => {
     clearErrors("root");
 
-    const result = await resetPassword(data);
+    const res = await resetPassword(data);
 
-    if (!result.success) {
-      setError("root", {
-        message: result.message,
-      });
+    if (!res.success) {
+      setError("root", { message: res.message });
       return;
     }
 
+    toast.success(res.message);
+
     setTimeout(() => {
-      router.push("/login");
+      router.replace("/login");
     }, 3000);
   });
 
