@@ -10,10 +10,13 @@ function Field({ className, ...props }: FieldProps) {
 
 type FieldLabelProps = React.ComponentPropsWithoutRef<"label">;
 
-function FieldLabel({ ...props }: FieldLabelProps) {
+function FieldLabel({ className, ...props }: FieldLabelProps) {
   return (
     <label
-      className="text-label-sm ps-1 leading-4.25 font-bold tracking-wider text-slate-500 uppercase"
+      className={cn(
+        "text-2xs truncate ps-1 leading-4.25 font-bold tracking-wider text-slate-500 uppercase",
+        className,
+      )}
       {...props}
     />
   );
