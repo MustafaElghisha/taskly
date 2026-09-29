@@ -19,7 +19,6 @@ export default async function MembersPage({
 }) {
   const { projectId } = await params;
   const members = await getProjectMembers(projectId);
-  console.log(members);
 
   return (
     <div className="px-4 py-4 sm:px-8">

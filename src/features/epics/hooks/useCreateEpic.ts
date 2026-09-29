@@ -26,7 +26,6 @@ const useCreateEpic = (projectId: string) => {
   const router = useRouter();
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
     clearErrors();
 
     const res = await createEpic({ ...data, project_id: projectId });
