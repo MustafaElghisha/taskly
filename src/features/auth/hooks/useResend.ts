@@ -6,7 +6,7 @@ const useResend = (
   onSubmit: (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     e?: React.BaseSyntheticEvent<object, any, any> | undefined,
-  ) => Promise<boolean | undefined>,
+  ) => Promise<void | undefined>,
 ) => {
   const [endTime, setEndTime] = useState(0);
   const [secondsRemaining, setSecondsRemaining] = useState(0);
