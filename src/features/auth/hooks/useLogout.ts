@@ -1,30 +1,20 @@
 import { useState } from "react";
 import logout from "../actions/logout";
+import { useRouter } from "next/navigation";
 
 export function useLogout() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const router = useRouter();
 
   const handleLogout = async () => {
-    try {
-      setIsLoggingOut(true);
-      setError(null);
-
-      await logout();
-    } catch (error) {
-      const logoutError =
-        error instanceof Error ? error : new Error("Logout failed");
-
-      setError(logoutError);
-      throw logoutError;
-    } finally {
-      setIsLoggingOut(false);
-    }
+    setIsLoggingOut(true);
+    await logout();
+    setIsLoggingOut(false);
+    router.replace("/login");
   };
 
   return {
     handleLogout,
     isLoggingOut,
-    error,
   };
 }

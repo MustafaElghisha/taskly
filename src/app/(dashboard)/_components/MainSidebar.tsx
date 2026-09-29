@@ -9,7 +9,6 @@ import CloseIcon from "@/assets/icons/CloseIcon.svg";
 import ProjectIcon from "@/assets/icons/ProjectIcon.svg";
 import ArrowIcon from "@/assets/icons/ArrowIcon.svg";
 import Logo from "@/components/Logo";
-import { FieldError } from "@/components/ui/Field";
 import { Separator } from "@/components/ui/Separator";
 import {
   SidebarHeader,
@@ -44,7 +43,6 @@ export default function MainSidebar({
     setIsPopoverOpen,
     isAccordionOpen,
     toggleActiveProject,
-    error,
     isLoggingOut,
     handleLogout,
   } = useSidebar();
@@ -153,7 +151,6 @@ export default function MainSidebar({
               <LogoutIcon />
               {!isCollapsed && (isLoggingOut ? "Logging Out" : "Logout")}
             </SidebarMenuButton>
-            {error && <FieldError>{error.message}</FieldError>}
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>

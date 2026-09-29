@@ -2,7 +2,7 @@ import { useLogout } from "@/features/auth/hooks/useLogout";
 import { useState, useEffect } from "react";
 
 const useSidebar = () => {
-  const { handleLogout, isLoggingOut, error } = useLogout();
+  const { handleLogout, isLoggingOut } = useLogout();
 
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -43,7 +43,6 @@ const useSidebar = () => {
 
   return {
     isCollapsed,
-    error,
     handleLogout,
     isLoggingOut,
     isAccordionOpen,
