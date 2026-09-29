@@ -1,5 +1,3 @@
-"use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {
@@ -7,6 +5,7 @@ import {
   forgotPasswordInputSchema,
 } from "../schemas/forgotPasswordSchema";
 import { forgotPassword } from "../actions/forgotPassword";
+import { toast } from "sonner";
 
 const useForgotPassword = () => {
   const {
@@ -21,20 +20,16 @@ const useForgotPassword = () => {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    try {
-      clearErrors("root");
-      await forgotPassword(data);
-      return true;
-    } catch (error) {
-      setError("root", {
-        message:
-          error instanceof Error
-            ? error.message
-            : "Something went wrong. Please try again.",
-      });
+    clearErrors("root");
 
-      return false;
+    const res = await forgotPassword(data);
+
+    if (!res.success) {
+      setError("root", { message: res.message });
+      return;
     }
+
+    toast.success(res.message);
   });
 
   return { register, errors, onSubmit, isSubmitting, isSubmitted, submitCount };
