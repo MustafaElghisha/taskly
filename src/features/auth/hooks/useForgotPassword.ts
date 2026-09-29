@@ -18,9 +18,6 @@ const useForgotPassword = () => {
   } = useForm<ForgotPasswordInput>({
     mode: "onTouched",
     resolver: zodResolver(forgotPasswordInputSchema),
-    defaultValues: {
-      email: "",
-    },
   });
 
   const onSubmit = handleSubmit(async (data) => {

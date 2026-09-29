@@ -21,10 +21,6 @@ const useResetPassword = () => {
   } = useForm<ResetPasswordInput>({
     mode: "onTouched",
     resolver: zodResolver(resetPasswordInputSchema),
-    defaultValues: {
-      password: "",
-      confirmPassword: "",
-    },
   });
 
   const watchPassword = watch("password");
