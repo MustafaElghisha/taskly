@@ -10,16 +10,16 @@ import {
 } from "@/components/ui/BreadCrumb";
 import { Fragment } from "react/jsx-runtime";
 
-const getRouteUrl = (pathName: string, route: string) => {
-  const indexOfRoute = pathName.indexOf(route + "/");
-  const routeUrl = pathName.substring(0, indexOfRoute + route.length + 1);
+const getRouteUrl = (pathname: string, route: string) => {
+  const indexOfRoute = pathname.indexOf(route + "/");
+  const routeUrl = pathname.substring(0, indexOfRoute + route.length + 1);
   return routeUrl;
 };
 
 export default function MainBreadCrumb() {
-  const pathName = usePathname();
+  const pathname = usePathname();
 
-  const routeSegments = pathName.split("/");
+  const routeSegments = pathname.split("/");
   routeSegments.shift();
 
   if (routeSegments.length === 1) return null;
@@ -36,7 +36,7 @@ export default function MainBreadCrumb() {
                 {isLast ? (
                   <BreadCrumbPage>{route}</BreadCrumbPage>
                 ) : (
-                  <BreadCrumbLink href={getRouteUrl(pathName, route)}>
+                  <BreadCrumbLink href={getRouteUrl(pathname, route)}>
                     {route}
                   </BreadCrumbLink>
                 )}
