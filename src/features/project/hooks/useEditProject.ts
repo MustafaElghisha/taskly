@@ -2,18 +2,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { createProjectInputSchema } from "../schemas/createProjectSchema";
 import { editProject } from "../actions/editProject";
-import { useRouter } from "next/navigation";
 import { Project } from "@/types";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const useEditProject = (project: Project) => {
   const {
-    reset,
     watch,
     register,
     setError,
     clearErrors,
     handleSubmit,
-    resetDefaultValues,
     formState: { errors, isSubmitting },
   } = useForm({
     mode: "onTouched",
@@ -26,22 +25,21 @@ const useEditProject = (project: Project) => {
 
   const router = useRouter();
 
-  const watchDescription = watch("description") as string;
+  const watchDescription = watch("description") ?? "";
+
   const onSubmit = handleSubmit(async (data) => {
     clearErrors();
-    try {
-      await editProject(data, project.id);
-      resetDefaultValues({ description: "", name: "" });
-      reset();
-      router.replace("/project");
-    } catch (error) {
-      setError("root", {
-        message:
-          error instanceof Error
-            ? error.message
-            : "Failed To Edit Project, Try Again Later.",
-      });
+
+    const res = await editProject(data, project.id);
+
+    if (!res.success) {
+      setError("root", { message: res.message });
+      return;
     }
+
+    toast.success(res.message);
+
+    router.push("/project");
   });
 
   return { register, errors, onSubmit, isSubmitting, watchDescription };
