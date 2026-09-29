@@ -9,7 +9,7 @@ export default function Loading() {
       </h1>
       <div className="mx-auto max-w-2xl">
         <div className="flex flex-col gap-8 rounded-t-lg sm:mt-11 sm:gap-0 sm:bg-white">
-          <div className="flex flex-col gap-8 rounded-t-lg sm:mt-11 sm:gap-0 sm:bg-white">
+          <div className="flex flex-col gap-8 sm:gap-0">
             <div className="sm:p-8">
               <Skeleton className="h-18 w-full" />
             </div>
