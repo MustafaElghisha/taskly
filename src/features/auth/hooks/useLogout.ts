@@ -1,6 +1,7 @@
 import { useState } from "react";
 import logout from "../actions/logout";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export function useLogout() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -8,8 +9,15 @@ export function useLogout() {
 
   const handleLogout = async () => {
     setIsLoggingOut(true);
-    await logout();
+
+    const res = await logout();
     setIsLoggingOut(false);
+
+    if (!res.success) {
+      toast.error(res.message);
+      return;
+    }
+
     router.replace("/login");
   };
 
