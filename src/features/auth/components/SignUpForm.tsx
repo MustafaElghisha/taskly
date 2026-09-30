@@ -50,7 +50,7 @@ export default function SignUpForm() {
             placeholder="Enter your full name"
             aria-invalid={errors.name ? "true" : "false"}
           />
-          <span className="text-label-sm ps-1 leading-4 text-slate-200">
+          <span className="text-2xs ps-1 leading-4 text-slate-200">
             3-50 characters, letters only.
           </span>
           {errors.name && <FieldError>{errors.name.message}</FieldError>}

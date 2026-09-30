@@ -51,7 +51,7 @@ export default function LoginForm() {
                 href="/forgot-password"
                 className={buttonVariants({
                   variant: "secondary",
-                  className: "text-label-sm leading-4.25 font-bold sm:hidden",
+                  className: "text-2xs leading-4.25 font-bold sm:hidden",
                 })}
               >
                 Forgot?

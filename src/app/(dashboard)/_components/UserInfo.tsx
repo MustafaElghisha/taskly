@@ -9,7 +9,7 @@ export default function UserInfo({ name, jobTitle }: User) {
           {name}
         </span>
         {jobTitle && (
-          <span className="text-label-xs text-primary font-bold tracking-widest uppercase">
+          <span className="text-3xs text-primary font-bold tracking-widest uppercase">
             {jobTitle}
           </span>
         )}

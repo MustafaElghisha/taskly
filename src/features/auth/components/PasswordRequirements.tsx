@@ -29,7 +29,7 @@ export default function PasswordRequirements({
         {passwordRequirements.map(({ satisfied, label }) => (
           <li key={label} className="flex items-center gap-2">
             {satisfied ? <CheckedIcon /> : <UnCheckedIcon />}
-            <span className="text-label-sm leading-4.25 text-slate-600">
+            <span className="text-2xs leading-4.25 text-slate-600">
               {label}
             </span>
           </li>
