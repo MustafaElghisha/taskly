@@ -1,6 +1,6 @@
 import { Project } from "@/types";
-import AddProjectCard from "./AddProjectCard";
 import ProjectCard from "./ProjectCard";
+import CreateProjectCard from "./CreateProjectCard";
 
 export default function ProjectList({ projects }: { projects: Project[] }) {
   return (
@@ -8,7 +8,7 @@ export default function ProjectList({ projects }: { projects: Project[] }) {
       {projects?.map((project) => (
         <ProjectCard key={project.id} {...project} />
       ))}
-      <AddProjectCard />
+      <CreateProjectCard />
     </ol>
   );
 }
