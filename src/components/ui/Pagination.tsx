@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 import ChevronRightIcon from "@/assets/icons/ChevronRightIcon.svg";
 
@@ -19,8 +20,8 @@ function Pagination({
 function PaginationContent({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<"ol">) {
-  return <ol className={cn("flex items-center gap-2", className)} {...props} />;
+}: React.ComponentPropsWithoutRef<"ul">) {
+  return <ul className={cn("flex items-center gap-2", className)} {...props} />;
 }
 
 function PaginationItem({ ...props }: React.ComponentPropsWithoutRef<"li">) {
@@ -28,15 +29,19 @@ function PaginationItem({ ...props }: React.ComponentPropsWithoutRef<"li">) {
 }
 
 function PaginationLink({
-  isActive = false,
   className,
+  isActive = false,
   ...props
-}: React.ComponentPropsWithoutRef<"button"> & { isActive?: boolean }) {
+}: React.ComponentPropsWithoutRef<typeof Link> & {
+  isActive?: boolean;
+}) {
   return (
-    <button
+    <Link
       className={cn(
         "flex size-8 items-center justify-center rounded-xs border border-slate-200 text-xs leading-4 font-bold",
-        isActive ? "bg-primary text-white" : "text-slate-200",
+        isActive
+          ? "bg-primary text-white"
+          : "text-slate-600 hover:border-slate-600",
         className,
       )}
       {...props}
@@ -74,6 +79,24 @@ function PaginationNext({
   );
 }
 
+function PaginationEllipsis({
+  className,
+  ...props
+}: React.ComponentProps<"span">) {
+  return (
+    <span
+      aria-hidden
+      className={cn(
+        "flex size-8 items-center justify-center rounded-xs border border-slate-200 text-xs leading-4 font-bold",
+        className,
+      )}
+      {...props}
+    >
+      ...
+    </span>
+  );
+}
+
 export {
   Pagination,
   PaginationContent,
@@ -81,4 +104,5 @@ export {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
+  PaginationEllipsis,
 };
