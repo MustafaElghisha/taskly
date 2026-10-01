@@ -1,7 +1,7 @@
 import PlusIcon from "@/assets/icons/PlusIcon.svg";
 import Link from "next/link";
 
-export default function AddProjectCard() {
+export default function CreateProjectCard() {
   return (
     <li>
       <Link
