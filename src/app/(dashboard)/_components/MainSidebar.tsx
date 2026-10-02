@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/Sidebar";
 import ProjectMenuPopover from "./ProjectMenuPopover";
 import { useSidebar } from "../_hooks/useSidebar";
-import { useClickOutside } from "../_hooks/useClickOutside";
+import { useClickOutside } from "../../../hooks/useClickOutside";
 import ProjectMenuAccordion from "./ProjectMenuAccordion";
 import { NAV_ITEMS } from "../_constants/routes";
 import { useProject } from "@/features/project/hooks/useProject";
