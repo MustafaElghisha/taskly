@@ -1,4 +1,4 @@
-import { getProjectMembers } from "@/app/(dashboard)/_actions/getProjectMembers";
+import { getProjectMembers } from "@/features/members/actions/getProjectMembers";
 import CreateEpicForm from "@/features/epics/components/CreateEpicForm";
 
 export default async function AddEpicPage({
