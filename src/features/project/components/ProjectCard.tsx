@@ -1,16 +1,10 @@
+import Link from "next/link";
 import EpicsIcon from "@/assets/icons/EpicsIcon.svg";
 import TasksIcon from "@/assets/icons/TasksIcon.svg";
 import MembersIcon from "@/assets/icons/MembersIcon.svg";
 import EditIcon from "@/assets/icons/EditIcon.svg";
 import { Project } from "@/types";
-import Link from "next/link";
-
-const formatDate = (date: string) =>
-  new Intl.DateTimeFormat("en-GB", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  }).format(new Date(date));
+import { formatDate } from "@/lib/utils";
 
 const PROJECT_NAV_ITEMS = [
   {
@@ -42,7 +36,7 @@ export default function ProjectCard({
   created_at,
 }: Project) {
   return (
-    <li className="flex h-full flex-col justify-between gap-8.5 rounded-lg bg-white p-6">
+    <div className="flex h-full flex-col justify-between gap-8.5 rounded-lg bg-white p-6">
       <div className="flex flex-1 flex-col justify-between gap-6">
         <div className="flex flex-1 flex-col justify-between gap-2">
           <h2 className="line-clamp-2 text-lg leading-7 font-medium text-slate-800">
@@ -76,6 +70,6 @@ export default function ProjectCard({
           {formatDate(created_at)}
         </time>
       </div>
-    </li>
+    </div>
   );
 }
