@@ -40,7 +40,7 @@ export default async function EpicsPage({
               className: "hidden rounded-sm sm:flex sm:gap-2 sm:px-6",
             })}
           >
-            <PlusIcon className="size-2.5" />
+            <PlusIcon />
             New Epic
           </Link>
         </div>

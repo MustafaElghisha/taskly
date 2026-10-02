@@ -9,7 +9,7 @@ export default function EmptyEpics({ projectId }: { projectId: string }) {
   return (
     <div className="flex h-full flex-col items-center justify-center gap-8.5 p-8 text-center">
       <div className="rounded-4xl bg-white">
-        <AbstractEpicRepresentationIcon className="size-47" />
+        <AbstractEpicRepresentationIcon />
       </div>
       <h1 className="text-3xl leading-9 font-semibold tracking-tight text-slate-800">
         No epics in this project yet.

@@ -61,7 +61,7 @@ export default async function ProjectPage({
             "fixed right-5 bottom-22 size-14 rounded-xl p-1! sm:hidden",
         })}
       >
-        <PlusIcon className="size-3.5" />
+        <PlusIcon />
       </Link>
     </div>
   );
