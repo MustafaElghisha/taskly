@@ -22,10 +22,11 @@ import {
 } from "@/components/ui/Sidebar";
 import ProjectMenuPopover from "./ProjectMenuPopover";
 import { useSidebar } from "../_hooks/useSidebar";
-import { useClickOutside } from "../../../hooks/useClickOutside";
+
 import ProjectMenuAccordion from "./ProjectMenuAccordion";
 import { NAV_ITEMS } from "../_constants/routes";
 import { useProject } from "@/features/project/hooks/useProject";
+import { useClickOutside } from "@/hooks/useClickOutside";
 
 type SidebarProps = {
   toggleSidebar: () => void;
@@ -112,8 +113,6 @@ export default function MainSidebar({
                         {isCurrentProject && project?.name}
                       </span>
                       <ChevronUpIcon
-                        width="20"
-                        height="20"
                         className={cn(
                           "ml-auto",
                           !isAccordionOpen && "rotate-180",
