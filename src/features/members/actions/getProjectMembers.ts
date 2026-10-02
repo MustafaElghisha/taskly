@@ -1,7 +1,7 @@
 "use server";
 
 import { authenticatedFetch } from "@/lib/auth/authenticatedFetch";
-import { membersSchema } from "@/types";
+import { membersSchemaResponse } from "../schemas/getProjectMembersSchema";
 
 export async function getProjectMembers(projectId: string) {
   const response = await authenticatedFetch(
@@ -14,5 +14,5 @@ export async function getProjectMembers(projectId: string) {
 
   const data = await response.json();
 
-  return membersSchema.parse(data);
+  return membersSchemaResponse.parse(data);
 }
