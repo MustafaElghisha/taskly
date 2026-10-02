@@ -1,7 +1,7 @@
 import { Skeleton } from "@/components/ui/Skeleton";
 import ProjectCardSkeleton from "@/features/project/components/ProjectCardSkeleton";
 
-export default async function Loading() {
+export default function ProjectsLoading() {
   return (
     <div className="p-8">
       <div className="flex flex-wrap items-end justify-between gap-x-20 gap-y-4">
@@ -16,8 +16,8 @@ export default async function Loading() {
         <Skeleton className="hidden h-10 w-53 rounded-xs sm:block" />
       </div>
       <div className="py-10">
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 sm:gap-6">
-          {Array.from({ length: 6 }).map((_, index) => (
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4 sm:gap-6">
+          {Array.from({ length: 10 }).map((_, index) => (
             <ProjectCardSkeleton key={index} />
           ))}
         </div>
