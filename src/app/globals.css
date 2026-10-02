@@ -53,6 +53,7 @@
   --color-green-900: hsla(159, 100%, 16%, 1);
 
   --shadow-form-container: 0px 24px 48px 0px hsla(215, 87%, 13%, 0.06);
+  --shadow-card: 0px 1px 2px 0px hsla(0, 0%, 0%, 0.05);
 }
 
 @utility bg-primary-gradient {
