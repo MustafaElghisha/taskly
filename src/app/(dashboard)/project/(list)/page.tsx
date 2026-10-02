@@ -5,8 +5,7 @@ import { buttonVariants } from "@/components/ui/Button";
 import TruncatedPagination from "@/components/ui/TruncatedPagination";
 import { getProjects } from "@/features/project/actions/getProjects";
 import EmptyProjects from "@/features/project/components/EmptyProjects";
-import ProjectCard from "@/features/project/components/ProjectCard";
-import CreateProjectCard from "@/features/project/components/CreateProjectCard";
+import ProjectList from "@/features/project/components/ProjectList";
 
 export default async function ProjectPage({
   searchParams,
@@ -40,18 +39,11 @@ export default async function ProjectPage({
         </Link>
       </div>
 
-      <div className="py-6 sm:pt-10 sm:pb-17.5">
-        <ul className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4 sm:gap-6">
-          {projects.map((project) => (
-            <li key={project.id}>
-              <ProjectCard {...project} />
-            </li>
-          ))}
-          <li>
-            <CreateProjectCard />
-          </li>
-        </ul>
-      </div>
+      <ProjectList
+        projects={projects}
+        currentPage={Number(page)}
+        totalPages={totalPages}
+      />
 
       <div className="mt-auto hidden justify-end py-10 sm:flex">
         <TruncatedPagination
