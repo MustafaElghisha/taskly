@@ -54,10 +54,10 @@ function BreadcrumbSeparator({
     <li
       role="presentation"
       aria-hidden="true"
-      className={cn("", className)}
+      className={cn("text-slate-600/60", className)}
       {...props}
     >
-      <ChevronRightIcon />
+      <ChevronRightIcon className="h-1.5 w-1" />
     </li>
   );
 }

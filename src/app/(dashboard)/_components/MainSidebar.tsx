@@ -7,7 +7,7 @@ import LogoutIcon from "@/assets/icons/LogoutIcon.svg";
 import CollapseIcon from "@/assets/icons/CollapseIcon.svg";
 import CloseIcon from "@/assets/icons/CloseIcon.svg";
 import ProjectIcon from "@/assets/icons/ProjectIcon.svg";
-import ArrowIcon from "@/assets/icons/ArrowIcon.svg";
+import ChevronUpIcon from "@/assets/icons/ChevronUpIcon.svg";
 import Logo from "@/components/Logo";
 import { Separator } from "@/components/ui/Separator";
 import {
@@ -111,7 +111,9 @@ export default function MainSidebar({
                       <span className="line-clamp-1 flex-1 text-start">
                         {isCurrentProject && project?.name}
                       </span>
-                      <ArrowIcon
+                      <ChevronUpIcon
+                        width="20"
+                        height="20"
                         className={cn(
                           "ml-auto",
                           !isAccordionOpen && "rotate-180",
