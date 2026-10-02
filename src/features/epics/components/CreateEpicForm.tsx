@@ -12,14 +12,14 @@ import { Textarea } from "@/components/ui/Textarea";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useCreateEpic } from "../hooks/useCreateEpic";
-import { MembersType } from "@/types";
+import { Member } from "@/features/members/schemas/getProjectMembersSchema";
 
 export default function CreateEpicForm({
   projectId,
   members,
 }: {
   projectId: string;
-  members: MembersType;
+  members: Member[];
 }) {
   const { register, errors, isSubmitting, watchDescription, onSubmit } =
     useCreateEpic(projectId);
