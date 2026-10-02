@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/Table";
 
-export default function Loading() {
+export default function MembersLoading() {
   return (
     <div className="px-4 py-4 sm:px-8">
       <div className="flex flex-wrap items-end justify-center gap-x-20 gap-y-4 sm:mb-20 sm:justify-between">
