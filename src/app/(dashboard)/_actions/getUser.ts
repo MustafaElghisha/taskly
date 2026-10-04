@@ -3,9 +3,7 @@
 import { authenticatedFetch } from "@/lib/auth/authenticatedFetch";
 
 export async function getUser() {
-  const response = await authenticatedFetch(
-    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/user`,
-  );
+  const response = await authenticatedFetch(`/auth/v1/user`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch user data");

@@ -9,11 +9,10 @@ export async function getProjects(page: number) {
   const offset = (page - 1) * LIMIT;
 
   const response = await authenticatedFetch(
-    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/rpc/get_projects?limit=${LIMIT}&offset=${offset}`,
+    `/rest/v1/rpc/get_projects?limit=${LIMIT}&offset=${offset}`,
     {
       method: "GET",
       headers: {
-        Content_Type: "application/json",
         Prefer: "count=exact",
       },
     },

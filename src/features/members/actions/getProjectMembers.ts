@@ -5,7 +5,7 @@ import { membersSchemaResponse } from "../schemas/getProjectMembersSchema";
 
 export async function getProjectMembers(projectId: string) {
   const response = await authenticatedFetch(
-    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/get_project_members?project_id=eq.${projectId}`,
+    `/rest/v1/get_project_members?project_id=eq.${projectId}`,
   );
 
   if (!response.ok) {

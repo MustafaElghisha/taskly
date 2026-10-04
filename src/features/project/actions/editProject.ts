@@ -14,11 +14,10 @@ export async function editProject(
 ) {
   try {
     const response = await authenticatedFetch(
-      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?id=eq.${projectId}`,
+      `/rest/v1/projects?id=eq.${projectId}`,
       {
         method: "PATCH",
         headers: {
-          "Content-Type": "application/json",
           Prefer: "return=minimal",
         },
         body: JSON.stringify({

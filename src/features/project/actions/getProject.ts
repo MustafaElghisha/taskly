@@ -5,7 +5,7 @@ import { Project } from "@/types";
 
 export async function getProject(projectId: string) {
   const response = await authenticatedFetch(
-    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/rpc/get_projects?id=eq.${projectId}`,
+    `/rest/v1/rpc/get_projects?id=eq.${projectId}`,
   );
 
   if (!response.ok) {

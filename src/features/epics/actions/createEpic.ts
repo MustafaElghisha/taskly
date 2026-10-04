@@ -11,22 +11,16 @@ export async function createEpic({
   deadline,
 }: CreateEpicInput & { project_id: string }) {
   try {
-    const response = await authenticatedFetch(
-      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/epics`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title,
-          project_id,
-          ...(description && { description }),
-          ...(assignee_id && { assignee_id }),
-          ...(deadline && { deadline }),
-        }),
-      },
-    );
+    const response = await authenticatedFetch(`/rest/v1/epics`, {
+      method: "POST",
+      body: JSON.stringify({
+        title,
+        project_id,
+        ...(description && { description }),
+        ...(assignee_id && { assignee_id }),
+        ...(deadline && { deadline }),
+      }),
+    });
 
     if (!response.ok) {
       const error = await response.json();

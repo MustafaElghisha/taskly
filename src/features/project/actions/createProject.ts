@@ -10,20 +10,16 @@ export async function createProject({
   description?: string;
 }) {
   try {
-    const response = await authenticatedFetch(
-      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Prefer: "return=minimal",
-        },
-        body: JSON.stringify({
-          name,
-          ...(description && { description }),
-        }),
+    const response = await authenticatedFetch(`/rest/v1/projects`, {
+      method: "POST",
+      headers: {
+        Prefer: "return=minimal",
       },
-    );
+      body: JSON.stringify({
+        name,
+        ...(description && { description }),
+      }),
+    });
 
     if (!response.ok) {
       const error = await response.json();

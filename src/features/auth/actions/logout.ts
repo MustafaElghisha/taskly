@@ -5,10 +5,9 @@ import { clearAccessToken, clearRefreshToken } from "@/lib/auth/session";
 
 export default async function logout() {
   try {
-    const response = await authenticatedFetch(
-      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/logout`,
-      { method: "POST" },
-    );
+    const response = await authenticatedFetch(`/auth/v1/logout`, {
+      method: "POST",
+    });
 
     if (!response.ok) {
       return {
