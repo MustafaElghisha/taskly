@@ -1,14 +1,20 @@
+"use server";
+
 import { authenticatedFetch } from "@/lib/auth/authenticatedFetch";
 import { epicsResponseSchema } from "../schemas/getEpicsSchema";
 
-export async function getEpics(projectId: string) {
+const LIMIT = 6;
+
+export async function getEpics(projectId: string, page: number) {
+  const offset = (page - 1) * LIMIT;
+
   try {
     const response = await authenticatedFetch(
-      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/project_epics?project_id=eq.${projectId}`,
+      `/rest/v1/project_epics?project_id=eq.${projectId}&limit=${LIMIT}&offset=${offset}`,
       {
         method: "GET",
         headers: {
-          Content_Type: "application/json",
+          Prefer: "count=exact",
         },
       },
     );
@@ -18,9 +24,13 @@ export async function getEpics(projectId: string) {
       throw new Error(error.message);
     }
 
+    const contentRange = response.headers.get("Content-Range");
+    const totalCount = Number(contentRange?.split("/")[1] ?? 0);
+    const totalPages = Math.ceil(totalCount / LIMIT);
+
     const epics = await response.json();
 
-    return epicsResponseSchema.parse(epics);
+    return { epics: epicsResponseSchema.parse(epics), totalPages };
   } catch (error) {
     throw new Error(
       error instanceof Error

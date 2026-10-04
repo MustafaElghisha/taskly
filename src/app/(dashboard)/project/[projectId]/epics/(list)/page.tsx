@@ -11,11 +11,14 @@ import Input from "@/components/ui/Input";
 
 export default async function EpicsPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ projectId: string }>;
+  searchParams: Promise<{ page: string }>;
 }) {
   const { projectId } = await params;
-  const epics = await getEpics(projectId);
+  const { page = "1" } = await searchParams;
+  const { epics, totalPages } = await getEpics(projectId, Number(page));
 
   if (!epics.length) return <EmptyEpics projectId={projectId} />;
 
@@ -58,8 +61,8 @@ export default async function EpicsPage({
 
       <div className="mt-auto hidden justify-end py-8 sm:flex">
         <TruncatedPagination
-          totalPages={15}
-          currentPage={1}
+          totalPages={totalPages}
+          currentPage={Number(page)}
           getHref={(page) => `/project/${projectId}/epics?page=${page}`}
         />
       </div>
