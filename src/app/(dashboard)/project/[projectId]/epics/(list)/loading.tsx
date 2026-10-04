@@ -8,7 +8,7 @@ export default function EpicsLoading() {
           Project Epics
         </h1>
         <div className="flex w-full flex-wrap gap-x-8 gap-y-4 sm:w-fit">
-          <Skeleton className="h-14 w-full sm:w-75" />
+          <Skeleton className="h-14 w-full sm:h-12 sm:w-75" />
           <Skeleton className="hidden h-12 w-35 sm:block" />
         </div>
       </div>
