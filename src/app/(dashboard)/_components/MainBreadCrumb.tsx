@@ -1,4 +1,5 @@
 import { usePathname } from "next/navigation";
+import { Fragment } from "react/jsx-runtime";
 
 import {
   BreadcrumbSeparator,
@@ -8,7 +9,7 @@ import {
   BreadCrumbList,
   BreadCrumbPage,
 } from "@/components/ui/BreadCrumb";
-import { Fragment } from "react/jsx-runtime";
+import { useProject } from "@/features/project/hooks/useProject";
 
 const getRouteUrl = (pathname: string, route: string) => {
   const indexOfRoute = pathname.indexOf(route + "/");
@@ -18,6 +19,7 @@ const getRouteUrl = (pathname: string, route: string) => {
 
 export default function MainBreadCrumb() {
   const pathname = usePathname();
+  const { project } = useProject();
 
   const routeSegments = pathname.split("/");
   routeSegments.shift();
@@ -25,7 +27,7 @@ export default function MainBreadCrumb() {
   if (routeSegments.length === 1) return null;
 
   return (
-    <BreadCrumb className="hidden px-8 pt-6 sm:block">
+    <BreadCrumb>
       <BreadCrumbList>
         {routeSegments.map((route) => {
           const isLast = route === routeSegments.at(-1);
@@ -37,7 +39,7 @@ export default function MainBreadCrumb() {
                   <BreadCrumbPage>{route}</BreadCrumbPage>
                 ) : (
                   <BreadCrumbLink href={getRouteUrl(pathname, route)}>
-                    {route}
+                    {route === project?.id ? project.name : route}
                   </BreadCrumbLink>
                 )}
               </BreadCrumbItem>

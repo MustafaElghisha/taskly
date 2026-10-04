@@ -1,8 +1,8 @@
 import BurgerMenuIcon from "@/assets/icons/BurgerMenuIcon.svg";
 import { Separator } from "@/components/ui/Separator";
-
 import UserInfo from "./UserInfo";
 import { User } from "@/types";
+import MainBreadCrumb from "./MainBreadCrumb";
 
 type MainHeaderProps = {
   toggleSidebar: () => void;
@@ -17,8 +17,8 @@ export default function MainHeader({
 }: MainHeaderProps) {
   return (
     <>
-      <header className="ml-auto flex w-full items-center justify-between px-6 py-5 sm:justify-end sm:px-8 sm:py-3">
-        <div className="flex items-center gap-4 sm:hidden">
+      <header className="flex w-full justify-between px-6 py-5 sm:flex-col sm:px-8 sm:py-3">
+        <div className="flex items-center justify-start gap-4 sm:hidden">
           <button
             type="button"
             aria-label="Main Navigation Menu"
@@ -33,9 +33,19 @@ export default function MainHeader({
             TASKLY
           </span>
         </div>
-        <UserInfo name={user.name} jobTitle={user.jobTitle} />
+
+        <div className="self-end">
+          <UserInfo name={user.name} jobTitle={user.jobTitle} />
+        </div>
+
+        <Separator className="mt-3 mb-6 hidden sm:block" />
+
+        <div className="hidden self-start sm:block">
+          <MainBreadCrumb />
+        </div>
       </header>
-      <Separator />
+
+      <Separator className="block sm:hidden" />
     </>
   );
 }
