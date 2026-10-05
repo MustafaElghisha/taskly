@@ -31,7 +31,7 @@ export default function MobileNavigation() {
             </li>
           </ul>
         ) : (
-          <ul className="flex items-center justify-between gap-6">
+          <ul className="flex items-center justify-between gap-5.75">
             {ACTIVE_PROJECT_ROUTES.map(({ title, segment, Icon }) => (
               <li key={title} className="flex-1">
                 <Link
