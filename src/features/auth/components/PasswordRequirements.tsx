@@ -24,7 +24,7 @@ export default function PasswordRequirements({
   ];
 
   return (
-    <div className="bg-blue-150 hidden rounded-lg p-4 sm:block">
+    <div className="bg-blue-150 hidden rounded-lg p-4 md:block">
       <ul className="flex flex-col gap-2">
         {passwordRequirements.map(({ satisfied, label }) => (
           <li key={label} className="flex items-center gap-2">

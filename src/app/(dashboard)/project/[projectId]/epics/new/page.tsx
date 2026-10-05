@@ -10,9 +10,9 @@ export default async function AddEpicPage({
   const members = await getProjectMembers(projectId);
 
   return (
-    <div className="mx-auto flex max-w-4xl flex-col gap-6 px-6 py-8 sm:gap-8">
-      <div className="flex flex-col gap-1.5 sm:gap-2">
-        <h1 className="text-2xl leading-8 font-semibold tracking-tight text-slate-800 sm:text-4xl sm:leading-10 sm:font-bold">
+    <div className="mx-auto flex max-w-4xl flex-col gap-6 px-6 py-8 md:gap-8">
+      <div className="flex flex-col gap-1.5 md:gap-2">
+        <h1 className="text-2xl leading-8 font-semibold tracking-tight text-slate-800 md:text-4xl md:leading-10 md:font-bold">
           Create New Epic
         </h1>
         <p className="max-w-lg leading-6 text-slate-600">

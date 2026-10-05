@@ -21,17 +21,17 @@ export default function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="sm:shadow-form-container mx-auto flex max-w-xl flex-col rounded-lg sm:items-center sm:bg-white sm:p-12">
-      <div className="sm:text-center">
-        <h1 className="text-heading-md mb-2 leading-10 font-semibold tracking-tight text-slate-800 sm:text-3xl sm:leading-9">
+    <div className="md:shadow-form-container mx-auto flex max-w-xl flex-col rounded-lg md:items-center md:bg-white md:p-12">
+      <div className="md:text-center">
+        <h1 className="text-heading-md mb-2 leading-10 font-semibold tracking-tight text-slate-800 md:text-3xl md:leading-9">
           Create your workspace
         </h1>
         <FieldDescription>
-          <span className="sm:hidden">
+          <span className="md:hidden">
             Join the curated environment for institutional trust and task
             precision.
           </span>
-          <span className="hidden sm:inline">
+          <span className="hidden md:inline">
             Join the editorial approach to task management.
           </span>
         </FieldDescription>
@@ -39,7 +39,7 @@ export default function SignUpForm() {
 
       <form
         onSubmit={onSubmit}
-        className="mt-10 mb-16 flex w-full flex-col gap-6 sm:mb-12"
+        className="mt-10 mb-16 flex w-full flex-col gap-6 md:mb-12"
       >
         <Field>
           <FieldLabel htmlFor="name">Name</FieldLabel>
@@ -69,7 +69,7 @@ export default function SignUpForm() {
         <Field>
           <FieldLabel htmlFor="jobTitle">
             Job Title
-            <span className="hidden ps-0.5 leading-0 tracking-normal text-slate-400 sm:inline">
+            <span className="hidden ps-0.5 leading-0 tracking-normal text-slate-400 md:inline">
               (Optional)
             </span>
           </FieldLabel>
@@ -80,7 +80,7 @@ export default function SignUpForm() {
             placeholder="e.g. Project Manager"
           />
         </Field>
-        <div className="flex flex-col gap-x-4 gap-y-6 sm:flex-row">
+        <div className="flex flex-col gap-x-4 gap-y-6 md:flex-row">
           <Field className="min-w-0 flex-1">
             <FieldLabel htmlFor="password">Password</FieldLabel>
             <PasswordInput

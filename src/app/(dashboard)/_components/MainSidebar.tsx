@@ -59,14 +59,14 @@ export default function MainSidebar({
     <aside
       id="main-navigation"
       className={cn(
-        "bg-surface-low fixed z-10 flex h-dvh w-full shrink-0 flex-col gap-8 p-4 sm:static sm:max-w-3xs sm:translate-x-0!",
+        "bg-surface-low fixed z-10 flex h-dvh w-full shrink-0 flex-col gap-8 p-4 md:static md:max-w-3xs md:translate-x-0!",
         isSidebarOpen ? "translate-x-0" : "-translate-x-full",
         isCollapsed && "w-fit min-w-0 items-center px-5",
       )}
     >
-      <SidebarHeader className="sm:ps-1">
+      <SidebarHeader className="md:ps-1">
         <Logo isCollapsed={isCollapsed} className="p-1" />
-        <button className="cursor-pointer sm:hidden" onClick={toggleSidebar}>
+        <button className="cursor-pointer md:hidden" onClick={toggleSidebar}>
           <CloseIcon />
         </button>
       </SidebarHeader>
@@ -130,13 +130,13 @@ export default function MainSidebar({
       </SidebarContent>
 
       <SidebarFooter>
-        <Separator className="mb-6 hidden sm:block" />
+        <Separator className="mb-6 hidden md:block" />
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               isCollapsed={isCollapsed}
               onClick={toggleCollapsed}
-              className="hidden sm:flex"
+              className="hidden md:flex"
             >
               <CollapseIcon className={cn(isCollapsed && "rotate-180")} />
               {!isCollapsed && "Collapse"}

@@ -18,19 +18,19 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="sm:shadow-form-container mx-auto flex max-w-120 flex-col items-center rounded-lg sm:bg-white sm:p-12">
+    <div className="md:shadow-form-container mx-auto flex max-w-120 flex-col items-center rounded-lg md:bg-white md:p-12">
       <div className="text-center">
-        <h1 className="mb-2 text-2xl leading-8 font-semibold tracking-tight text-slate-800 sm:text-3xl sm:leading-9">
+        <h1 className="mb-2 text-2xl leading-8 font-semibold tracking-tight text-slate-800 md:text-3xl md:leading-9">
           Welcome Back
         </h1>
-        <FieldDescription className="max-w-[29ch] sm:max-w-full">
+        <FieldDescription className="max-w-[29ch] md:max-w-full">
           Please enter your details to access your workspace
         </FieldDescription>
       </div>
 
       <form
         onSubmit={onSubmit}
-        className="mt-10 mb-16 flex w-full flex-col gap-6 sm:mb-16"
+        className="mt-10 mb-16 flex w-full flex-col gap-6 md:mb-16"
       >
         <Field>
           <FieldLabel htmlFor="email">Email</FieldLabel>
@@ -51,7 +51,7 @@ export default function LoginForm() {
                 href="/forgot-password"
                 className={buttonVariants({
                   variant: "secondary",
-                  className: "text-2xs leading-4.25 font-bold sm:hidden",
+                  className: "text-2xs leading-4.25 font-bold md:hidden",
                 })}
               >
                 Forgot?
@@ -86,7 +86,7 @@ export default function LoginForm() {
             href="/forgot-password"
             className={buttonVariants({
               variant: "secondary",
-              className: "hidden sm:block",
+              className: "hidden md:block",
             })}
           >
             Forgot Password?

@@ -15,8 +15,8 @@ export default function ProjectList({
   totalPages: number;
 }) {
   return (
-    <div className="py-6 sm:pt-10 sm:pb-17.5">
-      <ul className="hidden grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4 sm:grid sm:gap-6">
+    <div className="py-6 md:pt-10 md:pb-17.5">
+      <ul className="hidden grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4 md:grid md:gap-6">
         {projects.map((project) => (
           <li key={project.id}>
             <ProjectCard {...project} />

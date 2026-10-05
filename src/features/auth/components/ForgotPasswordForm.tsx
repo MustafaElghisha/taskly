@@ -19,18 +19,18 @@ export default function ForgotPasswordForm() {
 
   return (
     <div className="mx-auto flex max-w-md flex-col items-center gap-6">
-      <div className="shadow-form-container flex w-full flex-col gap-8 rounded-lg bg-white p-8 sm:p-10">
-        <div className="flex flex-col items-center gap-2 text-center sm:items-start sm:text-start">
-          <h1 className="sm:text-heading-lg text-2xl leading-8 font-semibold text-slate-800 sm:leading-10 sm:tracking-tighter">
+      <div className="shadow-form-container flex w-full flex-col gap-8 rounded-lg bg-white p-8 md:p-10">
+        <div className="flex flex-col items-center gap-2 text-center md:items-start md:text-start">
+          <h1 className="md:text-heading-lg text-2xl leading-8 font-semibold text-slate-800 md:leading-10 md:tracking-tighter">
             Forgot password?
           </h1>
-          <p className="px-8 text-sm leading-5 text-slate-600 sm:p-0 sm:leading-5.75">
+          <p className="px-8 text-sm leading-5 text-slate-600 md:p-0 md:leading-5.75">
             No worries, we&apos;ll send you reset instructions.
           </p>
         </div>
         <form
           onSubmit={handleSendReset}
-          className="flex flex-col gap-4 sm:gap-6"
+          className="flex flex-col gap-4 md:gap-6"
         >
           <Field>
             <FieldLabel htmlFor="email">Email Address</FieldLabel>
@@ -47,7 +47,7 @@ export default function ForgotPasswordForm() {
           <Button
             type="submit"
             disabled={isSubmitting || submitCount >= 1}
-            className="rounded-xs sm:rounded-sm"
+            className="rounded-xs md:rounded-sm"
           >
             {isSubmitting ? "Sending..." : "Send Reset Link"}
           </Button>
@@ -60,7 +60,7 @@ export default function ForgotPasswordForm() {
 
         <Link
           href={"/login"}
-          className="text-primary flex items-center justify-center gap-2 text-sm leading-5 font-medium sm:-mt-2 sm:font-medium"
+          className="text-primary flex items-center justify-center gap-2 text-sm leading-5 font-medium md:-mt-2 md:font-medium"
         >
           <ArrowLeftIcon />
           Back to log in
@@ -87,7 +87,7 @@ export default function ForgotPasswordForm() {
               onClick={() => handleSendReset()}
               disabled={isSubmitting || submitCount >= 4 || !!secondsRemaining}
               variant={"ghost"}
-              className="text-primary text-2xs sm:text-2xs gap-1 leading-4 font-bold tracking-widest uppercase"
+              className="text-primary text-2xs md:text-2xs gap-1 leading-4 font-bold tracking-widest uppercase"
             >
               Resend
               {secondsRemaining === 0 && <span>( {4 - submitCount} )</span>}

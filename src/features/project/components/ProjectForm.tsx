@@ -48,13 +48,13 @@ export default function ProjectForm({
 }: ProjectFormProps) {
   return (
     <div className="mx-auto max-w-2xl">
-      <div className="sm:shadow-form-container flex flex-col gap-8 rounded-t-lg sm:mt-11 sm:gap-0 sm:bg-white">
-        <div className="flex items-center gap-4 sm:p-8">
-          <div className="bg-primary-container/10 hidden items-center justify-center rounded-sm p-4 sm:flex">
+      <div className="md:shadow-form-container flex flex-col gap-8 rounded-t-lg md:mt-11 md:gap-0 md:bg-white">
+        <div className="flex items-center gap-4 md:p-8">
+          <div className="bg-primary-container/10 hidden items-center justify-center rounded-sm p-4 md:flex">
             <InitializeIcon />
           </div>
           <div>
-            <h2 className="pb-1 text-2xl leading-8 font-semibold text-slate-800 sm:pb-0">
+            <h2 className="pb-1 text-2xl leading-8 font-semibold text-slate-800 md:pb-0">
               {formTitle}
             </h2>
             <p className="text-sm leading-5 text-slate-500">
@@ -63,10 +63,10 @@ export default function ProjectForm({
           </div>
         </div>
 
-        <Separator className="hidden bg-black/5 sm:block" />
+        <Separator className="hidden bg-black/5 md:block" />
 
         <form
-          className="flex flex-col gap-8 sm:p-8 sm:pb-12"
+          className="flex flex-col gap-8 md:p-8 md:pb-12"
           onSubmit={onSubmit}
         >
           <Field>
@@ -85,7 +85,7 @@ export default function ProjectForm({
           <Field>
             <div className="flex items-center justify-between">
               <FieldLabel htmlFor="project-description">Description</FieldLabel>
-              <span className="text-2xs hidden leading-4 text-slate-500/60 sm:inline">
+              <span className="text-2xs hidden leading-4 text-slate-500/60 md:inline">
                 Optional
               </span>
             </div>
@@ -104,10 +104,10 @@ export default function ProjectForm({
               )}
             >
               {watchDescription?.length} / 500
-              <span className="hidden ps-0.5 sm:inline">characters</span>
+              <span className="hidden ps-0.5 md:inline">characters</span>
             </FieldDescription>
           </Field>
-          <div className="flex flex-col-reverse items-center justify-between gap-y-7 pt-4 sm:flex-row">
+          <div className="flex flex-col-reverse items-center justify-between gap-y-7 pt-4 md:flex-row">
             <Link
               href={"/project"}
               className={buttonVariants({ variant: "ghost" })}
@@ -118,7 +118,7 @@ export default function ProjectForm({
               type="submit"
               disabled={isSubmitting}
               variant={"primary"}
-              className="primary-button-shadow w-full font-bold sm:w-fit sm:rounded-sm sm:text-sm sm:leading-5"
+              className="primary-button-shadow w-full font-bold md:w-fit md:rounded-sm md:text-sm md:leading-5"
             >
               {isSubmitting ? submittingLabel : submitLabel}
             </Button>
@@ -133,15 +133,15 @@ export default function ProjectForm({
         </form>
       </div>
 
-      <div className="bg-surface-low -mt-1 flex flex-col gap-2 rounded-lg p-6 sm:mb-11 sm:flex-row sm:items-baseline sm:rounded-t-none">
-        <div className="hidden sm:block">
+      <div className="bg-surface-low -mt-1 flex flex-col gap-2 rounded-lg p-6 md:mb-11 md:flex-row md:items-baseline md:rounded-t-none">
+        <div className="hidden md:block">
           <TipIcon />
         </div>
-        <span className="text-xs leading-5 font-bold text-slate-500 sm:hidden">
+        <span className="text-xs leading-5 font-bold text-slate-500 md:hidden">
           Pro Tip
         </span>
         <p className="text-xs text-slate-500">
-          <span className="hidden pe-0.5 text-xs leading-5 font-bold text-slate-500 sm:inline">
+          <span className="hidden pe-0.5 text-xs leading-5 font-bold text-slate-500 md:inline">
             Pro Tip:
           </span>
           You can invite project members and assign epics immediately after the

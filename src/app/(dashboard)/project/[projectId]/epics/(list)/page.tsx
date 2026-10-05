@@ -23,24 +23,24 @@ export default async function EpicsPage({
   if (!epics.length) return <EmptyEpics projectId={projectId} />;
 
   return (
-    <div className="flex h-full flex-col px-6 sm:px-8">
-      <div className="flex flex-wrap items-end justify-between gap-x-20 gap-y-4 pt-4 sm:pt-8">
-        <h1 className="hidden text-3xl leading-9 font-bold tracking-tight text-slate-800 sm:block">
+    <div className="flex h-full flex-col px-6 md:px-8">
+      <div className="flex flex-wrap items-end justify-between gap-x-20 gap-y-4 pt-4 md:pt-8">
+        <h1 className="hidden text-3xl leading-9 font-bold tracking-tight text-slate-800 md:block">
           Project Epics
         </h1>
-        <div className="flex w-full flex-wrap gap-x-8 gap-y-4 sm:w-fit">
-          <div className="relative flex w-full items-center sm:w-fit">
+        <div className="flex w-full flex-wrap gap-x-8 gap-y-4 md:w-fit">
+          <div className="relative flex w-full items-center md:w-fit">
             <SearchIcon className="absolute left-3" />
             <Input
               placeholder="Search epics..."
-              className="w-full px-8 sm:rounded-xs"
+              className="w-full px-8 md:rounded-xs"
             />
           </div>
           <Link
             href={`/project/${projectId}/epics/new`}
             className={buttonVariants({
               variant: "primary",
-              className: "hidden rounded-sm sm:flex sm:gap-2 sm:px-6",
+              className: "hidden rounded-sm md:flex md:gap-2 md:px-6",
             })}
           >
             <PlusIcon />
@@ -49,8 +49,8 @@ export default async function EpicsPage({
         </div>
       </div>
 
-      <div className="py-6 sm:py-10">
-        <ul className="grid gap-3 sm:grid-cols-[repeat(auto-fill,minmax(340px,1fr))] sm:gap-6">
+      <div className="py-6 md:py-10">
+        <ul className="grid gap-3 md:grid-cols-[repeat(auto-fill,minmax(340px,1fr))] md:gap-6">
           {epics.map((epic) => (
             <li key={epic.epic_id}>
               <EpicCard {...epic} />
@@ -59,7 +59,7 @@ export default async function EpicsPage({
         </ul>
       </div>
 
-      <div className="mt-auto hidden justify-end py-8 sm:flex">
+      <div className="mt-auto hidden justify-end py-8 md:flex">
         <TruncatedPagination
           totalPages={totalPages}
           currentPage={Number(page)}
@@ -72,7 +72,7 @@ export default async function EpicsPage({
         className={buttonVariants({
           variant: "primary",
           className:
-            "fixed right-6 bottom-22 size-14 rounded-lg p-1! sm:hidden",
+            "fixed right-6 bottom-22 size-14 rounded-lg p-1! md:hidden",
         })}
       >
         <PlusIcon className="size-3.75" />

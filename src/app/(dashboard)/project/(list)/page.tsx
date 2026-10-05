@@ -18,10 +18,10 @@ export default async function ProjectPage({
   if (!totalPages) return <EmptyProjects />;
 
   return (
-    <div className="flex h-full flex-col px-5 py-4 sm:p-8">
+    <div className="flex h-full flex-col px-5 py-4 md:p-8">
       <div className="flex flex-wrap items-end justify-between gap-x-20 gap-y-4">
         <div className="flex flex-col gap-1">
-          <h1 className="text-2xl leading-8 font-semibold tracking-tight text-slate-800 sm:text-3xl sm:leading-9">
+          <h1 className="text-2xl leading-8 font-semibold tracking-tight text-slate-800 md:text-3xl md:leading-9">
             Projects
           </h1>
           <p className="leading-6 text-slate-600">
@@ -31,7 +31,7 @@ export default async function ProjectPage({
         <Link
           href="/project/add"
           className={buttonVariants({
-            className: "hidden rounded-xs px-6 font-medium sm:block",
+            className: "hidden rounded-xs px-6 font-medium md:block",
             variant: "primary",
           })}
         >
@@ -45,7 +45,7 @@ export default async function ProjectPage({
         totalPages={totalPages}
       />
 
-      <div className="mt-auto hidden justify-end py-10 sm:flex">
+      <div className="mt-auto hidden justify-end py-10 md:flex">
         <TruncatedPagination
           currentPage={Number(page)}
           totalPages={totalPages}
@@ -58,7 +58,7 @@ export default async function ProjectPage({
         className={buttonVariants({
           variant: "primary",
           className:
-            "fixed right-5 bottom-22 size-14 rounded-xl p-1! sm:hidden",
+            "fixed right-5 bottom-22 size-14 rounded-xl p-1! md:hidden",
         })}
       >
         <PlusIcon />

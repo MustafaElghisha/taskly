@@ -11,7 +11,7 @@ export default function MobileNavigation() {
   const activeProjectRoute = pathname.split("/")[3];
 
   return (
-    <div className="bg-surface-low block sm:hidden">
+    <div className="bg-surface-low block md:hidden">
       <nav className="px-7 py-3.75">
         {!activeProjectRoute ? (
           <ul>

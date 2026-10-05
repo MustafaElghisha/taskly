@@ -5,10 +5,10 @@ function Table({
   ...props
 }: React.ComponentPropsWithoutRef<"table">) {
   return (
-    <div className="outline-surface-low max-w-xl rounded-lg outline-0 sm:outline-4">
+    <div className="outline-surface-low max-w-xl rounded-lg outline-0 md:outline-4">
       <table
         className={cn(
-          "sm:bg-blue-150/30 w-full table-fixed border-separate border-spacing-y-3 rounded-lg sm:border-collapse sm:border-spacing-y-0",
+          "md:bg-blue-150/30 w-full table-fixed border-separate border-spacing-y-3 rounded-lg md:border-collapse md:border-spacing-y-0",
           className,
         )}
         {...props}
@@ -22,7 +22,7 @@ function TableHeader({
   ...props
 }: React.ComponentPropsWithoutRef<"thead">) {
   return (
-    <thead className={cn("sr-only sm:not-sr-only", className)} {...props} />
+    <thead className={cn("sr-only md:not-sr-only", className)} {...props} />
   );
 }
 
@@ -39,7 +39,7 @@ function TableRow({
 }: React.ComponentPropsWithoutRef<"tr">) {
   return (
     <tr
-      className={cn("border-blue-150 sm:not-last:border-b", className)}
+      className={cn("border-blue-150 md:not-last:border-b", className)}
       {...props}
     />
   );
@@ -66,7 +66,7 @@ function TableCell({
 }: React.ComponentPropsWithoutRef<"td">) {
   return (
     <td
-      className={cn("bg-white p-4 sm:rounded-none sm:px-8 sm:py-5", className)}
+      className={cn("bg-white p-4 md:rounded-none md:px-8 md:py-5", className)}
       {...props}
     />
   );

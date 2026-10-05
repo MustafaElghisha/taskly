@@ -26,7 +26,7 @@ const useSidebar = () => {
   };
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 640px)");
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
 
     const handleChange = (e: MediaQueryListEvent | MediaQueryList) => {
       if (e.matches) {

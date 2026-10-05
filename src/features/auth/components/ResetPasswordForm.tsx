@@ -17,18 +17,18 @@ export default function ResetPasswordForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="shadow-form-container mx-auto flex max-w-lg flex-col gap-6 rounded-lg bg-white p-8.25 sm:px-12.5 sm:pt-9 sm:pb-7.5">
-      <div className="text-center sm:text-start">
+    <div className="shadow-form-container mx-auto flex max-w-lg flex-col gap-6 rounded-lg bg-white p-8.25 md:px-12.5 md:pt-9 md:pb-7.5">
+      <div className="text-center md:text-start">
         <h1 className="text-2xl leading-7.5 font-semibold tracking-tight text-slate-800">
           Create a New Password
         </h1>
-        <p className="pt-2 text-sm leading-5 text-slate-600 sm:pt-5 sm:pb-2">
+        <p className="pt-2 text-sm leading-5 text-slate-600 md:pt-5 md:pb-2">
           Create a new, strong password to secure your workstation access.
         </p>
       </div>
 
       <form onSubmit={onSubmit} className="flex flex-col gap-6">
-        <div className="flex flex-col gap-4 sm:gap-6">
+        <div className="flex flex-col gap-4 md:gap-6">
           <Field>
             <FieldLabel htmlFor="password">New Password</FieldLabel>
             <PasswordInput
@@ -70,7 +70,7 @@ export default function ResetPasswordForm() {
 
       <Link
         href={"/login"}
-        className="text-primary flex items-center justify-center gap-2 text-sm leading-5 font-medium sm:font-medium"
+        className="text-primary flex items-center justify-center gap-2 text-sm leading-5 font-medium md:font-medium"
       >
         <ArrowLeftIcon />
         Back to log in

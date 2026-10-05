@@ -33,15 +33,15 @@ export default function SecurityRequirements({
       <h2 className="text-2xs leading-4 font-bold text-slate-500 uppercase">
         Security Requirements
       </h2>
-      <Separator className="hidden sm:-mt-2 sm:block" />
-      <ul className="grid gap-2.5 sm:grid-cols-2 sm:gap-3">
+      <Separator className="hidden md:-mt-2 md:block" />
+      <ul className="grid gap-2.5 md:grid-cols-2 md:gap-3">
         {securityRequirements.map(({ label, satisfied }, index) => (
           <li
             key={label}
             className={cn(
               "flex items-center gap-2",
               satisfied ? "" : "opacity-50",
-              index === securityRequirements.length - 1 && "sm:col-span-2",
+              index === securityRequirements.length - 1 && "md:col-span-2",
             )}
           >
             {satisfied ? <CheckedIcon /> : <UnCheckedIcon />}

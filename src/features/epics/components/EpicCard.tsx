@@ -20,7 +20,7 @@ export default function EpicCard({
         {epic_id}
       </div>
 
-      <h2 className="flex-1 leading-7 font-semibold text-slate-800 sm:text-xl">
+      <h2 className="flex-1 leading-7 font-semibold text-slate-800 md:text-xl">
         {title}
       </h2>
 
@@ -31,10 +31,10 @@ export default function EpicCard({
           size={"sm"}
         />
         <div className="flex flex-col">
-          <span className="text-3xs leading-4 font-medium text-slate-600 sm:text-xs">
+          <span className="text-3xs leading-4 font-medium text-slate-600 md:text-xs">
             Assignee
           </span>
-          <span className="text-xs leading-5 font-semibold text-slate-800 sm:text-sm">
+          <span className="text-xs leading-5 font-semibold text-slate-800 md:text-sm">
             {assignee.name ? assignee.name : "Unassigned"}
           </span>
         </div>

@@ -13,12 +13,12 @@ export default async function MembersPage({
   const members = await getProjectMembers(projectId);
 
   return (
-    <div className="px-4 py-4 sm:px-8">
-      <div className="flex flex-wrap items-end justify-center gap-x-20 gap-y-4 sm:mb-20 sm:justify-between">
-        <h1 className="text-heading-lg leading-10 font-semibold tracking-tight text-slate-800 sm:text-4xl">
+    <div className="px-4 py-4 md:px-8">
+      <div className="flex flex-wrap items-end justify-center gap-x-20 gap-y-4 md:mb-20 md:justify-between">
+        <h1 className="text-heading-lg leading-10 font-semibold tracking-tight text-slate-800 md:text-4xl">
           Project Members
         </h1>
-        <Button className="primary-button-shadow hidden gap-2 rounded-xs px-6 text-sm leading-5 font-bold sm:flex">
+        <Button className="primary-button-shadow hidden gap-2 rounded-xs px-6 text-sm leading-5 font-bold md:flex">
           <InviteIcon />
           Invite Member
         </Button>
@@ -30,7 +30,7 @@ export default async function MembersPage({
 
       <Button
         variant={"primary"}
-        className="fixed right-4 bottom-22 size-10 rounded-xl p-1! sm:hidden"
+        className="fixed right-4 bottom-22 size-10 rounded-xl p-1! md:hidden"
       >
         <UserPlusIcon />
       </Button>

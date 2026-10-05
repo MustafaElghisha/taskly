@@ -17,8 +17,8 @@ export default function MainHeader({
 }: MainHeaderProps) {
   return (
     <>
-      <header className="flex w-full justify-between px-6 py-5 sm:flex-col sm:px-8 sm:py-3">
-        <div className="flex items-center justify-start gap-4 sm:hidden">
+      <header className="flex w-full justify-between px-6 py-5 md:flex-col md:px-8 md:py-3">
+        <div className="flex items-center justify-start gap-4 md:hidden">
           <button
             type="button"
             aria-label="Main Navigation Menu"
@@ -35,7 +35,7 @@ export default function MainHeader({
         </div>
 
         <div className="flex gap-3.75 self-end">
-          <div className="hidden flex-col items-end justify-center sm:flex">
+          <div className="hidden flex-col items-end justify-center md:flex">
             <span className="text-sm leading-5 font-semibold text-slate-800 capitalize">
               {user.name}
             </span>
@@ -48,14 +48,14 @@ export default function MainHeader({
           <Avatar name={user.name} />
         </div>
 
-        <Separator className="mt-3 mb-6 hidden sm:block" />
+        <Separator className="mt-3 mb-6 hidden md:block" />
 
-        <div className="hidden self-start sm:block">
+        <div className="hidden self-start md:block">
           <MainBreadCrumb />
         </div>
       </header>
 
-      <Separator className="block sm:hidden" />
+      <Separator className="block md:hidden" />
     </>
   );
 }

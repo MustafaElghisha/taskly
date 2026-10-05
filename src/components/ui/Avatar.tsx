@@ -9,7 +9,7 @@ const getAvatarName = (name: string) => {
 };
 
 const avatarVariants = cva(
-  "flex shrink-0 items-center justify-center rounded-xl text-base leading-6 font-bold uppercase sm:text-sm sm:leading-5",
+  "flex shrink-0 items-center justify-center rounded-xl text-base leading-6 font-bold uppercase md:text-sm md:leading-5",
   {
     variants: {
       variant: {
@@ -19,7 +19,7 @@ const avatarVariants = cva(
       },
       size: {
         default: "size-10",
-        sm: "size-7 text-3xs sm:size-10",
+        sm: "size-7 text-3xs md:size-10",
         lg: "size-12",
       },
     },
