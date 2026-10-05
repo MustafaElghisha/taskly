@@ -14,12 +14,12 @@ export default function MobileNavigation() {
     <div className="bg-surface-low block sm:hidden">
       <nav className="px-7 py-3.75">
         {!activeProjectRoute ? (
-          <ul className="flex items-center justify-center">
+          <ul>
             <li>
               <Link
                 href={"/project"}
                 className={cn(
-                  "flex flex-col items-center justify-center gap-0.5 capitalize",
+                  "flex flex-col items-center gap-1 capitalize",
                   pathname.endsWith("/project")
                     ? "text-primary font-semibold"
                     : "text-slate-800",
@@ -31,9 +31,9 @@ export default function MobileNavigation() {
             </li>
           </ul>
         ) : (
-          <ul className="flex items-center justify-between gap-5.75">
+          <ul className="grid grid-cols-5 items-stretch gap-5.75">
             {ACTIVE_PROJECT_ROUTES.map(({ title, segment, Icon }) => (
-              <li key={title} className="flex-1">
+              <li key={title}>
                 <Link
                   href={
                     title === "projects"
@@ -41,7 +41,7 @@ export default function MobileNavigation() {
                       : `/project/${projectId}/${segment}`
                   }
                   className={cn(
-                    "flex flex-col items-center justify-center gap-0.5 capitalize",
+                    "flex h-full flex-col items-center justify-between capitalize",
                     activeProjectRoute === segment
                       ? "text-primary font-semibold"
                       : "text-slate-800",
