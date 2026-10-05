@@ -1,8 +1,8 @@
-import BurgerMenuIcon from "@/assets/icons/BurgerMenuIcon.svg";
+import { Avatar } from "@/components/ui/Avatar";
 import { Separator } from "@/components/ui/Separator";
-import UserInfo from "./UserInfo";
-import { User } from "@/types";
 import MainBreadCrumb from "./MainBreadCrumb";
+import BurgerMenuIcon from "@/assets/icons/BurgerMenuIcon.svg";
+import { User } from "@/types";
 
 type MainHeaderProps = {
   toggleSidebar: () => void;
@@ -34,8 +34,18 @@ export default function MainHeader({
           </span>
         </div>
 
-        <div className="self-end">
-          <UserInfo name={user.name} jobTitle={user.jobTitle} />
+        <div className="flex gap-3.75 self-end">
+          <div className="hidden flex-col items-end justify-center sm:flex">
+            <span className="text-sm leading-5 font-semibold text-slate-800 capitalize">
+              {user.name}
+            </span>
+            {user.jobTitle && (
+              <span className="text-3xs text-primary font-bold tracking-widest uppercase">
+                {user.jobTitle}
+              </span>
+            )}
+          </div>
+          <Avatar name={user.name} />
         </div>
 
         <Separator className="mt-3 mb-6 hidden sm:block" />
