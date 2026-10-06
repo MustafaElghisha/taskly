@@ -75,7 +75,7 @@ export default async function EpicsPage({
             "fixed right-6 bottom-22 size-14 rounded-lg p-1! md:hidden",
         })}
       >
-        <PlusIcon className="size-3.75" />
+        <PlusIcon />
       </Link>
     </div>
   );
