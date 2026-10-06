@@ -20,13 +20,12 @@ import {
   SidebarMenuButton,
   SidebarFooter,
 } from "@/components/ui/Sidebar";
-import ProjectMenuPopover from "./ProjectMenuPopover";
 import { useSidebar } from "../_hooks/useSidebar";
 
-import ProjectMenuAccordion from "./ProjectMenuAccordion";
 import { NAV_ITEMS } from "../_constants/routes";
 import { useProject } from "@/features/project/hooks/useProject";
 import { useClickOutside } from "@/hooks/useClickOutside";
+import ProjectMenu from "./ProjectMenu";
 
 type SidebarProps = {
   toggleSidebar: () => void;
@@ -121,8 +120,21 @@ export default function MainSidebar({
                     </>
                   )}
                 </SidebarMenuButton>
-                <ProjectMenuAccordion isAccordionOpen={isAccordionOpen} />
-                {isCollapsed && isPopoverOpen && <ProjectMenuPopover />}
+                <div
+                  className={cn(
+                    "absolute bottom-0 grid w-full translate-y-full rounded-b-sm bg-white",
+                    isAccordionOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+                  )}
+                >
+                  <ProjectMenu
+                    className={cn("overflow-hidden", !isAccordionOpen && "p-0")}
+                  />
+                </div>
+                {isCollapsed && isPopoverOpen && (
+                  <div className="bg-surface-medium absolute top-0 -right-5 min-w-3xs translate-x-full rounded-e-sm">
+                    <ProjectMenu />
+                  </div>
+                )}
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroup>
