@@ -33,7 +33,7 @@ export default async function EpicsPage({
             <SearchIcon className="absolute left-3" />
             <Input
               placeholder="Search epics..."
-              className="w-full px-8 md:rounded-xs"
+              className="w-full px-8 leading-0 md:rounded-xs"
             />
           </div>
           <Link

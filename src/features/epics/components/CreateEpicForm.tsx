@@ -83,7 +83,7 @@ export default function CreateEpicForm({
             <select
               id="epic-assignee"
               aria-invalid={errors.assignee_id ? "true" : "false"}
-              className="bg-surface-medium rounded-lg px-4 pt-4.5 pb-4.75 leading-0 text-slate-800 md:rounded-sm md:pt-3.5 md:pb-3.75"
+              className="bg-surface-medium rounded-lg px-4 pt-4.5 pb-4.75 text-slate-800 md:rounded-sm md:pt-3.5 md:pb-3.75"
               {...register("assignee_id")}
             >
               <option value="">Select a member...</option>
