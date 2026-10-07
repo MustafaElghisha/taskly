@@ -1,9 +1,13 @@
 import z from "zod";
 
-const epicSchema = z.object({
-  epic_id: z.string(),
+export const epicResponseSchema = z.object({
+  id: z.string(),
+  project_id: z.string(),
   title: z.string(),
+  description: z.string().nullable(),
+  created_at: z.string(),
   deadline: z.string().nullable(),
+  epic_id: z.string(),
   created_by: z.object({
     name: z.string(),
   }),
@@ -12,6 +16,6 @@ const epicSchema = z.object({
   }),
 });
 
-export const epicsResponseSchema = z.array(epicSchema);
+export const epicsResponseSchema = z.array(epicResponseSchema);
 
-export type Epic = z.infer<typeof epicSchema>;
+export type Epic = z.infer<typeof epicResponseSchema>;
