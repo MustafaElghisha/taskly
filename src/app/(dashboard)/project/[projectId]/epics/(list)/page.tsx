@@ -52,8 +52,10 @@ export default async function EpicsPage({
       <div className="py-6 md:py-10">
         <ul className="grid gap-3 md:grid-cols-[repeat(auto-fill,minmax(340px,1fr))] md:gap-6">
           {epics.map((epic) => (
-            <li key={epic.epic_id}>
-              <EpicCard {...epic} />
+            <li key={epic.id}>
+              <Link href={`/project/${projectId}/epics/view/${epic.id}`}>
+                <EpicCard {...epic} />
+              </Link>
             </li>
           ))}
         </ul>
