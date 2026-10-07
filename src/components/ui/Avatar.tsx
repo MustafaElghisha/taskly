@@ -1,6 +1,8 @@
 import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "class-variance-authority";
 
+import UserDashedIcon from "@/assets/icons/UserDashedIcon.svg";
+
 const getAvatarName = (name: string) => {
   const names = name.split(" ");
   return names.length > 1
@@ -37,13 +39,13 @@ function Avatar({
   name,
   ...props
 }: React.ComponentPropsWithoutRef<"div"> &
-  VariantProps<typeof avatarVariants> & { name: string }) {
+  VariantProps<typeof avatarVariants> & { name?: string }) {
   return (
     <div
       className={cn(avatarVariants({ variant, size }), className)}
       {...props}
     >
-      {getAvatarName(name)}
+      {name ? getAvatarName(name) : <UserDashedIcon />}
     </div>
   );
 }
