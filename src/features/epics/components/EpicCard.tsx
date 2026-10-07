@@ -26,7 +26,7 @@ export default function EpicCard({
 
       <div className="mt-4 mb-6 flex items-center gap-3">
         <Avatar
-          name={assignee.name ? assignee.name : "Unassigned"}
+          name={assignee.name ? assignee.name : ""}
           variant={"tertiary"}
           size={"sm"}
         />
