@@ -19,6 +19,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         {children}
+        <div id="modal-root" />
         <Toaster position="top-right" richColors />
       </body>
     </html>
