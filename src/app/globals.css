@@ -54,6 +54,8 @@
 
   --shadow-form-container: 0px 24px 48px 0px hsla(215, 87%, 13%, 0.06);
   --shadow-card: 0px 1px 2px 0px hsla(0, 0%, 0%, 0.05);
+
+  --shadow-edit-container: 0px 25px 50px -12px hsla(0, 0%, 0%, 0.25);
 }
 
 @utility bg-primary-gradient {
