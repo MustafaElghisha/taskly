@@ -10,7 +10,6 @@
   --green-300: hsl(150, 91%, 74%);
   --red-500: hsl(0, 75%, 42%);
   --yellow-500: hsl(42, 100%, 50%);
-
   --primary-gradient: linear-gradient(
     90deg,
     var(--blue-800) 0%,
@@ -45,8 +44,8 @@
   --color-slate-600: hsl(229, 11%, 30%);
   --color-slate-500: hsl(218, 22%, 40%);
   --color-slate-400: hsl(230, 7%, 49%);
+  --color-slate-300: hsl(215, 20%, 65%);
   --color-slate-200: hsl(231, 19%, 80%);
-
   --color-blue-250: hsl(221, 100%, 90%);
   --color-blue-150: hsl(227, 100%, 95%);
   --color-red-100: hsl(6, 100%, 92%);
