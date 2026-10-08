@@ -21,17 +21,15 @@ export default function MainLayoutClient({ children, user }: MainLayoutProps) {
         isSidebarOpen={isSidebarOpen}
       />
 
-      <div className="flex grow flex-col">
+      <div className="flex min-w-0 grow flex-col">
         <MainHeader
           toggleSidebar={toggleSidebar}
           isSidebarOpen={isSidebarOpen}
           user={user}
         />
-
-        <main className="flex-1 scrollbar-none overflow-y-auto">
+        <main className="min-w-0 flex-1 scrollbar-none overflow-y-auto">
           {children}
         </main>
-
         <MobileNavigation />
       </div>
     </div>
