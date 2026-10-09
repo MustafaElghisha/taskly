@@ -1,10 +1,10 @@
 import { Modal } from "@/components/ui/Modal";
-import SkeletonEpicForm from "@/features/epics/components/SkeletonEpicForm";
+import EpicFormSkeleton from "@/features/epics/components/EpicFormSkeleton";
 
 export default function ModalEpicLoading() {
   return (
     <Modal className="max-w-2xl">
-      <SkeletonEpicForm />
+      <EpicFormSkeleton />
     </Modal>
   );
 }

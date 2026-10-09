@@ -1,7 +1,7 @@
 import { Field } from "@/components/ui/Field";
 import { Skeleton } from "@/components/ui/Skeleton";
 
-export default function SkeletonEpicForm() {
+export default function EpicFormSkeleton() {
   return (
     <div className="md:shadow-edit-container mx-auto grid max-w-2xl rounded-lg p-6 md:bg-white md:p-8">
       <div className="flex items-center justify-between">
