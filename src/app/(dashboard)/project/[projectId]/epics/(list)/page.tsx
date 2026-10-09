@@ -3,11 +3,11 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/Button";
 import TruncatedPagination from "@/components/ui/TruncatedPagination";
 import { getEpics } from "@/features/epics/actions/getEpics";
-import EpicCard from "@/features/epics/components/EpicCard";
 import EmptyEpics from "@/features/epics/components/EmptyEpics";
 import PlusIcon from "@/assets/icons/PlusIcon.svg";
 import SearchIcon from "@/assets/icons/SearchIcon.svg";
 import Input from "@/components/ui/Input";
+import EpicsList from "@/features/epics/components/EpicsList";
 
 export default async function EpicsPage({
   params,
@@ -49,17 +49,12 @@ export default async function EpicsPage({
         </div>
       </div>
 
-      <div className="py-6 md:py-10">
-        <ul className="grid gap-3 md:grid-cols-[repeat(auto-fill,minmax(340px,1fr))] md:gap-6">
-          {epics.map((epic) => (
-            <li key={epic.id}>
-              <Link href={`/project/${projectId}/epics/view/${epic.id}`}>
-                <EpicCard {...epic} />
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <EpicsList
+        epics={epics}
+        projectId={projectId}
+        totalPages={totalPages}
+        currentPage={Number(page)}
+      />
 
       <div className="mt-auto hidden justify-end py-8 md:flex">
         <TruncatedPagination
