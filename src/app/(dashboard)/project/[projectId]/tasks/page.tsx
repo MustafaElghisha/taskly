@@ -1,12 +1,20 @@
-import Button from "@/components/ui/Button";
 import CirclePlusIcon from "@/assets/icons/CirclePlusIcon.svg";
 import SearchIcon from "@/assets/icons/SearchIcon.svg";
 import PlusIcon from "@/assets/icons/PlusIcon.svg";
 import Input from "@/components/ui/Input";
 import EmptyTasks from "@/features/tasks/components/EmptyTasks";
 import { statusStyles, TASKS } from "@/features/tasks/constants/tasks";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
 
-export default function TasksPage() {
+export default async function TasksPage({
+  params,
+}: {
+  params: Promise<{ projectId: string }>;
+}) {
+  const { projectId } = await params;
+
   return (
     <div className="h-full px-4 py-6 md:px-0 md:pt-3">
       <div className="mb-7 flex flex-col flex-wrap gap-x-20 md:mb-0 md:flex-row md:items-end md:justify-between md:gap-y-4 md:px-8">
@@ -27,12 +35,20 @@ export default function TasksPage() {
           />
         </div>
 
-        <Button className="gap-2 rounded-sm py-2 md:hidden">
+        <Link
+          href={`/project/${projectId}/tasks/add`}
+          className={cn(
+            buttonVariants({
+              variant: "primary",
+            }),
+            "gap-2 rounded-sm py-2 md:hidden",
+          )}
+        >
           <PlusIcon className="-scale-75" />
           <span className="text-xs font-bold tracking-widest uppercase">
             Add New Task
           </span>
-        </Button>
+        </Link>
       </div>
 
       <div className="grid h-3/4 pb-6 md:hidden">
@@ -53,7 +69,7 @@ export default function TasksPage() {
                 }}
               />
               <h2 className="text-2xs leading-4 font-bold tracking-widest text-slate-500">
-                {status}
+                {status.replaceAll("_", " ")}
               </h2>
               <div
                 className="flex items-center justify-center rounded-xs px-1.5 py-0.5"
@@ -66,15 +82,15 @@ export default function TasksPage() {
               </div>
             </div>
 
-            <Button
-              variant={"ghost"}
-              className="gap-3 rounded-lg border-2 border-dashed border-slate-200/30 py-4 text-slate-600/60"
+            <Link
+              href={`/project/${projectId}/tasks/add?status=${status}`}
+              className="flex items-center justify-center gap-3 rounded-lg border-2 border-dashed border-slate-200/30 py-4 text-slate-600/60"
             >
               <CirclePlusIcon className="scale-75" />
               <span className="text-xs leading-4 font-bold tracking-widest uppercase">
                 Add New Task
               </span>
-            </Button>
+            </Link>
 
             {length > 0 ? <></> : <EmptyTasks />}
           </li>
