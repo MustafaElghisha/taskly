@@ -1,6 +1,6 @@
 "use client";
 
-import ErrorFallback from "@/app/(dashboard)/_components/ErrorFallback";
+import ErrorFallback from "@/components/ui/ErrorFallback";
 
 export default function Error({ retry }: { retry: () => void }) {
   return (
