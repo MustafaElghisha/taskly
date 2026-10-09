@@ -17,7 +17,7 @@ export default function ProjectsLoading() {
       </div>
       <div className="py-10">
         <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4 md:gap-6">
-          {Array.from({ length: 10 }).map((_, index) => (
+          {Array.from({ length: 5 }).map((_, index) => (
             <ProjectCardSkeleton key={index} />
           ))}
         </div>
