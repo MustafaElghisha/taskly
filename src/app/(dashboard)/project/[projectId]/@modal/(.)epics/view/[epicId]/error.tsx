@@ -5,7 +5,7 @@ import { Modal } from "@/components/ui/Modal";
 
 export default function Error({ retry }: { retry: () => void }) {
   return (
-    <Modal>
+    <Modal className="max-w-2xl">
       <ErrorFallback
         retry={retry}
         message="We're having trouble retrieving your epic right now. Please try again in a moment."

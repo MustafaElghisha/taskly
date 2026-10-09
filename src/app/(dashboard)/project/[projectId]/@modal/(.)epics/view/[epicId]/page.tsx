@@ -11,7 +11,7 @@ export default async function page({
   const epic = await getEpic(projectId, epicId);
 
   return (
-    <Modal>
+    <Modal className="max-w-2xl">
       <EpicForm epic={epic} />
     </Modal>
   );

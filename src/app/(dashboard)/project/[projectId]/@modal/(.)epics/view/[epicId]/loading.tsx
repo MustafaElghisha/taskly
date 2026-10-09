@@ -3,7 +3,7 @@ import SkeletonEpicForm from "@/features/epics/components/SkeletonEpicForm";
 
 export default function ModalEpicLoading() {
   return (
-    <Modal>
+    <Modal className="max-w-2xl">
       <SkeletonEpicForm />
     </Modal>
   );
