@@ -9,15 +9,20 @@ import PlusIcon from "@/assets/icons/PlusIcon.svg";
 import Input from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { Field, FieldLabel } from "@/components/ui/Field";
-import Button from "@/components/ui/Button";
+import Button, { buttonVariants } from "@/components/ui/Button";
 import { Avatar } from "@/components/ui/Avatar";
-import { formatDate } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
 import { Epic } from "../schemas/getEpicsSchema";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import CopyLinkButton from "@/components/ui/CopyLinkButton";
+import Link from "next/link";
 
 export default function EpicForm({ epic }: { epic: Epic }) {
   const router = useRouter();
+  const { projectId, epicId } = useParams<{
+    projectId: string;
+    epicId: string;
+  }>();
 
   return (
     <div className="md:shadow-edit-container mx-auto grid max-w-2xl rounded-lg p-6 md:bg-white md:p-8">
@@ -25,13 +30,13 @@ export default function EpicForm({ epic }: { epic: Epic }) {
         <div className="flex items-center gap-2">
           <EpicIcon />
           <span className="text-xs leading-4 font-bold tracking-wider text-slate-800/60 uppercase">
-            Epic-101
+            {epic.epic_id}
           </span>
         </div>
 
         <div className="flex items-center gap-5">
           <CopyLinkButton />
-          <Button variant={"ghost"} onClick={() => router.back()}>
+          <Button onClick={() => router.back()} variant={"ghost"}>
             <CloseIcon />
           </Button>
         </div>
@@ -119,13 +124,13 @@ export default function EpicForm({ epic }: { epic: Epic }) {
           <h2 className="text-sm leading-7 font-semibold text-slate-800 md:text-lg">
             Tasks
           </h2>
-          <Button
-            variant={"ghost"}
-            className="text-primary gap-1 text-sm font-semibold"
+          <Link
+            href={`/project/${projectId}/tasks/add?epic_id=${epicId}`}
+            className="text-primary flex items-center gap-1 text-sm font-semibold"
           >
             <PlusIcon />
             Add Task
-          </Button>
+          </Link>
         </div>
 
         <div className="bg-surface-low flex flex-col items-center gap-4 rounded-lg border-2 border-dashed border-slate-200/30 px-15 py-8 md:p-12">
@@ -135,10 +140,16 @@ export default function EpicForm({ epic }: { epic: Epic }) {
           <p className="text-center leading-6 font-medium text-slate-800">
             No tasks have been added to this epic yet
           </p>
-          <Button className="gap-2 rounded-xs px-4 py-2 text-xs leading-4 font-bold md:px-6 md:py-2.5">
+          <Link
+            href={`/project/${projectId}/tasks/add?epic_id=${epicId}`}
+            className={cn(
+              buttonVariants({ variant: "primary" }),
+              "gap-2 rounded-xs px-4 py-2 text-xs leading-4 font-bold md:px-6 md:py-2.5",
+            )}
+          >
             <PlusIcon />
             Add Task
-          </Button>
+          </Link>
         </div>
       </div>
     </div>
