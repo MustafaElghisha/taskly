@@ -5,12 +5,23 @@ import { epicsResponseSchema } from "../schemas/getEpicsSchema";
 
 const LIMIT = 6;
 
-export async function getEpics(projectId: string, page: number) {
-  const offset = (page - 1) * LIMIT;
+export async function getEpics(projectId: string, page?: number) {
+  const query = new URLSearchParams();
+
+  query.set("project_id", `eq.${projectId}`);
+
+  if (page != undefined) {
+    const offset = (page - 1) * LIMIT;
+
+    query.set("limit", String(LIMIT));
+    query.set("offset", String(offset));
+  }
+
+  const qs = query.toString();
 
   try {
     const response = await authenticatedFetch(
-      `/rest/v1/project_epics?project_id=eq.${projectId}&limit=${LIMIT}&offset=${offset}`,
+      `/rest/v1/project_epics?${qs && `${qs}`}`,
       {
         method: "GET",
         headers: {

@@ -10,7 +10,7 @@ export default async function AddTaskPage({
   const { projectId } = await params;
 
   const members = await getProjectMembers(projectId);
-  const { epics } = await getEpics(projectId, 1);
+  const { epics } = await getEpics(projectId);
 
   return (
     <div className="md:m-8">
