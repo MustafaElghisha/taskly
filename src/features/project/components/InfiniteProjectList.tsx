@@ -61,7 +61,7 @@ export default function InfiniteProjectList({
   );
 
   return (
-    <ul className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4 md:hidden md:gap-6">
+    <ul className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4">
       {projects.map((project, index) => (
         <li
           key={project.id}
