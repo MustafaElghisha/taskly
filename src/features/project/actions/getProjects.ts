@@ -3,7 +3,7 @@
 import { authenticatedFetch } from "@/lib/auth/authenticatedFetch";
 import { Project } from "@/types";
 
-const LIMIT = 10;
+const LIMIT = 5;
 
 export async function getProjects(page: number) {
   const offset = (page - 1) * LIMIT;
