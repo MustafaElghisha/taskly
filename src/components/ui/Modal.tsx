@@ -32,7 +32,7 @@ export function Modal({
         }
       }}
       className={cn(
-        "shadow-edit-container fixed top-1/2 left-1/2 w-2xl -translate-1/2 rounded-lg backdrop:backdrop-blur-xs",
+        "shadow-edit-container fixed top-1/2 left-1/2 w-[calc(100%-4rem)] -translate-1/2 rounded-lg backdrop:backdrop-blur-xs",
         className,
       )}
     >
