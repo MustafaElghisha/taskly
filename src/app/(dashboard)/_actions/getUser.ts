@@ -1,6 +1,7 @@
 "use server";
 
 import { authenticatedFetch } from "@/lib/auth/authenticatedFetch";
+import { userResponseSchema } from "@/schemas/userSchema";
 
 export async function getUser() {
   const response = await authenticatedFetch(`/auth/v1/user`);
@@ -9,10 +10,9 @@ export async function getUser() {
     throw new Error("Failed to fetch user data");
   }
 
-  const user = await response.json();
+  const {
+    user_metadata: { email, name, role },
+  } = userResponseSchema.parse(await response.json());
 
-  return {
-    name: user.user_metadata.name as string,
-    jobTitle: user.user_metadata.department as string,
-  };
+  return { email, name, role };
 }

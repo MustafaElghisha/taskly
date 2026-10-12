@@ -1,7 +1,7 @@
 "use client";
 
 import { useEditProject } from "../hooks/useEditProject";
-import { Project } from "../schemas/projectSchema";
+import { Project } from "../../../schemas/projectSchema";
 import ProjectForm from "./ProjectForm";
 
 export default function EditProjectForm({ project }: { project: Project }) {

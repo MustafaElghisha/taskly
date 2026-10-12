@@ -29,7 +29,7 @@ const useLogin = () => {
     const result = await login(data);
 
     if (!result.success) {
-      setError("root", { message: result.error });
+      setError("root", { message: result.message });
       return;
     }
 

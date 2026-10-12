@@ -1,7 +1,7 @@
 "use server";
 
 import { authenticatedFetch } from "@/lib/auth/authenticatedFetch";
-import { projectsResponseSchema } from "../schemas/projectSchema";
+import { projectsResponseSchema } from "../../../schemas/projectSchema";
 
 export async function getProject(projectId: string) {
   const response = await authenticatedFetch(

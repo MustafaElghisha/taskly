@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Epic } from "../schemas/epicSchema";
+import { Epic } from "../../../schemas/epicSchema";
 import { getEpics } from "../actions/getEpics";
 import EpicCard from "./EpicCard";
 

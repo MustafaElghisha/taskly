@@ -3,7 +3,7 @@ import EpicsIcon from "@/assets/icons/EpicsIcon.svg";
 import TasksIcon from "@/assets/icons/TasksIcon.svg";
 import MembersIcon from "@/assets/icons/MembersIcon.svg";
 import EditIcon from "@/assets/icons/EditIcon.svg";
-import { Project } from "../schemas/projectSchema";
+import { Project } from "../../../schemas/projectSchema";
 import { formatDate } from "@/lib/utils";
 
 const PROJECT_NAV_ITEMS = [

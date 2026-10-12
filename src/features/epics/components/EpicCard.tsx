@@ -3,7 +3,7 @@ import { Separator } from "@/components/ui/Separator";
 import { formatDate } from "@/lib/utils";
 import AuthorIcon from "@/assets/icons/AuthorIcon.svg";
 import CalendarIcon from "@/assets/icons/CalendarIcon.svg";
-import { Epic } from "../schemas/epicSchema";
+import { Epic } from "../../../schemas/epicSchema";
 
 export default function EpicCard({
   title,

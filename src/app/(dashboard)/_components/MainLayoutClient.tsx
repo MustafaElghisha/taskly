@@ -4,7 +4,7 @@ import MobileNavigation from "@/app/(dashboard)/_components/MobileNavigation";
 import { useState } from "react";
 import MainSidebar from "./MainSidebar";
 import MainHeader from "./MainHeader";
-import { User } from "@/types";
+import { User } from "@/schemas/userSchema";
 
 type MainLayoutProps = { children: React.ReactNode; user: User };
 

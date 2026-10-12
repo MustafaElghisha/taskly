@@ -2,7 +2,7 @@ import { Avatar } from "@/components/ui/Avatar";
 import { Separator } from "@/components/ui/Separator";
 import MainBreadCrumb from "./MainBreadCrumb";
 import BurgerMenuIcon from "@/assets/icons/BurgerMenuIcon.svg";
-import { User } from "@/types";
+import { User } from "@/schemas/userSchema";
 
 type MainHeaderProps = {
   toggleSidebar: () => void;
@@ -39,9 +39,9 @@ export default function MainHeader({
             <span className="text-sm leading-5 font-semibold text-slate-800 capitalize">
               {user.name}
             </span>
-            {user.jobTitle && (
+            {user.role && (
               <span className="text-3xs text-primary font-bold tracking-widest uppercase">
-                {user.jobTitle}
+                {user.role}
               </span>
             )}
           </div>

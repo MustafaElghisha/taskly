@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { createProjectInputSchema } from "../schemas/createProjectSchema";
 import { editProject } from "../actions/editProject";
-import { Project } from "../schemas/projectSchema";
+import { Project } from "../../../schemas/projectSchema";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 

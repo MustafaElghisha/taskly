@@ -12,7 +12,7 @@ import { Textarea } from "@/components/ui/Textarea";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useCreateEpic } from "../hooks/useCreateEpic";
-import { Member } from "@/features/members/schemas/getProjectMembersSchema";
+import { Member } from "@/schemas/memberSchema";
 
 export default function CreateEpicForm({
   projectId,

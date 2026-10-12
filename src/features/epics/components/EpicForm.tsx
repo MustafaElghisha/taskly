@@ -12,7 +12,7 @@ import { Field, FieldLabel } from "@/components/ui/Field";
 import Button, { buttonVariants } from "@/components/ui/Button";
 import { Avatar } from "@/components/ui/Avatar";
 import { cn, formatDate } from "@/lib/utils";
-import { Epic } from "../schemas/epicSchema";
+import { Epic } from "../../../schemas/epicSchema";
 import { useParams, useRouter } from "next/navigation";
 import CopyLinkButton from "@/components/ui/CopyLinkButton";
 import Link from "next/link";

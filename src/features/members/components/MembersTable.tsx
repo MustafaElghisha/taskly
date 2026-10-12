@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/Table";
-import { Member } from "../schemas/getProjectMembersSchema";
+import { Member } from "../../../schemas/memberSchema";
 
 export default function MembersTable({ members }: { members: Member[] }) {
   return (
