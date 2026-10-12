@@ -1,7 +1,7 @@
 "use server";
 
 import { authenticatedFetch } from "@/lib/auth/authenticatedFetch";
-import { epicResponseSchema } from "../schemas/getEpicsSchema";
+import { epicsResponseSchema } from "../schemas/epicSchema";
 
 export async function getEpic(projectId: string, epicId: string) {
   const response = await authenticatedFetch(
@@ -20,5 +20,5 @@ export async function getEpic(projectId: string, epicId: string) {
 
   const epics = await response.json();
 
-  return epicResponseSchema.parse(epics[0]);
+  return epicsResponseSchema.parse(epics)[0];
 }

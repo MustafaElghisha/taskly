@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const epicResponseSchema = z.object({
+const epicResponseSchema = z.object({
   id: z.string(),
   project_id: z.string(),
   title: z.string(),

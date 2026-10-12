@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Epic } from "../schemas/getEpicsSchema";
+import { Epic } from "../schemas/epicSchema";
 import EpicCard from "./EpicCard";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import InfiniteEpicList from "./InfiniteEpicList";
