@@ -1,7 +1,7 @@
-import { Project } from "@/types";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { getProject } from "../actions/getProject";
+import { Project } from "../schemas/projectSchema";
 
 const useProject = () => {
   const { projectId } = useParams();

@@ -5,7 +5,7 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/Field";
 import Input from "@/components/ui/Input";
 import { Separator } from "@/components/ui/Separator";
 import { Textarea } from "@/components/ui/Textarea";
-import { Epic } from "@/features/epics/schemas/getEpicsSchema";
+import { Epic } from "@/features/epics/schemas/epicSchema";
 import { Member } from "@/features/members/schemas/getProjectMembersSchema";
 import { TASK_STATUSES } from "@/features/tasks/constants/tasks";
 import { useCreateTask } from "../hooks/useCreateTask";

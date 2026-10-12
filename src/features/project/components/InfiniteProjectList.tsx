@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { Project } from "@/types";
+import { Project } from "../schemas/projectSchema";
 import { getProjects } from "../actions/getProjects";
 import ProjectCard from "./ProjectCard";
 

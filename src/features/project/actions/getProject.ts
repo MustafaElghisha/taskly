@@ -1,7 +1,7 @@
 "use server";
 
 import { authenticatedFetch } from "@/lib/auth/authenticatedFetch";
-import { Project } from "@/types";
+import { projectsResponseSchema } from "../schemas/projectSchema";
 
 export async function getProject(projectId: string) {
   const response = await authenticatedFetch(
@@ -12,6 +12,6 @@ export async function getProject(projectId: string) {
     throw new Error("Faild to fetch the current project");
   }
 
-  const project = (await response.json()) as Project[];
-  return project[0];
+  const project = await response.json();
+  return projectsResponseSchema.parse(project)[0];
 }

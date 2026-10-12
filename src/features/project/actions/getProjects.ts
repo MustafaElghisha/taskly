@@ -1,7 +1,7 @@
 "use server";
 
 import { authenticatedFetch } from "@/lib/auth/authenticatedFetch";
-import { Project } from "@/types";
+import { projectsResponseSchema } from "../schemas/projectSchema";
 
 const LIMIT = 5;
 
@@ -28,7 +28,7 @@ export async function getProjects(page: number) {
   const totalCount = Number(contentRange?.split("/")[1] ?? 0);
   const totalPages = Math.ceil(totalCount / LIMIT);
 
-  const projects = (await response.json()) as Project[];
+  const projects = await response.json();
 
-  return { totalPages, projects };
+  return { totalPages, projects: projectsResponseSchema.parse(projects) };
 }
