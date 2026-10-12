@@ -25,34 +25,26 @@ export async function getEpics(
     params.set("offset", String(offset));
   }
 
-  try {
-    const response = await authenticatedFetch(
-      `/rest/v1/project_epics?${params.toString()}`,
-      {
-        method: "GET",
-        headers: {
-          Prefer: "count=exact",
-        },
+  const response = await authenticatedFetch(
+    `/rest/v1/project_epics?${params.toString()}`,
+    {
+      method: "GET",
+      headers: {
+        Prefer: "count=exact",
       },
-    );
+    },
+  );
 
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message);
-    }
-
-    const contentRange = response.headers.get("Content-Range");
-    const totalCount = Number(contentRange?.split("/")[1] ?? 0);
-    const totalPages = Math.ceil(totalCount / LIMIT);
-
-    const epics = await response.json();
-
-    return { epics: epicsResponseSchema.parse(epics), totalPages };
-  } catch (error) {
-    throw new Error(
-      error instanceof Error
-        ? error.message
-        : "Something went wrong, please try again later.",
-    );
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
   }
+
+  const contentRange = response.headers.get("Content-Range");
+  const totalCount = Number(contentRange?.split("/")[1] ?? 0);
+  const totalPages = Math.ceil(totalCount / LIMIT);
+
+  const epics = await response.json();
+
+  return { epics: epicsResponseSchema.parse(epics), totalPages };
 }

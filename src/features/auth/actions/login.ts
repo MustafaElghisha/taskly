@@ -7,13 +7,7 @@ import {
 } from "@/lib/auth/session";
 import { LoginInput } from "../schemas/loginSchema";
 
-type LoginResult = { success: true } | { success: false; error: string };
-
-export async function login({
-  email,
-  password,
-  rememberMe,
-}: LoginInput): Promise<LoginResult> {
+export async function login({ email, password, rememberMe }: LoginInput) {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/token?grant_type=password`,
@@ -28,7 +22,7 @@ export async function login({
     );
 
     if (!response.ok) {
-      return { success: false, error: "Invalid email or password." };
+      return { success: false, message: "Invalid email or password." };
     }
 
     const authResponse = await response.json();
@@ -41,11 +35,12 @@ export async function login({
       await clearRefreshToken();
     }
 
-    return { success: true };
+    return { success: true, message: "" };
   } catch {
     return {
       success: false,
-      error: "Couldn't reach the server. Check your connection and try again.",
+      message:
+        "Couldn't reach the server. Check your connection and try again.",
     };
   }
 }
