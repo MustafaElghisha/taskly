@@ -1,65 +1,88 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Epic } from "../schemas/getEpicsSchema";
 import { getEpics } from "../actions/getEpics";
 import EpicCard from "./EpicCard";
-import Link from "next/link";
 
 export default function InfiniteEpicList({
   projectId,
-  initialEpics,
-  startPage,
-  totalPages,
+  totalPages: initialTotalPages,
 }: {
   projectId: string;
-  initialEpics: Epic[];
-  startPage: number;
   totalPages: number;
 }) {
-  const [epics, setEpics] = useState<Epic[]>(initialEpics);
-  const [page, setPage] = useState(startPage + 1);
+  const searchParams = useSearchParams();
+  const searchTerm = searchParams.get("searchTerm") ?? "";
+
+  const [epics, setEpics] = useState<Epic[]>([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(initialTotalPages);
   const [loading, setLoading] = useState(false);
 
   const loadingRef = useRef(false);
 
-  const loadMoreProjects = useCallback(async () => {
-    if (loadingRef.current || page > totalPages) return;
+  useEffect(() => {
+    const fetchFirstPage = async () => {
+      loadingRef.current = true;
+      setLoading(true);
+      try {
+        const { epics: newEpics, totalPages: newTotalPages } = await getEpics(
+          projectId,
+          1,
+          searchTerm,
+        );
+        setEpics(newEpics);
+        setTotalPages(newTotalPages);
+        setPage(1);
+      } finally {
+        loadingRef.current = false;
+        setLoading(false);
+      }
+    };
+
+    fetchFirstPage();
+  }, [searchTerm, projectId]);
+
+  const loadMore = useCallback(async () => {
+    if (loadingRef.current || page >= totalPages) return;
 
     loadingRef.current = true;
     setLoading(true);
+    const nextPage = page + 1;
 
     try {
-      const { epics: newEpics } = await getEpics(projectId, page);
-
-      setEpics((prevEpics) => [...prevEpics, ...newEpics]);
+      const { epics: newEpics, totalPages: newTotalPages } = await getEpics(
+        projectId,
+        nextPage,
+        searchTerm,
+      );
+      setEpics((prev) => [...prev, ...newEpics]);
+      setTotalPages(newTotalPages);
+      setPage(nextPage);
     } finally {
       loadingRef.current = false;
       setLoading(false);
     }
-  }, [page, totalPages, projectId]);
-
-  useEffect(() => {
-    loadMoreProjects();
-  }, [loadMoreProjects]);
+  }, [page, totalPages, projectId, searchTerm]);
 
   const observer = useRef<IntersectionObserver | null>(null);
 
   const lastEpicElementRef = useCallback(
     (node: HTMLLIElement | null) => {
-      if (!node || loading || page > totalPages) return;
-
       observer.current?.disconnect();
+      if (!node || loadingRef.current || page >= totalPages) return;
 
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && !loadingRef.current) {
-          setPage((prevPage) => prevPage + 1);
+          loadMore();
         }
       });
-
       observer.current.observe(node);
     },
-    [loading, page, totalPages],
+    [page, totalPages, loadMore],
   );
 
   return (

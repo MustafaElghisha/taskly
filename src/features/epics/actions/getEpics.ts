@@ -5,23 +5,29 @@ import { epicsResponseSchema } from "../schemas/getEpicsSchema";
 
 const LIMIT = 6;
 
-export async function getEpics(projectId: string, page?: number) {
-  const query = new URLSearchParams();
+export async function getEpics(
+  projectId: string,
+  page?: number,
+  searchTerm?: string,
+) {
+  const params = new URLSearchParams();
 
-  query.set("project_id", `eq.${projectId}`);
+  params.set("project_id", `eq.${projectId}`);
+
+  if (searchTerm?.length) {
+    params.set("title", `ilike.%${searchTerm}%`);
+  }
 
   if (page != undefined) {
     const offset = (page - 1) * LIMIT;
 
-    query.set("limit", String(LIMIT));
-    query.set("offset", String(offset));
+    params.set("limit", String(LIMIT));
+    params.set("offset", String(offset));
   }
-
-  const qs = query.toString();
 
   try {
     const response = await authenticatedFetch(
-      `/rest/v1/project_epics?${qs && `${qs}`}`,
+      `/rest/v1/project_epics?${params.toString()}`,
       {
         method: "GET",
         headers: {
