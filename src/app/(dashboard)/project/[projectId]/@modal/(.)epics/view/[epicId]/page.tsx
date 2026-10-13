@@ -1,6 +1,7 @@
 import { Modal } from "@/components/ui/Modal";
 import { getEpic } from "@/features/epics/actions/getEpic";
 import EpicForm from "@/features/epics/components/EpicForm";
+import { getProjectMembers } from "@/features/members/actions/getProjectMembers";
 
 export default async function page({
   params,
@@ -9,10 +10,11 @@ export default async function page({
 }) {
   const { epicId, projectId } = await params;
   const epic = await getEpic(projectId, epicId);
+  const members = await getProjectMembers(projectId);
 
   return (
     <Modal className="max-w-2xl">
-      <EpicForm epic={epic} />
+      <EpicForm epic={epic} members={members} />
     </Modal>
   );
 }

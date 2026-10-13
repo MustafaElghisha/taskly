@@ -3,12 +3,11 @@
 import EpicIcon from "@/assets/icons/EpicIcon.svg";
 import CloseIcon from "@/assets/icons/CloseIcon.svg";
 import CalendarIcon from "@/assets/icons/CalendarIcon.svg";
-import ChevronUpIcon from "@/assets/icons/ChevronUpIcon.svg";
 import ListIcon from "@/assets/icons/ListIcon.svg";
 import PlusIcon from "@/assets/icons/PlusIcon.svg";
 import Input from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
-import { Field, FieldLabel } from "@/components/ui/Field";
+import { Field, FieldError, FieldLabel } from "@/components/ui/Field";
 import Button, { buttonVariants } from "@/components/ui/Button";
 import { Avatar } from "@/components/ui/Avatar";
 import { cn, formatDate } from "@/lib/utils";
@@ -16,16 +15,30 @@ import { Epic } from "../../../schemas/epicSchema";
 import { useParams, useRouter } from "next/navigation";
 import CopyLinkButton from "@/components/ui/CopyLinkButton";
 import Link from "next/link";
+import { useEditEpic } from "../hooks/useEditEpic";
+import { Member } from "@/schemas/memberSchema";
 
-export default function EpicForm({ epic }: { epic: Epic }) {
+export default function EpicForm({
+  epic,
+  members,
+}: {
+  epic: Epic;
+  members: Member[];
+}) {
   const router = useRouter();
   const { projectId, epicId } = useParams<{
     projectId: string;
     epicId: string;
   }>();
 
+  const { onSubmit, register, errors, reset, dirtyFields, clearErrors } =
+    useEditEpic(epic);
+
   return (
-    <div className="md:shadow-edit-container mx-auto grid max-w-2xl rounded-lg p-6 md:bg-white md:p-8">
+    <form
+      className="md:shadow-edit-container mx-auto grid max-w-2xl rounded-lg p-6 md:bg-white md:p-8"
+      onSubmit={onSubmit}
+    >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <EpicIcon />
@@ -44,52 +57,87 @@ export default function EpicForm({ epic }: { epic: Epic }) {
 
       <Field className="pt-4.5 pb-8 md:pt-6 md:pb-11">
         <Input
-          disabled
-          className="w-full p-2 font-semibold text-slate-800 md:rounded-xl md:p-3 md:text-xl md:leading-8 md:font-bold"
-          defaultValue={epic.title}
+          className="border-surface-medium w-full border bg-transparent p-2 font-semibold text-slate-800 md:rounded-xl md:p-3 md:text-xl md:leading-8 md:font-bold"
+          {...register("title")}
+          onBlur={() => {
+            if (dirtyFields.title) onSubmit();
+            if (errors.title) {
+              reset();
+              clearErrors("title");
+            }
+          }}
         />
+        {errors.title && <FieldError>{errors.title.message}</FieldError>}
       </Field>
 
       <Field>
         <Textarea
-          disabled
           rows={5}
-          defaultValue={epic.description ?? "No description provided"}
-          className="rounded-lg p-2 text-sm leading-5 text-slate-800 md:rounded-xl md:p-3 md:text-base md:leading-6.5"
+          placeholder="No description provided"
+          className="border-surface-medium rounded-lg border bg-transparent p-2 text-sm leading-5 text-slate-800 md:rounded-xl md:p-3 md:text-base md:leading-6.5"
+          {...register("description")}
+          onBlur={() => {
+            if (dirtyFields.description) onSubmit();
+            if (errors.description) {
+              reset();
+              clearErrors("description");
+            }
+          }}
         />
+        {errors.description && (
+          <FieldError>{errors.description.message}</FieldError>
+        )}
       </Field>
 
       <div className="grid gap-3 py-5 md:grid-cols-2 md:gap-4 md:py-8">
         <Field>
-          <FieldLabel>Assignee</FieldLabel>
-          <div className="relative flex items-center">
-            <Avatar
-              name={epic.assignee.name ?? ""}
-              className="bg-blue-250 text-3xs! absolute left-2 size-6! rounded-full leading-4 font-bold! text-slate-500"
-            />
-            <Input
-              disabled
-              defaultValue={epic.assignee.name ?? "Unassigned"}
-              className="w-full p-2 ps-10 text-sm leading-5 font-medium text-slate-800 md:rounded-lg md:py-2.5"
-            />
-            <ChevronUpIcon className="absolute right-2 rotate-180" />
-          </div>
+          <FieldLabel htmlFor="epic-assignee">Assignee</FieldLabel>
+          <select
+            id="epic-assignee"
+            aria-invalid={errors.assignee_id ? "true" : "false"}
+            className="border-surface-medium w-full border bg-white p-2 text-sm leading-5 font-medium text-slate-800 md:rounded-lg md:py-2.5"
+            {...register("assignee_id")}
+            onBlur={() => {
+              if (dirtyFields.assignee_id) onSubmit();
+              if (errors.assignee_id) {
+                reset();
+                clearErrors("assignee_id");
+              }
+            }}
+          >
+            <option value="">Select a member...</option>
+            {members.map(({ user_id, metadata: { name } }) => (
+              <option key={user_id} value={user_id}>
+                {name}
+              </option>
+            ))}
+          </select>
+          {errors.assignee_id && (
+            <FieldError>{errors.assignee_id.message}</FieldError>
+          )}
         </Field>
         <Field>
-          <FieldLabel>Deadline</FieldLabel>
-          <div className="relative flex items-center">
-            <CalendarIcon className="absolute left-2 text-slate-800/40" />
-            <Input
-              disabled
-              defaultValue={
-                epic.deadline
-                  ? formatDate(epic.deadline.split("T")[0])
-                  : "Unassigned"
+          <FieldLabel htmlFor="epic-deadline" className="p-0">
+            Deadline
+          </FieldLabel>
+          <Input
+            type="date"
+            min={new Date().toISOString().split("T")[0]}
+            id="epic-deadline"
+            aria-invalid={errors.deadline ? "true" : "false"}
+            className="border-surface-medium w-full border bg-white p-2 text-sm font-medium text-slate-800 md:rounded-lg md:py-2.5"
+            {...register("deadline")}
+            onBlur={() => {
+              if (dirtyFields.deadline) onSubmit();
+              if (errors.deadline) {
+                reset();
+                clearErrors("deadline");
               }
-              className="w-full p-2 ps-6 text-sm leading-5 font-medium text-slate-800 md:rounded-lg md:py-2.5"
-            />
-            <ChevronUpIcon className="absolute right-2 rotate-180" />
-          </div>
+            }}
+          />
+          {errors.deadline && (
+            <FieldError>{errors.deadline.message}</FieldError>
+          )}
         </Field>
         <Field>
           <FieldLabel>Created By</FieldLabel>
@@ -111,7 +159,6 @@ export default function EpicForm({ epic }: { epic: Epic }) {
             <CalendarIcon className="absolute left-2 text-slate-800/40" />
             <Input
               disabled
-
               defaultValue={formatDate(epic.created_at.split("T")[0])}
               className="w-full p-2 ps-6 text-sm leading-5 font-medium text-slate-800 md:rounded-lg md:py-2.5"
             />
@@ -152,6 +199,7 @@ export default function EpicForm({ epic }: { epic: Epic }) {
           </Link>
         </div>
       </div>
-    </div>
+      {errors.root && <FieldError>{errors.root.message}</FieldError>}
+    </form>
   );
 }
