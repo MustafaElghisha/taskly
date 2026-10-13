@@ -3,7 +3,7 @@ import z from "zod";
 const userMetaDataSchema = z.object({
   email: z.email(),
   name: z.string(),
-  role: z.string(),
+  jobTitle: z.string().optional(),
 });
 
 export const userResponseSchema = z.object({

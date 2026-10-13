@@ -39,9 +39,9 @@ export default function MainHeader({
             <span className="text-sm leading-5 font-semibold text-slate-800 capitalize">
               {user.name}
             </span>
-            {user.role && (
+            {user.jobTitle && (
               <span className="text-3xs text-primary font-bold tracking-widest uppercase">
-                {user.role}
+                {user.jobTitle}
               </span>
             )}
           </div>

@@ -2,7 +2,7 @@
 
 import { SignUpInput } from "../schemas/signUpSchema";
 
-export async function signUp(data: SignUpInput) {
+export async function signUp({ email, password, name, jobTitle }: SignUpInput) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/signup`,
     {
@@ -12,9 +12,9 @@ export async function signUp(data: SignUpInput) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: data.email,
-        password: data.password,
-        data: { name: data.name, department: data.jobTitle },
+        email,
+        password,
+        data: { name, jobTitle },
       }),
     },
   );

@@ -11,8 +11,8 @@ export async function getUser() {
   }
 
   const {
-    user_metadata: { email, name, role },
+    user_metadata: { email, name, jobTitle },
   } = userResponseSchema.parse(await response.json());
 
-  return { email, name, role };
+  return { email, name, jobTitle };
 }
