@@ -12,9 +12,9 @@ export const epicResponseSchema = z.object({
     name: z.string(),
   }),
   assignee: z.object({
-    sub: z.string().nullable().optional(),
-    name: z.string().nullable().optional(),
-    eamil: z.email().nullable().optional(),
+    sub: z.string().nullish(),
+    name: z.string().nullish(),
+    eamil: z.email().nullish(),
   }),
 });
 
