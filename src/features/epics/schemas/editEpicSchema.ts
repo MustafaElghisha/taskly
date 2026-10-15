@@ -12,11 +12,11 @@ export const editEpicInputSchema = z.object({
     .max(500, {
       message: "Epic description must be at most 500 characters",
     })
-    .nullish(),
-  assignee_id: z.string().nullish(),
+    .nullable(),
+  assignee_id: z.string().nullable(),
   deadline: z
     .string()
-    .nullish()
+    .nullable()
     .refine(
       (date) => {
         if (!date) return true;

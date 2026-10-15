@@ -18,9 +18,9 @@ const useEditEpic = (epic: Epic) => {
     resolver: zodResolver(editEpicInputSchema),
     defaultValues: {
       title: epic.title,
-      description: epic.description || null,
-      assignee_id: epic.assignee.sub || null,
-      deadline: epic.deadline || null,
+      description: epic.description,
+      assignee_id: epic.assignee.sub,
+      deadline: epic.deadline,
     },
   });
 
@@ -32,7 +32,7 @@ const useEditEpic = (epic: Epic) => {
       if (typedKey === "title") acc[typedKey] = data[typedKey];
       else acc[typedKey] = data[typedKey] || null;
       return acc;
-    }, {} as Partial<editEpicInput>);
+    }, {} as editEpicInput);
 
     const res = await editEpic(obj, epic.id, epic.project_id);
 
