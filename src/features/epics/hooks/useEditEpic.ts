@@ -30,7 +30,7 @@ const useEditEpic = (epic: Epic) => {
     const obj = Object.entries(dirtyFields).reduce((acc, [key]) => {
       const typedKey = key as keyof editEpicInput;
       if (typedKey === "title") acc[typedKey] = data[typedKey];
-      else acc[typedKey] = data[typedKey] ?? null;
+      else acc[typedKey] = data[typedKey] || null;
       return acc;
     }, {} as Partial<editEpicInput>);
 
