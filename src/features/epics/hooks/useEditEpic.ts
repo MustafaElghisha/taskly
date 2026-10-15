@@ -45,6 +45,8 @@ const useEditEpic = (epic: Epic) => {
     resetDefaultValues({
       title: data.title,
       description: data.description,
+      assignee_id: data.assignee_id,
+      deadline: data.deadline,
     });
     reset();
     toast.success(res.message);
