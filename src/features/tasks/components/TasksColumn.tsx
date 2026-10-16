@@ -1,20 +1,21 @@
-"use client";
+"use server";
 
 import Link from "next/link";
 import { statusStyles, TaskStatus } from "../constants/tasks";
 import CirclePlusIcon from "@/assets/icons/CirclePlusIcon.svg";
 import EmptyTasks from "./EmptyTasks";
-import { useGetTasks } from "../hooks/useGetTasks";
 import TaskCard from "./TaskCard";
+import { getTasks } from "../actions/getTasks";
 
-export default function TasksColumn({
+export default async function TasksColumn({
   status,
   projectId,
 }: {
   status: TaskStatus;
   projectId: string;
 }) {
-  const { tasks } = useGetTasks(projectId, status);
+  const { tasks } = await getTasks(projectId, status);
+
   return (
     <div className="grid grid-cols-1 gap-3 md:h-dvh md:w-2xs md:grid-rows-[auto_auto_1fr]">
       <div className="hidden items-center gap-2 px-1 md:flex">
