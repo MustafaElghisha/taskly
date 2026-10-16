@@ -24,7 +24,7 @@ export async function editEpic(
       };
     }
 
-    revalidatePath(`/projects/${project_id}/epics/view/${id}`);
+    revalidatePath(`/project/${project_id}/epics/view/${id}`);
     return { success: true, message: "Epic updated successfully!" };
   } catch (error) {
     return {
