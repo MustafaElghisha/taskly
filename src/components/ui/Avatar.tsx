@@ -11,7 +11,7 @@ const getAvatarName = (name: string) => {
 };
 
 const avatarVariants = cva(
-  "flex shrink-0 items-center justify-center rounded-xl text-base leading-6 font-bold uppercase md:text-sm md:leading-5",
+  "flex shrink-0 items-center justify-center rounded-xl text-base leading-6 font-bold uppercase  md:leading-5",
   {
     variants: {
       variant: {

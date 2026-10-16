@@ -30,6 +30,8 @@
 
   --text-3xs: 0.625rem;
 
+  --text-4xs: 0.5rem;
+
   --color-primary: var(--blue-800);
   --color-primary-container: var(--blue-700);
   --color-surface-medium: var(--blue-200);

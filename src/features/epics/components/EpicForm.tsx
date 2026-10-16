@@ -17,13 +17,17 @@ import CopyLinkButton from "@/components/ui/CopyLinkButton";
 import Link from "next/link";
 import { useEditEpic } from "../hooks/useEditEpic";
 import { Member } from "@/schemas/memberSchema";
+import { Task } from "@/features/tasks/schemas/taskSchema";
+import EpicTaskCard from "./EpicTaskCard";
 
 export default function EpicForm({
   epic,
   members,
+  tasks,
 }: {
   epic: Epic;
   members: Member[];
+  tasks: Task[];
 }) {
   const router = useRouter();
   const { projectId, epicId } = useParams<{
@@ -66,6 +70,7 @@ export default function EpicForm({
               clearErrors("title");
             }
           }}
+          aria-invalid={errors.title ? "true" : "false"}
         />
         {errors.title && <FieldError>{errors.title.message}</FieldError>}
       </Field>
@@ -83,6 +88,7 @@ export default function EpicForm({
               clearErrors("description");
             }
           }}
+          aria-invalid={errors.description ? "true" : "false"}
         />
         {errors.description && (
           <FieldError>{errors.description.message}</FieldError>
@@ -180,24 +186,37 @@ export default function EpicForm({
           </Link>
         </div>
 
-        <div className="bg-surface-low flex flex-col items-center gap-4 rounded-lg border-2 border-dashed border-slate-200/30 px-15 py-8 md:p-12">
-          <div className="bg-surface-medium rounded-xl p-4">
-            <ListIcon />
+        {tasks.length > 0 ? (
+          <ul className="border-blue-150 flex flex-col gap-3 overflow-y-auto rounded-lg pb-3 md:gap-0 md:border md:pb-0">
+            {tasks.map((task) => (
+              <li
+                key={task.task_id}
+                className="border-blue-150 md:not-last:border-b"
+              >
+                <EpicTaskCard task={task} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="bg-surface-low flex flex-col items-center gap-4 rounded-lg border-2 border-dashed border-slate-200/30 px-15 py-8 md:p-12">
+            <div className="bg-surface-medium rounded-xl p-4">
+              <ListIcon />
+            </div>
+            <p className="text-center leading-6 font-medium text-slate-800">
+              No tasks have been added to this epic yet
+            </p>
+            <Link
+              href={`/project/${projectId}/tasks/add?epic_id=${epicId}`}
+              className={cn(
+                buttonVariants({ variant: "primary" }),
+                "gap-2 rounded-xs px-4 py-2 text-xs leading-4 font-bold md:px-6 md:py-2.5",
+              )}
+            >
+              <PlusIcon />
+              Add Task
+            </Link>
           </div>
-          <p className="text-center leading-6 font-medium text-slate-800">
-            No tasks have been added to this epic yet
-          </p>
-          <Link
-            href={`/project/${projectId}/tasks/add?epic_id=${epicId}`}
-            className={cn(
-              buttonVariants({ variant: "primary" }),
-              "gap-2 rounded-xs px-4 py-2 text-xs leading-4 font-bold md:px-6 md:py-2.5",
-            )}
-          >
-            <PlusIcon />
-            Add Task
-          </Link>
-        </div>
+        )}
       </div>
       {errors.root && <FieldError>{errors.root.message}</FieldError>}
     </form>
