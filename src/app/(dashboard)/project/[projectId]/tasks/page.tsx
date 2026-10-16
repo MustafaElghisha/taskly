@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import EmptyTasks from "@/features/tasks/components/EmptyTasks";
-import { TASKS } from "@/features/tasks/constants/tasks";
+import { TASK_STATUSES } from "@/features/tasks/constants/tasks";
 import TasksColumn from "@/features/tasks/components/TasksColumn";
 import Input from "@/components/ui/Input";
 import { buttonVariants } from "@/components/ui/Button";
@@ -16,7 +15,7 @@ export default async function TasksPage({
   const { projectId } = await params;
 
   return (
-    <div className="h-full px-4 py-6 md:px-0 md:pt-3">
+    <div className="px-4 py-6 md:px-0 md:pt-3">
       <div className="mb-7 flex flex-col flex-wrap gap-x-20 md:mb-0 md:flex-row md:items-end md:justify-between md:gap-y-4 md:px-8">
         <div className="flex flex-col md:gap-1">
           <h1 className="text-3xl leading-9 font-semibold tracking-tight text-slate-800">
@@ -51,18 +50,10 @@ export default async function TasksPage({
         </Link>
       </div>
 
-      <div className="grid h-3/4 pb-6 md:hidden">
-        <EmptyTasks />
-      </div>
-
-      <ul className="hidden h-10/11 grid-cols-[repeat(8,288px)] gap-6 overflow-x-scroll px-8 py-6 md:grid">
-        {TASKS.map(({ status, length }, index) => (
+      <ul className="grid overflow-y-auto md:grid-cols-[repeat(8,288px)] md:gap-6 md:px-8 md:py-6">
+        {TASK_STATUSES.map((status, index) => (
           <li key={index}>
-            <TasksColumn
-              status={status}
-              length={length}
-              projectId={projectId}
-            />
+            <TasksColumn status={status} projectId={projectId} />
           </li>
         ))}
       </ul>
