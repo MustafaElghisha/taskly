@@ -39,7 +39,7 @@ function Avatar({
   name,
   ...props
 }: React.ComponentPropsWithoutRef<"div"> &
-  VariantProps<typeof avatarVariants> & { name?: string }) {
+  VariantProps<typeof avatarVariants> & { name?: string | null }) {
   return (
     <div
       className={cn(avatarVariants({ variant, size }), className)}
