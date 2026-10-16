@@ -12,13 +12,16 @@ const useSearch = () => {
   const debounced = useDebounce(searchTerm);
 
   useEffect(() => {
+    if (debounced === (searchParams.get("searchTerm") ?? "")) return;
+
     const params = new URLSearchParams(searchParams.toString());
     if (debounced) {
       params.set("searchTerm", debounced);
+      params.delete("page");
     } else {
       params.delete("searchTerm");
+      params.delete("page");
     }
-    params.delete("page");
 
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     // eslint-disable-next-line react-hooks/exhaustive-deps
