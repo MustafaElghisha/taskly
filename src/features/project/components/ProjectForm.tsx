@@ -22,7 +22,7 @@ type ProjectFormProps = {
   submittingLabel: string;
   register: UseFormRegister<{
     name: string;
-    description?: string | undefined;
+    description?: string | undefined | null;
   }>;
   onSubmit: (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

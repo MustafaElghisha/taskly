@@ -12,7 +12,7 @@ export const createProjectInputSchema = z.object({
     .max(500, {
       message: "Project description must be at most 500 characters",
     })
-    .optional(),
+    .nullish(),
 });
 
 export type CreateProjectInput = z.infer<typeof createProjectInputSchema>;

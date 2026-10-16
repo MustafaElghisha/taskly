@@ -7,7 +7,7 @@ export async function createProject({
   description,
 }: {
   name: string;
-  description?: string;
+  description?: string | null;
 }) {
   try {
     const response = await authenticatedFetch(`/rest/v1/projects`, {

@@ -8,7 +8,7 @@ export async function editProject(
     description,
   }: {
     name: string;
-    description?: string;
+    description?: string | null;
   },
   projectId: string,
 ) {
