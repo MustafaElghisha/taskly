@@ -1,9 +1,9 @@
-import EpicFormSkeleton from "@/features/epics/components/EpicFormSkeleton";
+import EditEpicFormSkeleton from "@/features/epics/components/EditEpicFormSkeleton";
 
 export default function EpicLoading() {
   return (
     <div className="md:p-8">
-      <EpicFormSkeleton />
+      <EditEpicFormSkeleton />
     </div>
   );
 }

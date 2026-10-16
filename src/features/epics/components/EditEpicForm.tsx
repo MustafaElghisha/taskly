@@ -20,7 +20,7 @@ import { Member } from "@/schemas/memberSchema";
 import { Task } from "@/features/tasks/schemas/taskSchema";
 import EpicTaskCard from "./EpicTaskCard";
 
-export default function EpicForm({
+export default function EditEpicForm({
   epic,
   members,
   tasks,

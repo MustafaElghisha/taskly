@@ -1,7 +1,7 @@
 import { Modal } from "@/components/ui/Modal";
 import { getEpic } from "@/features/epics/actions/getEpic";
 import { getEpicTasks } from "@/features/epics/actions/getEpicTasks";
-import EpicForm from "@/features/epics/components/EpicForm";
+import EditEpicForm from "@/features/epics/components/EditEpicForm";
 import { getProjectMembers } from "@/features/members/actions/getProjectMembers";
 
 export default async function page({
@@ -16,7 +16,7 @@ export default async function page({
 
   return (
     <Modal className="max-w-2xl">
-      <EpicForm epic={epic} members={members} tasks={tasks} />
+      <EditEpicForm epic={epic} members={members} tasks={tasks} />
     </Modal>
   );
 }
