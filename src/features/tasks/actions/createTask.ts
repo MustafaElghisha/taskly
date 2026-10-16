@@ -2,6 +2,7 @@
 
 import { authenticatedFetch } from "@/lib/auth/authenticatedFetch";
 import { CreateTaskInput } from "../schemas/createTaskSchema";
+import { revalidatePath } from "next/cache";
 
 export async function createTask(
   projectId: string,
@@ -37,6 +38,8 @@ export async function createTask(
       };
     }
 
+    revalidatePath(`/project/${projectId}/tasks`);
+    revalidatePath(`/project/${projectId}/epics/view/${epic_id}`);
     return {
       success: true,
       message: "Task created successfully!",
