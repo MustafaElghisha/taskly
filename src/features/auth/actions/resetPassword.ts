@@ -12,7 +12,7 @@ export async function resetPassword({ password }: ResetPasswordInput) {
       {
         method: "PUT",
         headers: {
-          apikey: process.env.NEXT_PUBLIC_SUPABASE_API_KEY!,
+          apikey: process.env.SUPABASE_SECRET_KEY!,
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",
         },

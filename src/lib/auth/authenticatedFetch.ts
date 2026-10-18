@@ -15,7 +15,7 @@ export async function authenticatedFetch(path: string, init: RequestInit = {}) {
     ...init,
     headers: {
       "Content-Type": "application/json",
-      apikey: process.env.NEXT_PUBLIC_SUPABASE_API_KEY!,
+      apikey: process.env.SUPABASE_SECRET_KEY!,
       ...init.headers,
       Authorization: `Bearer ${accessToken}`,
     },

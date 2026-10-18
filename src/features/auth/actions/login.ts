@@ -14,7 +14,7 @@ export async function login({ email, password, rememberMe }: LoginInput) {
       {
         method: "POST",
         headers: {
-          apikey: process.env.NEXT_PUBLIC_SUPABASE_API_KEY!,
+          apikey: process.env.SUPABASE_SECRET_KEY!,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
