@@ -53,7 +53,7 @@ export default function EditEpicForm({
 
         <div className="flex items-center gap-5">
           <CopyLinkButton />
-          <Button onClick={() => router.back()} variant={"ghost"}>
+          <Button type="button" onClick={() => router.back()} variant={"ghost"}>
             <CloseIcon />
           </Button>
         </div>
