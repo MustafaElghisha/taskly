@@ -15,7 +15,7 @@ export default async function TasksPage({
   const { projectId } = await params;
 
   return (
-    <div className="px-4 py-6 md:px-0 md:pt-3">
+    <div className="flex h-full flex-col px-4 pt-6 md:px-0">
       <div className="mb-7 flex flex-col flex-wrap gap-x-20 md:mb-0 md:flex-row md:items-end md:justify-between md:gap-y-4 md:px-8">
         <div className="flex flex-col md:gap-1">
           <h1 className="text-3xl leading-9 font-semibold tracking-tight text-slate-800">
@@ -50,9 +50,9 @@ export default async function TasksPage({
         </Link>
       </div>
 
-      <ul className="grid overflow-y-auto md:grid-cols-[repeat(8,288px)] md:gap-6 md:px-8 md:py-6">
+      <ul className="h-full overflow-x-auto overflow-y-hidden md:flex md:gap-6 md:px-8 md:py-6">
         {TASK_STATUSES.map((status, index) => (
-          <li key={index}>
+          <li key={index} className="">
             <TasksColumn status={status} projectId={projectId} />
           </li>
         ))}

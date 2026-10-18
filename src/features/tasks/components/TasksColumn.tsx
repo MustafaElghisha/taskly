@@ -17,7 +17,7 @@ export default async function TasksColumn({
   const { tasks } = await getTasks(projectId, status);
 
   return (
-    <div className="grid grid-cols-1 gap-3 md:h-dvh md:w-2xs md:grid-rows-[auto_auto_1fr]">
+    <div className="grid h-full grid-cols-1 gap-3 md:w-2xs md:grid-rows-[auto_auto_1fr]">
       <div className="hidden items-center gap-2 px-1 md:flex">
         <div
           className="size-2 rounded-full"
@@ -60,7 +60,7 @@ export default async function TasksColumn({
           ))}
         </ul>
       ) : (
-        <div className="hidden h-full md:block">
+        <div className="hidden md:block">
           <EmptyTasks />
         </div>
       )}
