@@ -1,5 +1,5 @@
 import { Avatar } from "@/components/ui/Avatar";
-import { Badge } from "@/components/ui/Badge";
+import { MemberRoleBadge } from "@/features/members/components/MemberRoleBadge";
 import {
   Table,
   TableBody,
@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/Table";
-import { Member } from "../../../schemas/memberSchema";
+import { Member } from "@/schemas/memberSchema";
 
 export default function MembersTable({ members }: { members: Member[] }) {
   return (
@@ -45,7 +45,7 @@ export default function MembersTable({ members }: { members: Member[] }) {
               </div>
             </TableCell>
             <TableCell className="rounded-r-2xl">
-              <Badge variant={role}>{role}</Badge>
+              <MemberRoleBadge variant={role}>{role}</MemberRoleBadge>
             </TableCell>
           </TableRow>
         ))}

@@ -9,7 +9,7 @@ const badgeVariants = cva(
         owner: "bg-primary-container text-white",
         admin: "bg-blue-250 text-slate-500",
         member: "bg-surface-medium text-slate-600",
-        viewer: "bg--blue-150 text-slate-600",
+        viewer: "bg-blue-150 text-slate-600",
       },
     },
     defaultVariants: {
@@ -18,7 +18,7 @@ const badgeVariants = cva(
   },
 );
 
-function Badge({
+function MemberRoleBadge({
   variant,
   className,
   ...props
@@ -29,4 +29,4 @@ function Badge({
   );
 }
 
-export { Badge };
+export { MemberRoleBadge };
