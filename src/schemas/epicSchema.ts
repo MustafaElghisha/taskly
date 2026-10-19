@@ -14,7 +14,7 @@ export const epicResponseSchema = z.object({
   assignee: z.object({
     sub: z.string().nullish(),
     name: z.string().nullish(),
-    eamil: z.email().nullish(),
+    email: z.email().nullish(),
   }),
 });
 
