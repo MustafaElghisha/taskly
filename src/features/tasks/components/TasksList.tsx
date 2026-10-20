@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Task } from "../schemas/taskSchema";
 import EmptyTasks from "./EmptyTasks";
 import TaskCard from "./TaskCard";
@@ -22,7 +23,11 @@ export default function TasksList({
                 key={task.task_id}
                 ref={tasks.length === index + 1 ? lastElementRef : null}
               >
-                <TaskCard task={task} />
+                <Link
+                  href={`/project/${task.project_id}/tasks/view/${task.id}`}
+                >
+                  <TaskCard task={task} />
+                </Link>
               </li>
             ))}
           </ul>
@@ -41,7 +46,10 @@ export default function TasksList({
           ))}
         </ul>
       ) : (
-        <div ref={tasks.length === 0 ? lastElementRef : null}>
+        <div
+          ref={tasks.length === 0 ? lastElementRef : null}
+          className="mb-4 h-full"
+        >
           <EmptyTasks />
         </div>
       )}
