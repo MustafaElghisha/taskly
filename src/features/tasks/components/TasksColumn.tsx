@@ -1,22 +1,34 @@
+"use client";
+
 import Link from "next/link";
+import { useCallback } from "react";
 import { statusStyles, TaskStatus } from "../constants/tasks";
 import CirclePlusIcon from "@/assets/icons/CirclePlusIcon.svg";
-import EmptyTasks from "./EmptyTasks";
-import TaskCard from "./TaskCard";
 import { getTasks } from "../actions/getTasks";
+import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
+import { Task } from "../schemas/taskSchema";
+import TasksList from "./TasksList";
 
-export default async function TasksColumn({
+export default function TasksColumn({
   status,
   projectId,
 }: {
   status: TaskStatus;
   projectId: string;
 }) {
-  const { tasks } = await getTasks(projectId, status);
+  const fetchTasks = useCallback(
+    (page: number) => getTasks(projectId, page, status),
+    [projectId, status],
+  );
+  const {
+    data: tasks,
+    loading,
+    lastElementRef,
+  } = useInfiniteScroll<Task>([], fetchTasks, 0, 1);
 
   return (
-    <div className="grid h-full grid-cols-1 gap-3 md:w-2xs md:grid-rows-[auto_auto_1fr]">
-      <div className="hidden items-center gap-2 px-1 md:flex">
+    <div className="grid h-full w-2xs grid-rows-[auto_auto_1fr] gap-3">
+      <div className="flex items-center gap-2 px-1">
         <div
           className="size-2 rounded-full"
           style={{
@@ -41,7 +53,7 @@ export default async function TasksColumn({
 
       <Link
         href={`/project/${projectId}/tasks/add?status=${status}`}
-        className="hidden items-center justify-center gap-3 rounded-lg border-2 border-dashed border-slate-200/30 py-4 text-slate-600/60 md:flex"
+        className="flex items-center justify-center gap-3 rounded-lg border-2 border-dashed border-slate-200/30 py-4 text-slate-600/60"
       >
         <CirclePlusIcon className="scale-75" />
         <span className="text-xs leading-4 font-bold tracking-widest uppercase">
@@ -49,19 +61,11 @@ export default async function TasksColumn({
         </span>
       </Link>
 
-      {tasks.length > 0 ? (
-        <ul className="flex flex-col gap-3 overflow-y-auto pb-3 md:pb-0">
-          {tasks.map((task) => (
-            <li key={task.task_id}>
-              <TaskCard task={task} />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div className="hidden md:block">
-          <EmptyTasks />
-        </div>
-      )}
+      <TasksList
+        tasks={tasks}
+        loading={loading}
+        lastElementRef={lastElementRef}
+      />
     </div>
   );
 }
