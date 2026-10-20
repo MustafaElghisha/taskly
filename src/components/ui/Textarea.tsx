@@ -11,7 +11,7 @@ function Textarea({
       className={cn(
         "bg-surface-medium resize-none rounded-lg px-4 pt-4.5 pb-4.75 text-slate-800 md:rounded-sm md:pt-3.5 md:pb-3.75",
         disabled &&
-          "border-surface-medium w-full rounded-xl border bg-transparent p-3",
+          "border-surface-medium w-full rounded-xl border bg-white p-3",
         className,
       )}
       {...props}
