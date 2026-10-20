@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { TASK_STATUSES } from "@/features/tasks/constants/tasks";
-import TasksColumn from "@/features/tasks/components/TasksColumn";
 import Input from "@/components/ui/Input";
 import { buttonVariants } from "@/components/ui/Button";
 import SearchIcon from "@/assets/icons/SearchIcon.svg";
 import PlusIcon from "@/assets/icons/PlusIcon.svg";
+import TaskBoard from "@/features/tasks/components/TaskBoard";
 
 export default async function TasksPage({
   params,
@@ -50,13 +49,7 @@ export default async function TasksPage({
         </Link>
       </div>
 
-      <ul className="h-full overflow-x-auto overflow-y-hidden md:flex md:gap-6 md:px-8 md:py-6">
-        {TASK_STATUSES.map((status, index) => (
-          <li key={index} className="">
-            <TasksColumn status={status} projectId={projectId} />
-          </li>
-        ))}
-      </ul>
+      <TaskBoard projectId={projectId} />
     </div>
   );
 }
