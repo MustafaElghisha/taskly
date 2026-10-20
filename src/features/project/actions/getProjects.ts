@@ -1,7 +1,7 @@
 "use server";
 
 import { authenticatedFetch } from "@/lib/auth/authenticatedFetch";
-import { projectsResponseSchema } from "../../../schemas/projectSchema";
+import { projectsResponseSchema } from "@/schemas/projectSchema";
 
 const LIMIT = 5;
 
@@ -30,5 +30,8 @@ export async function getProjects(page: number) {
 
   const projects = await response.json();
 
-  return { totalPages, projects: projectsResponseSchema.parse(projects) };
+  return {
+    data: projectsResponseSchema.parse(projects),
+    totalPages: totalPages,
+  };
 }

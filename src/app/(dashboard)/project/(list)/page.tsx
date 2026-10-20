@@ -13,7 +13,7 @@ export default async function ProjectPage({
   searchParams: Promise<{ page?: string }>;
 }) {
   const { page = "1" } = await searchParams;
-  const { totalPages, projects } = await getProjects(Number(page));
+  const { totalPages, data: projects } = await getProjects(Number(page));
 
   if (!totalPages) return <EmptyProjects />;
 
