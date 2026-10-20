@@ -193,7 +193,11 @@ export default function EditEpicForm({
                 key={task.task_id}
                 className="border-blue-150 md:not-last:border-b"
               >
-                <EpicTaskCard task={task} />
+                <Link
+                  href={`/project/${task.project_id}/tasks/view/${task.id}`}
+                >
+                  <EpicTaskCard task={task} />
+                </Link>
               </li>
             ))}
           </ul>
