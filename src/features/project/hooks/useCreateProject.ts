@@ -34,7 +34,7 @@ const useCreateProject = () => {
 
     toast.success(res.message);
 
-    router.push("/project");
+    router.back();
   });
 
   return { register, errors, isSubmitting, onSubmit, watchDescription };

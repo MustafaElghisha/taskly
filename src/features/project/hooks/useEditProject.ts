@@ -39,7 +39,7 @@ const useEditProject = (project: Project) => {
 
     toast.success(res.message);
 
-    router.push("/project");
+    router.back();
   });
 
   return { register, errors, onSubmit, isSubmitting, watchDescription };
