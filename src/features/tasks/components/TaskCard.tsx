@@ -32,9 +32,10 @@ export default function TaskCard({ task }: { task: Task }) {
       </div>
       <h3
         className={cn(
-          "text-sm leading-5 font-medium text-slate-800",
+          "line-clamp-1 text-sm leading-5 font-medium text-slate-800",
           task.status === "DONE" && "line-through",
         )}
+        title={task.title}
       >
         {task.title}
       </h3>
