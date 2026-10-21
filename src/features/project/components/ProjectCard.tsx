@@ -39,7 +39,10 @@ export default function ProjectCard({
     <div className="flex h-full flex-col justify-between gap-8.5 rounded-lg bg-white p-6">
       <div className="flex flex-1 flex-col justify-between gap-6">
         <div className="flex flex-1 flex-col justify-between gap-2">
-          <h2 className="line-clamp-2 text-lg leading-7 font-medium text-slate-800">
+          <h2
+            className="line-clamp-2 text-lg leading-7 font-medium text-slate-800"
+            title={name}
+          >
             {name}
           </h2>
           <p className="line-clamp-3 text-sm leading-5.5 hyphens-auto text-slate-600">
