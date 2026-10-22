@@ -7,7 +7,7 @@ import { buttonVariants } from "@/components/ui/Button";
 
 export default function EmptyEpics({ projectId }: { projectId: string }) {
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-8.5 p-8 text-center">
+    <div className="flex min-h-full flex-col items-center justify-center gap-8.5 p-8 text-center">
       <div className="rounded-4xl bg-white">
         <AbstractEpicRepresentationIcon />
       </div>

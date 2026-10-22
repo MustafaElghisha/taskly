@@ -5,8 +5,8 @@ import { buttonVariants } from "@/components/ui/Button";
 
 export default function EmptyProjects() {
   return (
-    <div className="flex min-h-dvh flex-col items-center justify-center gap-11 p-8">
-      <NoProjectsIcon />
+    <div className="flex min-h-full flex-col items-center justify-center gap-11 p-8">
+      <NoProjectsIcon className="shrink-0" />
       <div className="flex flex-col items-center justify-center gap-4 text-center">
         <h1 className="text-4xl leading-10 font-semibold tracking-tighter text-slate-800">
           No Projects
