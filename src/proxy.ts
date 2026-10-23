@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { accessTokenOptions, refreshTokenOptions } from "./lib/auth/session";
 
-const protectedRoutes = ["/project"];
+const protectedRoutes = ["/project", "/invite"];
 const publicRoutes = [
   "/login",
   "/sign-up",
@@ -16,8 +16,20 @@ function matchesRoute(pathname: string, routes: string[]) {
   );
 }
 
+function redirectToLogin(req: NextRequest) {
+  const loginUrl = new URL("/login", req.url);
+
+  const token = req.nextUrl.searchParams.get("token");
+
+  if (token) {
+    const redirect = `${req.nextUrl.pathname}${req.nextUrl.search}`;
+    loginUrl.searchParams.set("redirect", redirect);
+  }
+
+  return NextResponse.redirect(loginUrl);
+}
+
 async function refreshAccessToken(
-  req: NextRequest,
   response: NextResponse,
   refreshToken: string,
 ) {
@@ -36,14 +48,11 @@ async function refreshAccessToken(
     },
   );
 
-  const authResponse = await responseFromSupabase.json();
-
   if (!responseFromSupabase.ok) {
-    response.cookies.delete("access_token");
-    response.cookies.delete("refresh_token");
-
     return false;
   }
+
+  const authResponse = await responseFromSupabase.json();
 
   response.cookies.set(
     "access_token",
@@ -70,31 +79,37 @@ export default async function proxy(req: NextRequest) {
   const isProtectedRoute = matchesRoute(pathname, protectedRoutes);
   const isPublicRoute = matchesRoute(pathname, publicRoutes);
 
-  if (isProtectedRoute && !accessToken && refreshToken) {
-    const response = NextResponse.next();
+  if (isProtectedRoute && !accessToken) {
+    if (refreshToken) {
+      const response = NextResponse.next();
 
-    const refreshed = await refreshAccessToken(req, response, refreshToken);
+      try {
+        const refreshed = await refreshAccessToken(response, refreshToken);
 
-    if (!refreshed) {
-      return NextResponse.redirect(new URL("/login", req.url));
+        if (refreshed) {
+          return response;
+        }
+      } catch {
+        // Continue to login if refreshing fails.
+      }
+
+      const loginResponse = redirectToLogin(req);
+
+      loginResponse.cookies.delete("access_token");
+      loginResponse.cookies.delete("refresh_token");
+
+      return loginResponse;
     }
 
-    return response;
-  }
-
-  if (isProtectedRoute && !accessToken) {
-    return NextResponse.redirect(new URL("/login", req.url));
+    return redirectToLogin(req);
   }
 
   if (isPublicRoute && (accessToken || refreshToken)) {
     return NextResponse.redirect(new URL("/project", req.url));
   }
 
-  if (pathname === "/reset-password") {
-    if (!tempAccessToken) {
-      return NextResponse.redirect(new URL("/login", req.url));
-    }
-    return NextResponse.next();
+  if (pathname === "/reset-password" && !tempAccessToken) {
+    return NextResponse.redirect(new URL("/login", req.url));
   }
 
   return NextResponse.next();
