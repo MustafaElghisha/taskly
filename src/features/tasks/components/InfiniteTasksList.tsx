@@ -8,18 +8,22 @@ import TasksList from "./TasksList";
 
 export default function InfiniteTasksList({
   projectId,
+  searchTerm,
 }: {
   projectId: string;
+  searchTerm: string;
 }) {
   const fetchTasks = useCallback(
-    (page: number) => getTasks(projectId, page, undefined),
-    [projectId],
+    (page: number) => getTasks(projectId, page, undefined, searchTerm),
+    [projectId, searchTerm],
   );
+
   const {
     data: tasks,
     loading,
     lastElementRef,
   } = useInfiniteScroll<Task>([], fetchTasks, 0, 1);
+
   return (
     <TasksList
       tasks={tasks}

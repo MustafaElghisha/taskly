@@ -10,6 +10,7 @@ export async function getTasks(
   projectId: string,
   page: number,
   status?: TaskStatus,
+  searchTerm?: string,
 ) {
   const offset = (page - 1) * LIMIT;
 
@@ -17,6 +18,9 @@ export async function getTasks(
   params.set("project_id", `eq.${projectId}`);
   if (status) {
     params.set("status", `eq.${status}`);
+  }
+  if (searchTerm?.length) {
+    params.set("title", `ilike.%${searchTerm}%`);
   }
   params.set("limit", String(LIMIT));
   params.set("offset", String(offset));

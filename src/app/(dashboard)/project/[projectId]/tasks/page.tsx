@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import Input from "@/components/ui/Input";
 import { buttonVariants } from "@/components/ui/Button";
-import SearchIcon from "@/assets/icons/SearchIcon.svg";
 import PlusIcon from "@/assets/icons/PlusIcon.svg";
 import TaskBoard from "@/features/tasks/components/TaskBoard";
+import SearchInput from "@/components/ui/SearchInput";
 
 export default async function TasksPage({
   params,
@@ -25,12 +24,8 @@ export default async function TasksPage({
           </p>
         </div>
 
-        <div className="relative flex items-center pt-6 pb-4 md:w-fit md:py-0">
-          <SearchIcon className="absolute left-4 scale-170" />
-          <Input
-            placeholder="Search tasks..."
-            className="w-full py-3.5 ps-10 pe-4 leading-0 md:rounded-xs"
-          />
+        <div className="pt-6 pb-4 md:w-fit md:py-0">
+          <SearchInput placeholder="Search tasks..." />
         </div>
 
         <Link

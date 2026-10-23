@@ -12,14 +12,17 @@ import TasksList from "./TasksList";
 export default function TasksColumn({
   status,
   projectId,
+  searchTerm,
 }: {
   status: TaskStatus;
   projectId: string;
+  searchTerm: string;
 }) {
   const fetchTasks = useCallback(
-    (page: number) => getTasks(projectId, page, status),
-    [projectId, status],
+    (page: number) => getTasks(projectId, page, status, searchTerm),
+    [projectId, status, searchTerm],
   );
+
   const {
     data: tasks,
     loading,
