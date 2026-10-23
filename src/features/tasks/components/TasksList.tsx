@@ -46,10 +46,7 @@ export default function TasksList({
           ))}
         </ul>
       ) : (
-        <div
-          ref={tasks.length === 0 ? lastElementRef : null}
-          className="mb-4 h-full"
-        >
+        <div ref={lastElementRef} className="mb-4 h-full">
           <EmptyTasks />
         </div>
       )}
