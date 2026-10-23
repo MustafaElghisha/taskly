@@ -14,7 +14,12 @@ export default function Logo({ isCollapsed, className }: LogoProps) {
     >
       <LogoIcon />
       {!isCollapsed && (
-        <span className="text-xl leading-7 font-bold tracking-tight text-slate-800">
+        <span
+          className={cn(
+            "text-xl leading-7 font-bold tracking-tight text-slate-800",
+            className,
+          )}
+        >
           TASKLY
         </span>
       )}
