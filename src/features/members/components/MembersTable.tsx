@@ -12,7 +12,7 @@ import { Member } from "@/schemas/memberSchema";
 
 export default function MembersTable({ members }: { members: Member[] }) {
   return (
-    <Table>
+    <Table className="md:my-10">
       <colgroup>
         <col className="w-2/3" />
         <col className="w-1/3" />
