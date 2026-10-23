@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useState } from "react";
 import PasswordInput from "./PasswordInput";
 import { useLogin } from "../hooks/useLogin";
+import ParamLink from "@/components/ui/ParamLink";
 
 export default function LoginForm() {
   const { register, errors, isSubmitting, onSubmit } = useLogin();
@@ -104,12 +105,12 @@ export default function LoginForm() {
         <span className="text-sm leading-5 text-slate-500">
           Don&apos;t have an account?
         </span>
-        <Link
+        <ParamLink
           href="/sign-up"
           className={buttonVariants({ variant: "secondary" })}
         >
           Sign Up
-        </Link>
+        </ParamLink>
       </div>
     </div>
   );

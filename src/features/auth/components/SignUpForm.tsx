@@ -8,11 +8,11 @@ import {
   FieldError,
 } from "@/components/ui/Field";
 import Input from "@/components/ui/Input";
-import Link from "next/link";
 import { useState } from "react";
 import PasswordRequirements from "./PasswordRequirements";
 import PasswordInput from "./PasswordInput";
 import { useSignUp } from "../hooks/useSignUp";
+import ParamLink from "@/components/ui/ParamLink";
 
 export default function SignUpForm() {
   const { register, errors, isSubmitting, watchPassword, onSubmit } =
@@ -120,12 +120,12 @@ export default function SignUpForm() {
         <span className="text-sm leading-5 text-slate-500">
           Already have an account?
         </span>
-        <Link
+        <ParamLink
           href="/login"
           className={buttonVariants({ variant: "secondary" })}
         >
           Log in
-        </Link>
+        </ParamLink>
       </div>
     </div>
   );
