@@ -11,7 +11,7 @@ export default async function AddTaskModalPage({
   const { projectId } = await params;
 
   const members = await getProjectMembers(projectId);
-  const { epics } = await getEpics(projectId);
+  const { data: epics } = await getEpics(projectId);
 
   return (
     <Modal className="max-w-4xl">

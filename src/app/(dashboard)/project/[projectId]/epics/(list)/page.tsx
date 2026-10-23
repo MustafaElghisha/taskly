@@ -17,7 +17,7 @@ export default async function EpicsPage({
 }) {
   const { projectId } = await params;
   const { page = "1", searchTerm = "" } = await searchParams;
-  const { epics, totalPages } = await getEpics(
+  const { data: epics, totalPages } = await getEpics(
     projectId,
     Number(page),
     searchTerm,
@@ -50,11 +50,7 @@ export default async function EpicsPage({
 
       {epics.length ? (
         <>
-          <EpicsList
-            epics={epics}
-            projectId={projectId}
-            totalPages={totalPages}
-          />
+          <EpicsList epics={epics} projectId={projectId} />
 
           <div className="mt-auto hidden justify-end py-8 md:flex">
             <TruncatedPagination

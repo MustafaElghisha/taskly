@@ -46,5 +46,5 @@ export async function getEpics(
 
   const epics = await response.json();
 
-  return { epics: epicsResponseSchema.parse(epics), totalPages };
+  return { data: epicsResponseSchema.parse(epics), totalPages };
 }

@@ -5,22 +5,27 @@ import { Epic } from "../../../schemas/epicSchema";
 import EpicCard from "./EpicCard";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import InfiniteEpicList from "./InfiniteEpicList";
+import { useSearchParams } from "next/navigation";
 
 export default function EpicsList({
   epics,
   projectId,
-  totalPages,
 }: {
   epics: Epic[];
   projectId: string;
-  totalPages: number;
 }) {
   const isMobile = useIsMobile();
+  const searchParams = useSearchParams();
+  const searchTerm = searchParams.get("searchTerm") ?? "";
 
   return (
     <div className="py-6 md:py-10">
       {isMobile ? (
-        <InfiniteEpicList projectId={projectId} totalPages={totalPages} />
+        <InfiniteEpicList
+          key={`${projectId}-${searchTerm}`}
+          projectId={projectId}
+          searchTerm={searchTerm}
+        />
       ) : (
         <ul className="grid grid-cols-[repeat(auto-fill,minmax(340px,1fr))] gap-6">
           {epics.map((epic) => (
