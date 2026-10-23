@@ -9,9 +9,11 @@ export default async function EpicPage({
   params: Promise<{ projectId: string; epicId: string }>;
 }) {
   const { epicId, projectId } = await params;
-  const epic = await getEpic(projectId, epicId);
-  const members = await getProjectMembers(projectId);
-  const { tasks } = await getEpicTasks(epicId);
+  const [epic, members, { tasks }] = await Promise.all([
+    getEpic(projectId, epicId),
+    getProjectMembers(projectId),
+    getEpicTasks(epicId),
+  ]);
 
   return (
     <div className="md:p-8">
