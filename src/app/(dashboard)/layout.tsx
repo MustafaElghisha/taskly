@@ -1,5 +1,5 @@
-import MainLayoutClient from "@/app/(dashboard)/_components/MainLayoutClient";
-import { getUser } from "./_actions/getUser";
+import { getUser } from "@/actions/getUser";
+import MainLayoutClient from "@/components/layouts/dashboard/MainLayoutClient";
 
 type MainLayoutProps = {
   children: React.ReactNode;

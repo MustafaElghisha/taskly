@@ -20,12 +20,11 @@ import {
   SidebarMenuButton,
   SidebarFooter,
 } from "@/components/ui/Sidebar";
-import { useSidebar } from "../_hooks/useSidebar";
-
-import { NAV_ITEMS } from "../_constants/routes";
 import { useProject } from "@/features/project/hooks/useProject";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import ProjectMenu from "./ProjectMenu";
+import { NAV_ITEMS } from "@/constants/routes";
+import { useSidebar } from "@/hooks/useSidebar";
 
 type SidebarProps = {
   toggleSidebar: () => void;

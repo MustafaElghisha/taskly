@@ -1,7 +1,7 @@
+import { ACTIVE_PROJECT_ROUTES } from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
-import { ACTIVE_PROJECT_ROUTES } from "../_constants/routes";
 
 export default function ProjectMenu({ className }: { className?: string }) {
   const pathName = usePathname();

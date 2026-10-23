@@ -1,10 +1,10 @@
 "use client";
 
-import MobileNavigation from "@/app/(dashboard)/_components/MobileNavigation";
 import { useState } from "react";
 import MainSidebar from "./MainSidebar";
 import MainHeader from "./MainHeader";
 import { User } from "@/schemas/userSchema";
+import MobileNavigation from "./MobileNavigation";
 
 type MainLayoutProps = { children: React.ReactNode; user: User };
 

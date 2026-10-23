@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import ProjectsIcon from "@/assets/icons/ProjectsIcon.svg";
-import { ACTIVE_PROJECT_ROUTES } from "../_constants/routes";
+import { ACTIVE_PROJECT_ROUTES } from "@/constants/routes";
 
 export default function MobileNavigation() {
   const pathname = usePathname();
