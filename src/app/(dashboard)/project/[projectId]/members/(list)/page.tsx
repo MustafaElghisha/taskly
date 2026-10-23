@@ -1,8 +1,10 @@
 import { getProjectMembers } from "@/features/members/actions/getProjectMembers";
 import InviteIcon from "@/assets/icons/InviteIcon.svg";
-import Button from "@/components/ui/Button";
+import { buttonVariants } from "@/components/ui/Button";
 import UserPlusIcon from "@/assets/icons/UserPlusIcon.svg";
 import MembersTable from "@/features/members/components/MembersTable";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default async function MembersPage({
   params,
@@ -18,22 +20,32 @@ export default async function MembersPage({
         <h1 className="text-heading-lg leading-10 font-semibold tracking-tight text-slate-800 md:text-4xl">
           Project Members
         </h1>
-        <Button className="primary-button-shadow hidden gap-2 rounded-xs px-6 text-sm leading-5 font-bold md:flex">
+        <Link
+          href={`/project/${projectId}/members/invite`}
+
+          className={cn(
+            buttonVariants({ variant: "primary" }),
+            "primary-button-shadow hidden gap-2 rounded-xs px-6 md:flex",
+          )}
+        >
           <InviteIcon />
-          Invite Member
-        </Button>
+          <span className="text-sm leading-5 font-bold">Invite Member</span>
+        </Link>
       </div>
 
       <div className="mx-auto w-fit">
         <MembersTable members={members} />
       </div>
 
-      <Button
-        variant={"primary"}
-        className="fixed right-4 bottom-22 size-10 rounded-xl p-1! md:hidden"
+      <Link
+        href={`/project/${projectId}/members/invite`}
+        className={cn(
+          buttonVariants({ variant: "primary" }),
+          "fixed right-4 bottom-22 size-10 rounded-xl p-0 md:hidden",
+        )}
       >
         <UserPlusIcon />
-      </Button>
+      </Link>
     </div>
   );
 }
