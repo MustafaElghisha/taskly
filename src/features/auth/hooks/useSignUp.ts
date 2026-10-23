@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { signUp } from "../actions/signUp";
 import { SignUpInput, signUpInputSchema } from "../schemas/signUpSchema";
@@ -36,15 +36,15 @@ const useSignUp = () => {
   }, [watchPassword, getFieldState, trigger]);
 
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const onSubmit = handleSubmit(async (data) => {
     clearErrors("root");
 
     try {
       await signUp(data);
-
-      const redirect = searchParams.get("redirect");
+      const redirect = new URLSearchParams(window.location.search).get(
+        "redirect",
+      );
       router.push(redirect || "/login");
     } catch (error) {
       setError("root", {
