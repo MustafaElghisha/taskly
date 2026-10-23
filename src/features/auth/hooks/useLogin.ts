@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { login } from "../actions/login";
 import { LoginInput, loginInputSchema } from "../schemas/loginSchema";
 
@@ -22,6 +22,7 @@ const useLogin = () => {
   });
 
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const onSubmit = handleSubmit(async (data) => {
     clearErrors("root");
@@ -33,9 +34,7 @@ const useLogin = () => {
       return;
     }
 
-    const redirect = new URLSearchParams(window.location.search).get(
-      "redirect",
-    );
+    const redirect = searchParams.get("redirect");
     router.replace(redirect || "/project");
   });
 
