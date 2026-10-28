@@ -1,34 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback } from "react";
 import { statusStyles, TaskStatus } from "../constants/tasks";
 import CirclePlusIcon from "@/assets/icons/CirclePlusIcon.svg";
-import { getTasks } from "../actions/getTasks";
-import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import { Task } from "../schemas/taskSchema";
 import TasksList from "./TasksList";
 
 export default function TasksColumn({
   status,
   projectId,
-  searchTerm,
+  tasks,
+  loading,
+  lastElementRef,
 }: {
   status: TaskStatus;
   projectId: string;
-  searchTerm: string;
+  tasks: Task[];
+  loading: boolean;
+  lastElementRef: (node: HTMLElement | null) => void;
 }) {
-  const fetchTasks = useCallback(
-    (page: number) => getTasks(projectId, page, status, searchTerm),
-    [projectId, status, searchTerm],
-  );
-
-  const {
-    data: tasks,
-    loading,
-    lastElementRef,
-  } = useInfiniteScroll<Task>([], fetchTasks, 0, 1);
-
   return (
     <div className="grid h-full w-2xs grid-rows-[auto_auto_1fr] gap-3">
       <div className="flex items-center gap-2 px-1">
@@ -65,6 +55,7 @@ export default function TasksColumn({
       </Link>
 
       <TasksList
+        id={status}
         tasks={tasks}
         loading={loading}
         lastElementRef={lastElementRef}

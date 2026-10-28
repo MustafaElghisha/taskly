@@ -4,10 +4,18 @@ import CheckedIcon from "@/assets/icons/CheckedIcon.svg";
 import { Task } from "../schemas/taskSchema";
 import { cn } from "@/lib/utils";
 import { statusStyles } from "../constants/tasks";
+import { useDraggable } from "@dnd-kit/react";
+import Link from "next/link";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export default function TaskCard({ task }: { task: Task }) {
+  const { ref } = useDraggable({ id: task.id });
+  const isMobile = useIsMobile();
+
   return (
-    <div
+    <Link
+      href={`/project/${task.project_id}/tasks/view/${task.id}`}
+      ref={isMobile ? null : ref}
       className={cn(
         "shadow-task-card flex flex-col gap-3 rounded-lg border border-white bg-white p-4",
         task.status === "BLOCKED" &&
@@ -65,6 +73,6 @@ export default function TaskCard({ task }: { task: Task }) {
           className="text-3xs! bg-blue-150 size-6! rounded-full border border-white font-bold text-slate-800"
         />
       </div>
-    </div>
+    </Link>
   );
 }
