@@ -7,7 +7,7 @@ const useInfiniteScroll = <T>(
   totalPages: number,
 ) => {
   const [data, setData] = useState(initialData);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [pages, setPages] = useState(totalPages);
   const [currentPage, setCurrentPage] = useState(page);
 
@@ -38,7 +38,7 @@ const useInfiniteScroll = <T>(
     (node: HTMLElement | null) => {
       observer.current?.disconnect();
 
-      if (!node || loading || currentPage >= pages) return;
+      if (!node || loadingRef.current || currentPage >= pages) return;
 
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && !loadingRef.current) {
@@ -48,7 +48,7 @@ const useInfiniteScroll = <T>(
 
       observer.current.observe(node);
     },
-    [loading, currentPage, pages, loadMoreData],
+    [currentPage, pages, loadMoreData],
   );
 
   return { data, loading, lastElementRef };
