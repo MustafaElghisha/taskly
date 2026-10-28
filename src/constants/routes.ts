@@ -41,7 +41,7 @@ export const NAV_ITEMS = [
   },
   {
     title: "my statistics",
-    segment: "statistics",
+    segment: "my-statistics",
     Icon: StatisticsIcon,
   },
 ];

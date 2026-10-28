@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { accessTokenOptions, refreshTokenOptions } from "./lib/auth/session";
 
-const protectedRoutes = ["/project", "/invite"];
+const protectedRoutes = ["/project", "/invite", "/my-statistics"];
 const publicRoutes = [
   "/login",
   "/sign-up",
