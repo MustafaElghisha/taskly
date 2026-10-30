@@ -31,12 +31,6 @@ export async function getProjects(page?: number) {
 
   const projects = await response.json();
 
-  if (page === undefined) {
-    return {
-      data: projectsResponseSchema.parse(projects),
-    };
-  }
-
   const contentRange = response.headers.get("Content-Range");
   const totalCount = Number(contentRange?.split("/")[1] ?? 0);
 
