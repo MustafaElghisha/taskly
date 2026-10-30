@@ -12,7 +12,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Separator } from "@/components/ui/Separator";
 import Button from "@/components/ui/Button";
 import { TASK_STATUSES } from "@/features/tasks/constants/tasks";
-import { Project } from "@/schemas/projectSchema";
+import { ProjectTasks } from "../schemas/projectsTasksSchema";
 
 function getCurrentWeekRange(): DateRange {
   const today = new Date();
@@ -32,7 +32,11 @@ function formatRangeLabel(range: DateRange | undefined): string {
   return `${format(range.from, "MMM d")} – ${format(range.to, "MMM d, yyyy")}`;
 }
 
-export default function StatsFilters({ projects }: { projects: Project[] }) {
+export default function StatsFilters({
+  projectsTasks,
+}: {
+  projectsTasks: ProjectTasks;
+}) {
   const defaultClassNames = getDefaultClassNames();
 
   const router = useRouter();
@@ -223,9 +227,9 @@ export default function StatsFilters({ projects }: { projects: Project[] }) {
       >
         <option value="">All Projects</option>
 
-        {projects.map(({ id, name }) => (
-          <option key={id} value={id}>
-            {name}
+        {projectsTasks.map(({ project_id, project_name }) => (
+          <option key={project_id} value={project_id}>
+            {project_name}
           </option>
         ))}
       </select>

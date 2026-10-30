@@ -5,13 +5,11 @@ import { projectsResponseSchema } from "@/schemas/projectSchema";
 
 const LIMIT = 5;
 
-export async function getProjects(page?: number) {
+export async function getProjects(page: number) {
   const params = new URLSearchParams();
 
-  if (page !== undefined) {
-    params.set("limit", String(LIMIT));
-    params.set("offset", String((page - 1) * LIMIT));
-  }
+  params.set("limit", String(LIMIT));
+  params.set("offset", String((page - 1) * LIMIT));
 
   const response = await authenticatedFetch(
     `/rest/v1/rpc/get_projects?${params.toString()}`,

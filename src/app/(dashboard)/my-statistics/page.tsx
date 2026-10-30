@@ -1,5 +1,4 @@
 import { format, startOfWeek, endOfWeek } from "date-fns";
-import { getProjects } from "@/features/project/actions/getProjects";
 import { getStats } from "@/features/statistics/actions/getStats";
 import { getTasksCount } from "@/features/statistics/actions/getTasksCount";
 import { TASK_STATUSES } from "@/features/tasks/constants/tasks";
@@ -37,7 +36,7 @@ export default async function StatisticsPage({ searchParams }: Props) {
     ? (params.status as (typeof TASK_STATUSES)[number])
     : null;
 
-  const [stats, projectsTasks, { data: projects }] = await Promise.all([
+  const [stats, projectsTasks] = await Promise.all([
     getStats({
       p_start_date: startDate,
       p_end_date: endDate,
@@ -49,8 +48,6 @@ export default async function StatisticsPage({ searchParams }: Props) {
       p_start_date: startDate,
       p_end_date: endDate,
     }),
-
-    getProjects(),
   ]);
 
   return (
@@ -64,7 +61,7 @@ export default async function StatisticsPage({ searchParams }: Props) {
         </p>
       </div>
 
-      <StatsFilters projects={projects} />
+      <StatsFilters projectsTasks={projectsTasks} />
 
       <KpiList stats={stats} />
 
