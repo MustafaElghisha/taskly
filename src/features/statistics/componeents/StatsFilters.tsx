@@ -117,99 +117,81 @@ export default function StatsFilters({ projects }: { projects: Project[] }) {
   }
 
   return (
-    <div className="bg-surface-low relative flex items-center justify-between gap-4 rounded-lg px-4 py-4">
-      <button
-        onClick={handleOpen}
-        aria-haspopup="dialog"
-        aria-expanded={open}
-        className="text-sm leading-5 font-bold text-slate-800"
-      >
-        {formatRangeLabel(appliedRange)}
-      </button>
-
-      {open && (
-        <div
-          ref={popoverRef}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Select date range"
-          className="shadow-edit-container absolute top-0 left-0 z-50 rounded-lg"
+    <div className="md:bg-surface-low relative grid grid-cols-2 gap-4 rounded-lg md:grid-cols-[1fr_auto_auto] md:items-center md:p-4">
+      <div className="order-1 col-span-2 flex min-w-0 gap-2 md:contents">
+        <button
+          onClick={handleOpen}
+          aria-haspopup="dialog"
+          aria-expanded={open}
+          className="bg-surface-low relative min-w-0 flex-1 rounded-lg text-sm leading-5 font-bold text-slate-800 md:w-48 md:flex-none"
         >
-          <DayPicker
-            mode="range"
-            weekStartsOn={1}
-            showOutsideDays
-            selected={draftRange}
-            onSelect={setDraftRange}
-            footer={
-              <div className="flex flex-col">
-                <Separator className="mt-3 mb-4" />
+          {formatRangeLabel(appliedRange)}
+        </button>
 
-                <div className="flex items-center justify-between gap-2">
-                  <Button
-                    onClick={handleCancel}
-                    variant="ghost"
-                    className="flex-1"
-                  >
-                    Cancel
-                  </Button>
+        {open && (
+          <div
+            ref={popoverRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Select date range"
+            className="shadow-edit-container absolute top-0 left-0 z-50 rounded-lg"
+          >
+            <DayPicker
+              mode="range"
+              weekStartsOn={1}
+              showOutsideDays
+              selected={draftRange}
+              onSelect={setDraftRange}
+              footer={
+                <div className="flex flex-col">
+                  <Separator className="mt-3 mb-4" />
 
-                  <Button
-                    onClick={handleApply}
-                    disabled={!isComplete || isExceeded}
-                    aria-disabled={!isComplete || isExceeded}
-                    className="flex-1 rounded-xs px-0 py-2 text-xs leading-4 font-semibold"
-                  >
-                    Apply Range
-                  </Button>
+                  <div className="flex items-center justify-between gap-2">
+                    <Button
+                      onClick={handleCancel}
+                      variant="ghost"
+                      className="flex-1"
+                    >
+                      Cancel
+                    </Button>
+
+                    <Button
+                      onClick={handleApply}
+                      disabled={!isComplete || isExceeded}
+                      aria-disabled={!isComplete || isExceeded}
+                      className="flex-1 rounded-xs px-0 py-2 text-xs leading-4 font-semibold"
+                    >
+                      Apply Range
+                    </Button>
+                  </div>
+
+                  {isExceeded && (
+                    <p className="mt-2 text-xs text-red-500" role="alert">
+                      You can select a maximum of 7 calendar days.
+                    </p>
+                  )}
                 </div>
-
-                {isExceeded && (
-                  <p className="mt-2 text-xs text-red-500" role="alert">
-                    You can select a maximum of 7 calendar days.
-                  </p>
-                )}
-              </div>
-            }
-            classNames={{
-              outside: "text-slate-200",
-              month_grid: "border-separate border-spacing-1",
-              range_start:
-                "rounded-s-md bg-primary-container/20 text-primary! font-bold",
-              range_middle: "bg-primary-container/20 text-primary! font-bold",
-              range_end:
-                "rounded-e-md bg-primary-container/20 text-primary! font-bold",
-              day_button: "h-8 w-9 flex items-center justify-center",
-              day: "leading-4 text-xs",
-              root: `${defaultClassNames.root} bg-white w-fit relative p-5 rounded-lg text-slate-800`,
-              chevron: `${defaultClassNames.chevron} fill-slate-500 scale-80 cursor-pointer`,
-              weekday:
-                "text-3xs leading-4 font-bold tracking-tighter text-slate-300 uppercase",
-              month_caption: "text-base leading-6 font-bold mb-4",
-              nav: "absolute right-5",
-            }}
-          />
-        </div>
-      )}
-
-      <div className="flex gap-4">
-        <select
-          value={searchParams.get("projectId") ?? ""}
-          onChange={(e) =>
-            updateFilters({
-              projectId: e.target.value || null,
-            })
-          }
-          className="w-51 rounded-xs bg-white px-4 py-2 text-sm leading-5 font-medium text-slate-800"
-        >
-          <option value="">All Projects</option>
-
-          {projects.map(({ id, name }) => (
-            <option key={id} value={id}>
-              {name}
-            </option>
-          ))}
-        </select>
+              }
+              classNames={{
+                outside: "text-slate-200",
+                month_grid: "border-separate border-spacing-1",
+                range_start:
+                  "rounded-s-md bg-primary-container/20 text-primary! font-bold",
+                range_middle: "bg-primary-container/20 text-primary! font-bold",
+                range_end:
+                  "rounded-e-md bg-primary-container/20 text-primary! font-bold",
+                day_button: "h-8 w-9 flex items-center justify-center",
+                day: "leading-4 text-xs",
+                root: `${defaultClassNames.root} bg-white w-fit relative p-5 rounded-lg text-slate-800`,
+                chevron: `${defaultClassNames.chevron} fill-slate-500 scale-80 cursor-pointer`,
+                weekday:
+                  "text-3xs leading-4 font-bold tracking-tighter text-slate-300 uppercase",
+                month_caption: "text-base leading-6 font-bold mb-4",
+                nav: "absolute right-5",
+              }}
+            />
+          </div>
+        )}
 
         <select
           value={searchParams.get("status") ?? ""}
@@ -218,7 +200,7 @@ export default function StatsFilters({ projects }: { projects: Project[] }) {
               status: e.target.value || null,
             })
           }
-          className="w-34 rounded-xs bg-white px-4 py-2 text-sm leading-5 font-medium text-slate-800"
+          className="bg-surface-low min-w-0 flex-1 rounded-lg px-4 py-2.5 text-xs leading-4 font-bold text-slate-800 md:w-34 md:flex-none md:rounded-xs md:bg-white md:py-2 md:text-sm md:leading-5 md:font-medium"
         >
           <option value="">All Statuses</option>
 
@@ -229,6 +211,24 @@ export default function StatsFilters({ projects }: { projects: Project[] }) {
           ))}
         </select>
       </div>
+
+      <select
+        value={searchParams.get("projectId") ?? ""}
+        onChange={(e) =>
+          updateFilters({
+            projectId: e.target.value || null,
+          })
+        }
+        className="bg-surface-low order-0 col-span-2 w-full min-w-0 rounded-lg px-4 py-3 text-xs leading-4 font-bold text-slate-800 md:order-0 md:col-span-1 md:ml-auto md:w-51 md:rounded-xs md:bg-white md:py-2 md:text-sm md:leading-5 md:font-medium"
+      >
+        <option value="">All Projects</option>
+
+        {projects.map(({ id, name }) => (
+          <option key={id} value={id}>
+            {name}
+          </option>
+        ))}
+      </select>
     </div>
   );
 }
