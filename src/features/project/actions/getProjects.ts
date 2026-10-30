@@ -5,11 +5,16 @@ import { projectsResponseSchema } from "@/schemas/projectSchema";
 
 const LIMIT = 5;
 
-export async function getProjects(page: number) {
-  const offset = (page - 1) * LIMIT;
+export async function getProjects(page?: number) {
+  const params = new URLSearchParams();
+
+  if (page !== undefined) {
+    params.set("limit", String(LIMIT));
+    params.set("offset", String((page - 1) * LIMIT));
+  }
 
   const response = await authenticatedFetch(
-    `/rest/v1/rpc/get_projects?limit=${LIMIT}&offset=${offset}`,
+    `/rest/v1/rpc/get_projects?${params.toString()}`,
     {
       method: "GET",
       headers: {
@@ -24,14 +29,19 @@ export async function getProjects(page: number) {
     );
   }
 
+  const projects = await response.json();
+
+  if (page === undefined) {
+    return {
+      data: projectsResponseSchema.parse(projects),
+    };
+  }
+
   const contentRange = response.headers.get("Content-Range");
   const totalCount = Number(contentRange?.split("/")[1] ?? 0);
-  const totalPages = Math.ceil(totalCount / LIMIT);
-
-  const projects = await response.json();
 
   return {
     data: projectsResponseSchema.parse(projects),
-    totalPages: totalPages,
+    totalPages: Math.ceil(totalCount / LIMIT),
   };
 }
