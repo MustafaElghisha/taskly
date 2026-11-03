@@ -26,10 +26,11 @@ const useForgotPassword = () => {
 
     if (!res.success) {
       setError("root", { message: res.message });
-      return;
+      return res.success;
     }
 
     toast.success(res.message);
+    return res.success;
   });
 
   return { register, errors, onSubmit, isSubmitting, isSubmitted, submitCount };

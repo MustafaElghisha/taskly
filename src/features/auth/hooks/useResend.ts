@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
-const DURATION_IN_SECONDS = 300;
+const DURATION_IN_SECONDS = 60;
 
 const useResend = (
   onSubmit: (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     e?: React.BaseSyntheticEvent<object, any, any> | undefined,
-  ) => Promise<void | undefined>,
+  ) => Promise<boolean | undefined>,
 ) => {
   const [endTime, setEndTime] = useState(0);
   const [secondsRemaining, setSecondsRemaining] = useState(0);
@@ -25,9 +25,9 @@ const useResend = (
       }
     };
 
-    tick();
-
     const intervalId = setInterval(tick, 1000);
+
+    tick();
 
     return () => clearInterval(intervalId);
   }, [endTime]);
