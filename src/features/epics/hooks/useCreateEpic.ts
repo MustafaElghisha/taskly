@@ -37,7 +37,7 @@ const useCreateEpic = (projectId: string) => {
 
     toast.success(res.message);
 
-    router.push(`/project/${projectId}/epics`);
+    router.push(`/projects/${projectId}/epics`);
   });
 
   return { register, isSubmitting, errors, watchDescription, onSubmit };

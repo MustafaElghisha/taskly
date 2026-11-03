@@ -29,7 +29,7 @@ export default async function TasksPage({
         </div>
 
         <Link
-          href={`/project/${projectId}/tasks/add`}
+          href={`/projects/${projectId}/tasks/add`}
           className={cn(
             buttonVariants({
               variant: "primary",

@@ -79,8 +79,8 @@ Provides the top header for authenticated pages. It contains the mobile navigati
 **Used in:**
 
 - `/project`
-- `/project/add`
-- `/project/[projectId]/epics`
+- `/projects/add`
+- `/projects/[projectId]/epics`
 
 **Why reusable:**  
 The header is part of the authenticated application shell rather than being specific to one page.

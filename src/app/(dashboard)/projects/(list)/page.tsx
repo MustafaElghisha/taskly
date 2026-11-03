@@ -3,9 +3,9 @@ import Link from "next/link";
 import PlusIcon from "@/assets/icons/PlusIcon.svg";
 import { buttonVariants } from "@/components/ui/Button";
 import TruncatedPagination from "@/components/ui/TruncatedPagination";
-import { getProjects } from "@/features/project/actions/getProjects";
-import EmptyProjects from "@/features/project/components/EmptyProjects";
-import ProjectList from "@/features/project/components/ProjectList";
+import { getProjects } from "@/features/projects/actions/getProjects";
+import EmptyProjects from "@/features/projects/components/EmptyProjects";
+import ProjectList from "@/features/projects/components/ProjectList";
 
 export default async function ProjectPage({
   searchParams,
@@ -29,7 +29,7 @@ export default async function ProjectPage({
           </p>
         </div>
         <Link
-          href="/project/add"
+          href="/projects/add"
           className={buttonVariants({
             className: "hidden rounded-xs px-6 font-medium md:block",
             variant: "primary",
@@ -54,7 +54,7 @@ export default async function ProjectPage({
       </div>
 
       <Link
-        href="/project/add"
+        href="/projects/add"
         className={buttonVariants({
           variant: "primary",
           className:

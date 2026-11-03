@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { accessTokenOptions, refreshTokenOptions } from "./lib/auth/session";
 
-const protectedRoutes = ["/project", "/invite", "/my-statistics"];
+const protectedRoutes = ["/projects", "/invite", "/statistics"];
 const publicRoutes = [
   "/login",
   "/sign-up",
@@ -105,7 +105,7 @@ export default async function proxy(req: NextRequest) {
   }
 
   if (isPublicRoute && (accessToken || refreshToken)) {
-    return NextResponse.redirect(new URL("/project", req.url));
+    return NextResponse.redirect(new URL("/projects", req.url));
   }
 
   if (pathname === "/reset-password" && !tempAccessToken) {

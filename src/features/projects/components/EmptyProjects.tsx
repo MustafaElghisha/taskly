@@ -17,7 +17,7 @@ export default function EmptyProjects() {
         </p>
       </div>
       <Link
-        href="/project/add"
+        href="/projects/add"
         className={buttonVariants({
           className: "rounded-sm",
           variant: "primary",

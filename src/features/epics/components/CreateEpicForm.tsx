@@ -117,7 +117,7 @@ export default function CreateEpicForm({
 
         <div className="mt-6 flex flex-col-reverse items-center gap-x-12 gap-y-7 md:mt-8 md:flex-row md:justify-end">
           <Link
-            href={`/project/${projectId}/epics`}
+            href={`/projects/${projectId}/epics`}
             className={buttonVariants({ variant: "ghost" })}
           >
             Cancel

@@ -30,7 +30,7 @@ export default function EpicsList({
         <ul className="grid grid-cols-[repeat(auto-fill,minmax(340px,1fr))] gap-6">
           {epics.map((epic) => (
             <li key={epic.id}>
-              <Link href={`/project/${projectId}/epics/view/${epic.id}`}>
+              <Link href={`/projects/${projectId}/epics/view/${epic.id}`}>
                 <EpicCard {...epic} />
               </Link>
             </li>

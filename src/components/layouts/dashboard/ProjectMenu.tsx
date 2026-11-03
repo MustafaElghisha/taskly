@@ -10,11 +10,11 @@ export default function ProjectMenu({ className }: { className?: string }) {
   return (
     <ul className={cn("flex flex-col gap-1 p-2", className)}>
       {ACTIVE_PROJECT_ROUTES.map(({ title, segment, Icon }) => {
-        if (segment === "project") return null;
+        if (segment === "projects") return null;
         return (
           <li key={title}>
             <Link
-              href={`/project/${projectId}/${segment}`}
+              href={`/projects/${projectId}/${segment}`}
               className={cn(
                 "flex items-center gap-3 rounded-full p-3 capitalize",
                 pathName.includes(segment) && "bg-surface-low",

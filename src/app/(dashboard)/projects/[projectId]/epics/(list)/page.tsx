@@ -36,7 +36,7 @@ export default async function EpicsPage({
         <div className="flex w-full flex-wrap gap-x-8 gap-y-4 md:w-fit">
           <SearchInput placeholder="Search epics..." />
           <Link
-            href={`/project/${projectId}/epics/new`}
+            href={`/projects/${projectId}/epics/new`}
             className={buttonVariants({
               variant: "primary",
               className: "hidden rounded-sm md:flex md:gap-2 md:px-6",
@@ -57,7 +57,7 @@ export default async function EpicsPage({
               totalPages={totalPages}
               currentPage={Number(page)}
               getHref={(page) =>
-                `/project/${projectId}/epics?page=${page}${searchTerm.length ? `&searchTerm=${searchTerm}` : ``}`
+                `/projects/${projectId}/epics?page=${page}${searchTerm.length ? `&searchTerm=${searchTerm}` : ``}`
               }
             />
           </div>
@@ -71,7 +71,7 @@ export default async function EpicsPage({
       )}
 
       <Link
-        href={`/project/${projectId}/epics/new`}
+        href={`/projects/${projectId}/epics/new`}
         className={buttonVariants({
           variant: "primary",
           className:

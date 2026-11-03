@@ -9,7 +9,7 @@ import {
   BreadCrumbList,
   BreadCrumbPage,
 } from "@/components/ui/BreadCrumb";
-import { useProject } from "@/features/project/hooks/useProject";
+import { useProject } from "@/features/projects/hooks/useProject";
 
 const getRouteUrl = (pathname: string, route: string) => {
   const indexOfRoute = pathname.indexOf(route + "/");

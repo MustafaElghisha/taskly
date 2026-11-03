@@ -20,7 +20,7 @@ import {
   SidebarMenuButton,
   SidebarFooter,
 } from "@/components/ui/Sidebar";
-import { useProject } from "@/features/project/hooks/useProject";
+import { useProject } from "@/features/projects/hooks/useProject";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import ProjectMenu from "./ProjectMenu";
 import { NAV_ITEMS } from "@/constants/routes";

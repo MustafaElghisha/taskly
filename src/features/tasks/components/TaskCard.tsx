@@ -14,7 +14,7 @@ export default function TaskCard({ task }: { task: Task }) {
 
   return (
     <Link
-      href={`/project/${task.project_id}/tasks/view/${task.id}`}
+      href={`/projects/${task.project_id}/tasks/view/${task.id}`}
       ref={isMobile ? null : ref}
       className={cn(
         "shadow-task-card flex flex-col gap-3 rounded-lg border border-white bg-white p-4",

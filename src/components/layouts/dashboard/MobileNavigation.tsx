@@ -38,7 +38,7 @@ export default function MobileNavigation() {
                   href={
                     title === "projects"
                       ? `/${segment}`
-                      : `/project/${projectId}/${segment}`
+                      : `/projects/${projectId}/${segment}`
                   }
                   className={cn(
                     "flex h-full flex-col items-center justify-between capitalize",

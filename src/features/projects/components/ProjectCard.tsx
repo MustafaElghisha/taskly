@@ -53,7 +53,7 @@ export default function ProjectCard({
           {PROJECT_NAV_ITEMS.map(({ title, Icon }) => (
             <li key={title}>
               <Link
-                href={`/project/${id}/${title}`}
+                href={`/projects/${id}/${title}`}
                 className="text-primary flex items-center gap-0.5 capitalize"
               >
                 <Icon />

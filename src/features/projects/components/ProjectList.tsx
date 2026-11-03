@@ -1,8 +1,8 @@
 "use client";
 
-import ProjectCard from "@/features/project/components/ProjectCard";
-import CreateProjectCard from "@/features/project/components/CreateProjectCard";
-import InfiniteProjectList from "@/features/project/components/InfiniteProjectList";
+import ProjectCard from "@/features/projects/components/ProjectCard";
+import CreateProjectCard from "@/features/projects/components/CreateProjectCard";
+import InfiniteProjectList from "@/features/projects/components/InfiniteProjectList";
 import { Project } from "../../../schemas/projectSchema";
 import { useIsMobile } from "@/hooks/useIsMobile";
 

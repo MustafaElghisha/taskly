@@ -36,7 +36,7 @@ export default function InfiniteEpicList({
                 key={epic.epic_id}
                 ref={epics.length === index + 1 ? lastElementRef : null}
               >
-                <Link href={`/project/${projectId}/epics/view/${epic.id}`}>
+                <Link href={`/projects/${projectId}/epics/view/${epic.id}`}>
                   <EpicCard {...epic} />
                 </Link>
               </li>

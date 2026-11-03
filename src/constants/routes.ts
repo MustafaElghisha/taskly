@@ -18,7 +18,7 @@ export const ACTIVE_PROJECT_ROUTES = [
   },
   {
     title: "projects",
-    segment: "project",
+    segment: "projects",
     Icon: ProjectsIcon,
   },
   {
@@ -36,12 +36,12 @@ export const ACTIVE_PROJECT_ROUTES = [
 export const NAV_ITEMS = [
   {
     title: "projects",
-    segment: "project",
+    segment: "projects",
     Icon: ProjectsIcon,
   },
   {
-    title: "my statistics",
-    segment: "my-statistics",
+    title: "statistics",
+    segment: "statistics",
     Icon: StatisticsIcon,
   },
 ];

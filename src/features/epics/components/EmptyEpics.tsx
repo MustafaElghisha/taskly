@@ -19,7 +19,7 @@ export default function EmptyEpics({ projectId }: { projectId: string }) {
         better and maintain architectural clarity.
       </p>
       <Link
-        href={`/project/${projectId}/epics/new`}
+        href={`/projects/${projectId}/epics/new`}
         className={buttonVariants({
           className: "primary-button-shadow rounded-sm",
           variant: "primary",

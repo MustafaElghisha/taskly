@@ -38,8 +38,8 @@ export async function createTask(
       };
     }
 
-    revalidatePath(`/project/${projectId}/tasks`);
-    revalidatePath(`/project/${projectId}/epics/view/${epic_id}`);
+    revalidatePath(`/projects/${projectId}/tasks`);
+    revalidatePath(`/projects/${projectId}/epics/view/${epic_id}`);
     return {
       success: true,
       message: "Task created successfully!",

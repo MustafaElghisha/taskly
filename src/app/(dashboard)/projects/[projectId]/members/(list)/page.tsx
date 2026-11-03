@@ -21,7 +21,7 @@ export default async function MembersPage({
           Project Members
         </h1>
         <Link
-          href={`/project/${projectId}/members/invite`}
+          href={`/projects/${projectId}/members/invite`}
 
           className={cn(
             buttonVariants({ variant: "primary" }),
@@ -38,7 +38,7 @@ export default async function MembersPage({
       </div>
 
       <Link
-        href={`/project/${projectId}/members/invite`}
+        href={`/projects/${projectId}/members/invite`}
         className={cn(
           buttonVariants({ variant: "primary" }),
           "fixed right-4 bottom-22 size-10 rounded-xl p-0 md:hidden",

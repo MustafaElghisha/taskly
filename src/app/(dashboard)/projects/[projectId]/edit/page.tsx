@@ -1,5 +1,5 @@
-import { getProject } from "@/features/project/actions/getProject";
-import EditProjectForm from "@/features/project/components/EditProjectForm";
+import { getProject } from "@/features/projects/actions/getProject";
+import EditProjectForm from "@/features/projects/components/EditProjectForm";
 
 export default async function EditPage({
   params,

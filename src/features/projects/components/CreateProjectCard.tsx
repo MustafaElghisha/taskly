@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function CreateProjectCard() {
   return (
     <Link
-      href="/project/add"
+      href="/projects/add"
       className="flex flex-col items-center justify-center gap-4 rounded-lg bg-white p-17"
     >
       <div className="bg-surface-low flex items-center justify-center rounded-xl p-3.5">

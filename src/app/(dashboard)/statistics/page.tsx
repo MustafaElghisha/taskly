@@ -2,10 +2,10 @@ import { format, startOfWeek, endOfWeek } from "date-fns";
 import { getStats } from "@/features/statistics/actions/getStats";
 import { getTasksCount } from "@/features/statistics/actions/getTasksCount";
 import { TASK_STATUSES } from "@/features/tasks/constants/tasks";
-import ChartStats from "@/features/statistics/componeents/ChartStats";
-import KpiList from "@/features/statistics/componeents/KpiList";
-import StatsFilters from "@/features/statistics/componeents/StatsFilters";
-import WeeklyStats from "@/features/statistics/componeents/WeeklyStats";
+import ChartStats from "@/features/statistics/components/ChartStats";
+import KpiList from "@/features/statistics/components/KpiList";
+import StatsFilters from "@/features/statistics/components/StatsFilters";
+import WeeklyStats from "@/features/statistics/components/WeeklyStats";
 
 type Props = {
   searchParams: Promise<{
