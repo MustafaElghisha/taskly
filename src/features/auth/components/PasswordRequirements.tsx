@@ -1,37 +1,52 @@
+import { cn } from "@/lib/utils";
+import { Separator } from "@/components/ui/Separator";
 import CheckedIcon from "@/assets/icons/CheckedIcon.svg";
 import UnCheckedIcon from "@/assets/icons/UnCheckedIcon.svg";
 
-type PasswordRequirementsProps = {
-  watchPassword: string;
-};
+type PasswordRequirementsProps = { watchPassword: string };
 
 export default function PasswordRequirements({
   watchPassword,
 }: PasswordRequirementsProps) {
-  const passwordRequirements = [
+  const PasswordRequirements = [
     {
-      satisfied: watchPassword.trim().length >= 8,
-      label: "At least 8 characters",
+      satisfied:
+        watchPassword.trim().length >= 8 && watchPassword.trim().length <= 64,
+      label: "8 - 64 characters",
     },
     {
-      satisfied: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(watchPassword),
-      label: "One uppercase, lowercase, and digit",
+      satisfied: /[a-z]/.test(watchPassword),
+      label: "Lowercase letter",
     },
+    {
+      satisfied: /[A-Z]/.test(watchPassword),
+      label: "Uppercase letter",
+    },
+    { satisfied: /[0-9]/.test(watchPassword), label: "At least one digit" },
     {
       satisfied: /[!@#$%^&*]/.test(watchPassword),
-      label: "One special character",
+      label: "Special character (e.g. !@#$)",
     },
   ];
 
   return (
-    <div className="bg-blue-150 hidden rounded-lg p-4 md:block">
-      <ul className="flex flex-col gap-2">
-        {passwordRequirements.map(({ satisfied, label }) => (
-          <li key={label} className="flex items-center gap-2">
+    <div className="bg-surface-low flex flex-col gap-4 rounded-sm p-5">
+      <h2 className="text-2xs leading-4 font-bold text-slate-500 uppercase">
+        Password Requirements
+      </h2>
+      <Separator className="hidden md:-mt-2 md:block" />
+      <ul className="grid gap-2.5 md:grid-cols-2 md:gap-3">
+        {PasswordRequirements.map(({ label, satisfied }, index) => (
+          <li
+            key={label}
+            className={cn(
+              "flex items-center gap-2",
+              satisfied ? "" : "opacity-50",
+              index === PasswordRequirements.length - 1 && "md:col-span-2",
+            )}
+          >
             {satisfied ? <CheckedIcon /> : <UnCheckedIcon />}
-            <span className="text-2xs leading-4.25 text-slate-600">
-              {label}
-            </span>
+            <span className="text-sm leading-5 text-slate-800">{label}</span>
           </li>
         ))}
       </ul>

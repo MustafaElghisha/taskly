@@ -8,7 +8,7 @@ import PasswordInput from "./PasswordInput";
 import ArrowLeftIcon from "@/assets/icons/ArrowLeftIcon.svg";
 import Link from "next/link";
 import { useResetPassword } from "../hooks/useResetPassword";
-import SecurityRequirements from "./SecurityRequirements";
+import PasswordRequirements from "./PasswordRequirements";
 
 export default function ResetPasswordForm() {
   const { register, errors, isSubmitting, onSubmit, watchPassword } =
@@ -58,7 +58,7 @@ export default function ResetPasswordForm() {
           </Field>
         </div>
 
-        <SecurityRequirements watchPassword={watchPassword} />
+        <PasswordRequirements watchPassword={watchPassword} />
 
         <Button type="submit" disabled={isSubmitting} className="rounded-xs">
           {isSubmitting ? "Updating..." : "Update Password"}
