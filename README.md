@@ -79,7 +79,7 @@ Provides the top header for authenticated pages. It contains the mobile navigati
 **Used in:**
 
 - `/project`
-- `/projects/add`
+- `/projects/new`
 - `/projects/[projectId]/epics`
 
 **Why reusable:**  

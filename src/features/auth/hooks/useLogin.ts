@@ -35,7 +35,7 @@ const useLogin = () => {
     }
 
     const redirect = searchParams.get("redirect");
-    router.replace(redirect || "/project");
+    router.replace(redirect || "/projects");
   });
 
   return { register, errors, isSubmitting, onSubmit };

@@ -77,8 +77,8 @@ export default function MainSidebar({
                 <SidebarMenuLink
                   href={`/${segment}`}
                   isCollapsed={isCollapsed}
-                  isActive={pathname === `/${segment}`}
-                  className="capitalize"
+                  isActive={pathname.split("/")[1] === `${segment}`}
+                  className=""
                 >
                   <Icon />
                   {!isCollapsed && title}

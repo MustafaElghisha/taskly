@@ -41,7 +41,7 @@ const useAcceptInvitation = () => {
     }
 
     toast.success(res.message);
-    router.replace("/project");
+    router.replace("/projects");
   });
 
   return { onSubmit, isSubmitting, errors };

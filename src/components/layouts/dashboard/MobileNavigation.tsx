@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import ProjectsIcon from "@/assets/icons/ProjectsIcon.svg";
-import { ACTIVE_PROJECT_ROUTES } from "@/constants/routes";
+import { MOBILE_NAV_ITEMS } from "@/constants/routes";
 
 export default function MobileNavigation() {
   const pathname = usePathname();
@@ -17,10 +17,10 @@ export default function MobileNavigation() {
           <ul>
             <li>
               <Link
-                href={"/project"}
+                href={"/projects"}
                 className={cn(
                   "flex flex-col items-center gap-1 capitalize",
-                  pathname.endsWith("/project")
+                  pathname.endsWith("/projects")
                     ? "text-primary font-semibold"
                     : "text-slate-800",
                 )}
@@ -32,7 +32,7 @@ export default function MobileNavigation() {
           </ul>
         ) : (
           <ul className="grid grid-cols-5 items-stretch gap-5.75">
-            {ACTIVE_PROJECT_ROUTES.map(({ title, segment, Icon }) => (
+            {MOBILE_NAV_ITEMS.map(({ title, segment, Icon }) => (
               <li key={title}>
                 <Link
                   href={

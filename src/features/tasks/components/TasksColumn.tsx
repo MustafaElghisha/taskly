@@ -45,7 +45,7 @@ export default function TasksColumn({
       </div>
 
       <Link
-        href={`/projects/${projectId}/tasks/add?status=${status}`}
+        href={`/projects/${projectId}/tasks/new?status=${status}`}
         className="flex items-center justify-center gap-3 rounded-lg border-2 border-dashed border-slate-200/30 py-4 text-slate-600/60"
       >
         <CirclePlusIcon className="scale-75" />

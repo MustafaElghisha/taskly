@@ -29,7 +29,7 @@ export default async function ProjectPage({
           </p>
         </div>
         <Link
-          href="/projects/add"
+          href="/projects/new"
           className={buttonVariants({
             className: "hidden rounded-xs px-6 font-medium md:block",
             variant: "primary",
@@ -49,12 +49,12 @@ export default async function ProjectPage({
         <TruncatedPagination
           currentPage={Number(page)}
           totalPages={totalPages}
-          getHref={(page: number) => `/project?page=${page}`}
+          getHref={(page: number) => `/projects?page=${page}`}
         />
       </div>
 
       <Link
-        href="/projects/add"
+        href="/projects/new"
         className={buttonVariants({
           variant: "primary",
           className:

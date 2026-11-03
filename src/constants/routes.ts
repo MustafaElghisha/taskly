@@ -2,10 +2,10 @@ import EpicsIcon from "@/assets/icons/EpicsIcon.svg";
 import TasksIcon from "@/assets/icons/TasksIcon.svg";
 import ProjectsIcon from "@/assets/icons/ProjectsIcon.svg";
 import MembersIcon from "@/assets/icons/MembersIcon.svg";
-import DetailsIcon from "@/assets/icons/DetailsIcon.svg";
 import StatisticsIcon from "@/assets/icons/StatisticsIcon.svg";
+import EditIcon from "@/assets/icons/EditIcon.svg";
 
-export const ACTIVE_PROJECT_ROUTES = [
+export const MOBILE_NAV_ITEMS = [
   {
     title: "epics",
     segment: "epics",
@@ -27,9 +27,32 @@ export const ACTIVE_PROJECT_ROUTES = [
     Icon: MembersIcon,
   },
   {
-    title: "details",
+    title: "edit",
     segment: "edit",
-    Icon: DetailsIcon,
+    Icon: EditIcon,
+  },
+] as const;
+
+export const PROJECT_NAV_ITEMS = [
+  {
+    title: "epics",
+    segment: "epics",
+    Icon: EpicsIcon,
+  },
+  {
+    title: "tasks",
+    segment: "tasks",
+    Icon: TasksIcon,
+  },
+  {
+    title: "members",
+    segment: "members",
+    Icon: MembersIcon,
+  },
+  {
+    title: "edit",
+    segment: "edit",
+    Icon: EditIcon,
   },
 ] as const;
 
@@ -44,4 +67,4 @@ export const NAV_ITEMS = [
     segment: "statistics",
     Icon: StatisticsIcon,
   },
-];
+] as const;

@@ -178,7 +178,7 @@ export default function EditEpicForm({
             Tasks
           </h2>
           <Link
-            href={`/projects/${projectId}/tasks/add?epic_id=${epicId}`}
+            href={`/projects/${projectId}/tasks/new?epic_id=${epicId}`}
             className="text-primary flex items-center gap-1 text-sm font-semibold"
           >
             <PlusIcon />
@@ -210,7 +210,7 @@ export default function EditEpicForm({
               No tasks have been added to this epic yet
             </p>
             <Link
-              href={`/projects/${projectId}/tasks/add?epic_id=${epicId}`}
+              href={`/projects/${projectId}/tasks/new?epic_id=${epicId}`}
               className={cn(
                 buttonVariants({ variant: "primary" }),
                 "gap-2 rounded-xs px-4 py-2 text-xs leading-4 font-bold md:px-6 md:py-2.5",

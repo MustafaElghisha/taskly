@@ -109,7 +109,7 @@ export default function ProjectForm({
           </Field>
           <div className="flex flex-col-reverse items-center justify-between gap-y-7 pt-4 md:flex-row">
             <Link
-              href={"/project"}
+              href={"/projects"}
               className={buttonVariants({ variant: "ghost" })}
             >
               Back

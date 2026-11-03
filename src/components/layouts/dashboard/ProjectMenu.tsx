@@ -1,4 +1,4 @@
-import { ACTIVE_PROJECT_ROUTES } from "@/constants/routes";
+import { PROJECT_NAV_ITEMS } from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
@@ -9,8 +9,7 @@ export default function ProjectMenu({ className }: { className?: string }) {
 
   return (
     <ul className={cn("flex flex-col gap-1 p-2", className)}>
-      {ACTIVE_PROJECT_ROUTES.map(({ title, segment, Icon }) => {
-        if (segment === "projects") return null;
+      {PROJECT_NAV_ITEMS.map(({ title, segment, Icon }) => {
         return (
           <li key={title}>
             <Link
