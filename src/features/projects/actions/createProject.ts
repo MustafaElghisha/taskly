@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { authenticatedFetch } from "@/lib/auth/authenticatedFetch";
 
 export async function createProject({
@@ -29,6 +30,8 @@ export async function createProject({
         message: error.message ?? "Failed to add new project. Try again later.",
       };
     }
+
+    revalidatePath(`/projects`);
 
     return {
       success: true,
