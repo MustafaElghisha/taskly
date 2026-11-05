@@ -18,7 +18,7 @@ export default function ProjectList({
   const isMobile = useIsMobile();
 
   return (
-    <div className="py-6 md:pt-10 md:pb-17.5">
+    <>
       {isMobile ? (
         <InfiniteProjectList
           initialProjects={projects}
@@ -26,7 +26,7 @@ export default function ProjectList({
           totalPages={totalPages}
         />
       ) : (
-        <ul className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-6">
+        <ul className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4">
           {projects.map((project) => (
             <li key={project.id}>
               <ProjectCard {...project} />
@@ -37,6 +37,6 @@ export default function ProjectList({
           </li>
         </ul>
       )}
-    </div>
+    </>
   );
 }

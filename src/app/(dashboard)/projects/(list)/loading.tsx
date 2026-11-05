@@ -3,7 +3,7 @@ import ProjectCardSkeleton from "@/features/projects/components/ProjectCardSkele
 
 export default function ProjectsLoading() {
   return (
-    <div className="p-8">
+    <div className="flex min-h-full flex-col gap-6 p-4 md:gap-10 md:p-8">
       <div className="flex flex-wrap items-end justify-between gap-x-20 gap-y-4">
         <div className="flex flex-col gap-1">
           <h2 className="text-2xl leading-8 font-semibold tracking-tight text-slate-800 md:text-3xl md:leading-9">
@@ -15,12 +15,10 @@ export default function ProjectsLoading() {
         </div>
         <Skeleton className="hidden h-10 w-53 rounded-xs md:block" />
       </div>
-      <div className="py-10">
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4 md:gap-6">
-          {Array.from({ length: 5 }).map((_, index) => (
-            <ProjectCardSkeleton key={index} />
-          ))}
-        </div>
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <ProjectCardSkeleton key={index} />
+        ))}
       </div>
     </div>
   );

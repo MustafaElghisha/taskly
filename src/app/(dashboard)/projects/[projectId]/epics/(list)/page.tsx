@@ -23,12 +23,12 @@ export default async function EpicsPage({
     searchTerm,
   );
 
-  if (!epics.length && searchTerm === "") {
+  if (!totalPages && searchTerm === "") {
     return <EmptyEpics projectId={projectId} />;
   }
 
   return (
-    <div className="flex h-full flex-col px-6 md:px-8">
+    <div className="flex min-h-full flex-col gap-6 p-4 md:gap-10 md:p-8">
       <div className="flex flex-wrap items-end justify-between gap-x-20 gap-y-4 pt-4 md:pt-8">
         <h1 className="hidden text-3xl leading-9 font-bold tracking-tight text-slate-800 md:block">
           Project Epics
@@ -50,8 +50,12 @@ export default async function EpicsPage({
 
       {epics.length ? (
         <>
-          <EpicsList epics={epics} projectId={projectId} />
-
+          <EpicsList
+            epics={epics}
+            currentPage={Number(page)}
+            totalPages={totalPages}
+            projectId={projectId}
+          />
           <div className="mt-auto hidden justify-end py-8 md:flex">
             <TruncatedPagination
               totalPages={totalPages}
