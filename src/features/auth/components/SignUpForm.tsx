@@ -21,9 +21,9 @@ export default function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="md:shadow-form-container mx-auto flex max-w-xl flex-col rounded-lg md:items-center md:bg-white md:p-12">
-      <div className="md:text-center">
-        <h1 className="text-heading-md mb-2 leading-10 font-semibold tracking-tight text-slate-800 md:text-3xl md:leading-9">
+    <div className="md:shadow-form-container mx-auto flex max-w-xl flex-col rounded-lg md:bg-white md:p-12">
+      <div className="text-center">
+        <h1 className="mb-2 text-2xl leading-10 font-semibold tracking-tight text-slate-800 md:text-3xl md:leading-9">
           Create your workspace
         </h1>
         <FieldDescription>

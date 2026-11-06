@@ -10,14 +10,14 @@ import {
 
 export default function MembersLoading() {
   return (
-    <div className="px-4 py-4 md:px-8">
-      <div className="flex flex-wrap items-end justify-center gap-x-20 gap-y-4 md:mb-20 md:justify-between">
+    <div className="flex min-h-full flex-col gap-2 p-4 md:gap-10 md:p-8">
+      <div className="flex flex-wrap items-end justify-center gap-x-20 gap-y-4 md:justify-between">
         <h1 className="text-heading-lg leading-10 font-semibold tracking-tight text-slate-800 md:text-4xl">
           Project Members
         </h1>
         <Skeleton className="hidden h-11 w-45 rounded-xs md:block" />
       </div>
-      <div className="mx-auto w-fit">
+      <div className="mx-auto w-fit md:my-10">
         <Table>
           <colgroup>
             <col className="w-2/3" />

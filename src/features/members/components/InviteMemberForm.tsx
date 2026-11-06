@@ -14,7 +14,7 @@ export default function InviteMemberForm() {
   const router = useRouter();
 
   return (
-    <div className="flex max-w-md flex-col gap-6 rounded-lg bg-white p-8">
+    <div className="flex max-w-md flex-col gap-6 rounded-lg bg-white p-4 md:p-8">
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between">
           <div className="bg-surface-low flex size-12 items-center justify-center rounded-lg">

@@ -19,8 +19,8 @@ export default function ForgotPasswordForm() {
 
   return (
     <div className="mx-auto flex max-w-md flex-col items-center gap-6">
-      <div className="shadow-form-container flex w-full flex-col gap-8 rounded-lg bg-white p-8 md:p-10">
-        <div className="flex flex-col items-center gap-2 text-center md:items-start md:text-start">
+      <div className="md:shadow-form-container flex w-full flex-col gap-8 rounded-lg md:bg-white md:p-10">
+        <div className="flex flex-col items-center gap-2 text-center">
           <h1 className="md:text-heading-lg text-2xl leading-8 font-semibold text-slate-800 md:leading-10 md:tracking-tighter">
             Forgot password?
           </h1>

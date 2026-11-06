@@ -20,7 +20,7 @@ export default function TaskDetails({ task }: { task: Task }) {
   return (
     <div className="mx-auto grid h-full w-full max-w-4xl md:grid-cols-[5fr_3fr]">
       <div className="border-blue-150 md:border-r">
-        <div className="bg-surface-low flex flex-col gap-4 rounded-tl-lg px-6 pt-12 pb-4 md:gap-6 md:bg-white md:px-8 md:py-6">
+        <div className="bg-surface-low flex flex-col gap-4 rounded-tl-lg p-4 md:gap-6 md:bg-white md:p-8">
           <div className="flex items-center justify-between">
             <span
               className="flex rounded-xs px-2 py-0.5 text-xs leading-4 font-bold tracking-widest"

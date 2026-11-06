@@ -47,8 +47,8 @@ export default function ProjectForm({
   watchDescription,
 }: ProjectFormProps) {
   return (
-    <div className="mx-auto max-w-2xl">
-      <div className="md:shadow-form-container flex flex-col gap-8 rounded-t-lg md:mt-11 md:gap-0 md:bg-white">
+    <div className="mx-auto w-full max-w-2xl">
+      <div className="md:shadow-form-container flex flex-col gap-8 rounded-t-lg md:gap-0 md:bg-white">
         <div className="flex items-center gap-4 md:p-8">
           <div className="bg-primary-container/10 hidden items-center justify-center rounded-sm p-4 md:flex">
             <InitializeIcon />
@@ -133,7 +133,7 @@ export default function ProjectForm({
         </form>
       </div>
 
-      <div className="bg-surface-low -mt-1 flex flex-col gap-2 rounded-lg p-6 md:mb-11 md:flex-row md:items-baseline md:rounded-t-none">
+      <div className="bg-surface-low -mt-1 flex flex-col gap-2 rounded-lg p-6 md:flex-row md:items-baseline md:rounded-t-none">
         <div className="hidden md:block">
           <TipIcon />
         </div>

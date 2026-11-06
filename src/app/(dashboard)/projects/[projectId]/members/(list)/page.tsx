@@ -15,8 +15,8 @@ export default async function MembersPage({
   const members = await getProjectMembers(projectId);
 
   return (
-    <div className="px-4 py-4 md:px-8">
-      <div className="flex flex-wrap items-end justify-center gap-x-20 gap-y-4 md:mb-20 md:justify-between">
+    <div className="flex min-h-full flex-col gap-2 p-4 md:gap-10 md:p-8">
+      <div className="flex flex-wrap items-end justify-center gap-x-20 gap-y-4 md:justify-between">
         <h1 className="text-heading-lg leading-10 font-semibold tracking-tight text-slate-800 md:text-4xl">
           Project Members
         </h1>
@@ -33,18 +33,15 @@ export default async function MembersPage({
         </Link>
       </div>
 
-      <div className="mx-auto w-fit">
+      <div className="mx-auto w-fit md:my-10">
         <MembersTable members={members} />
       </div>
 
       <Link
         href={`/projects/${projectId}/members/invite`}
-        className={cn(
-          buttonVariants({ variant: "primary" }),
-          "fixed right-4 bottom-22 size-10 rounded-xl p-0 md:hidden",
-        )}
+        className="bg-primary-gradient fixed right-4 bottom-20.5 flex size-12 items-center justify-center rounded-lg text-white md:hidden"
       >
-        <UserPlusIcon />
+        <UserPlusIcon className="scale-110" />
       </Link>
     </div>
   );

@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/Skeleton";
 
 export default function Loading() {
   return (
-    <div className="px-6 py-8 md:px-8 md:pt-4 md:pb-6">
+    <div className="min-h-full p-4 md:p-8">
       <h1 className="hidden text-4xl leading-10 font-semibold tracking-tight text-slate-800 md:block">
         Edit Project
       </h1>

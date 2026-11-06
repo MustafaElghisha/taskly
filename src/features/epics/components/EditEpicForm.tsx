@@ -40,7 +40,7 @@ export default function EditEpicForm({
 
   return (
     <form
-      className="md:shadow-edit-container mx-auto grid max-w-2xl rounded-lg p-6 md:bg-white md:p-8"
+      className="md:shadow-edit-container mx-auto grid max-w-2xl rounded-lg p-4 md:bg-white md:p-8"
       onSubmit={onSubmit}
     >
       <div className="flex items-center justify-between">

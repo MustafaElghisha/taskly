@@ -76,13 +76,9 @@ export default async function EpicsPage({
 
       <Link
         href={`/projects/${projectId}/epics/new`}
-        className={buttonVariants({
-          variant: "primary",
-          className:
-            "fixed right-6 bottom-22 size-14 rounded-lg p-1! md:hidden",
-        })}
+        className="bg-primary-gradient fixed right-4 bottom-20.5 flex size-12 items-center justify-center rounded-lg text-white md:hidden"
       >
-        <PlusIcon />
+        <PlusIcon className="scale-140" />
       </Link>
     </div>
   );

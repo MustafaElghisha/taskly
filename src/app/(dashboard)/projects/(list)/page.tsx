@@ -55,13 +55,9 @@ export default async function ProjectPage({
 
       <Link
         href="/projects/new"
-        className={buttonVariants({
-          variant: "primary",
-          className:
-            "fixed right-5 bottom-22 size-14 rounded-xl p-1! md:hidden",
-        })}
+        className="bg-primary-gradient fixed right-4 bottom-20.5 flex size-12 items-center justify-center rounded-lg text-white md:hidden"
       >
-        <PlusIcon />
+        <PlusIcon className="scale-140" />
       </Link>
     </div>
   );

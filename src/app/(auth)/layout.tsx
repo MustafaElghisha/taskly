@@ -8,7 +8,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <>
       <AuthHeader />
-      <main>{children}</main>
+      <main className="min-h-full px-4 py-8 md:px-8 md:py-16">{children}</main>
     </>
   );
 }

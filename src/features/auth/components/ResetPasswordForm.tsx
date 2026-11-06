@@ -17,8 +17,8 @@ export default function ResetPasswordForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="shadow-form-container mx-auto flex max-w-lg flex-col gap-6 rounded-lg bg-white p-8.25 md:px-12.5 md:pt-9 md:pb-7.5">
-      <div className="text-center md:text-start">
+    <div className="md:shadow-form-container mx-auto flex max-w-lg flex-col gap-6 rounded-lg md:bg-white md:p-12">
+      <div className="text-center">
         <h1 className="text-2xl leading-7.5 font-semibold tracking-tight text-slate-800">
           Create a New Password
         </h1>

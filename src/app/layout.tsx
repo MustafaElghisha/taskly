@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} h-dvh antialiased`}>
       <body className="flex min-h-full flex-col">
         {children}
         <div id="modal-root" />

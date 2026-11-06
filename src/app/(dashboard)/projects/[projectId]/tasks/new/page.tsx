@@ -13,7 +13,7 @@ export default async function AddTaskPage({
   const { data: epics } = await getEpics(projectId);
 
   return (
-    <div className="md:m-8">
+    <div className="md:p-8">
       <CreateTaskForm members={members} epics={epics} />
     </div>
   );

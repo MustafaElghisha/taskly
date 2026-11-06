@@ -24,7 +24,7 @@ export default function LoginForm() {
         <h1 className="mb-2 text-2xl leading-8 font-semibold tracking-tight text-slate-800 md:text-3xl md:leading-9">
           Welcome Back
         </h1>
-        <FieldDescription className="max-w-[29ch] md:max-w-full">
+        <FieldDescription className="md:max-w-full">
           Please enter your details to access your workspace
         </FieldDescription>
       </div>

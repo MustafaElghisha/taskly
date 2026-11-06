@@ -10,14 +10,14 @@ export default async function AddEpicPage({
   const members = await getProjectMembers(projectId);
 
   return (
-    <div className="mx-auto flex max-w-4xl flex-col gap-6 px-6 py-8 md:gap-8">
+    <div className="flex min-h-full flex-col gap-6 p-4 md:gap-10 md:p-8">
       <div className="flex flex-col gap-1.5 md:gap-2">
         <h1 className="text-2xl leading-8 font-semibold tracking-tight text-slate-800 md:text-4xl md:leading-10 md:font-bold">
           Create New Epic
         </h1>
-        <p className="max-w-lg leading-6 text-slate-600">
-          Define a major project phase or high-level milestone to group related
-          tasks and track architectural progress.
+        <p className="leading-6 text-slate-600">
+          Define a major project phase to group related tasks and track
+          progress.
         </p>
       </div>
       <CreateEpicForm projectId={projectId} members={members} />

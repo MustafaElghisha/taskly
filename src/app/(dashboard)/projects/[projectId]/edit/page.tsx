@@ -10,7 +10,7 @@ export default async function EditPage({
   const project = await getProject(projectId);
 
   return (
-    <div className="px-6 py-8 md:px-8 md:pt-4 md:pb-6">
+    <div className="flex min-h-full flex-col gap-6 p-4 md:gap-10 md:p-8">
       <h1 className="hidden text-4xl leading-10 font-semibold tracking-tight text-slate-800 md:block">
         Edit Project
       </h1>

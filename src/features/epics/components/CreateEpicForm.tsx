@@ -25,8 +25,11 @@ export default function CreateEpicForm({
     useCreateEpic(projectId);
 
   return (
-    <div className="md:shadow-form-container md:py rounded-lg md:bg-white md:p-8">
-      <form className="flex flex-col gap-6 md:gap-8" onSubmit={onSubmit}>
+    <div className="mx-auto w-full max-w-3xl">
+      <form
+        className="md:shadow-form-container flex flex-col gap-6 rounded-lg md:gap-8 md:bg-white md:p-8"
+        onSubmit={onSubmit}
+      >
         <Field className="grid md:grid-cols-4">
           <FieldLabel htmlFor="epic-title" className="p-0">
             TITLE <span className="text-error">*</span>
