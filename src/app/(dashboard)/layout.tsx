@@ -1,4 +1,4 @@
-import { getUser } from "@/actions/getUser";
+import { getUser } from "@/features/auth/actions/getUser";
 import MainLayoutClient from "@/components/layouts/dashboard/MainLayoutClient";
 
 type MainLayoutProps = {
