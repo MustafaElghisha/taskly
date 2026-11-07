@@ -161,7 +161,7 @@ export default function MainSidebar({
               disabled={isLoggingOut}
             >
               <LogoutIcon />
-              {!isCollapsed && (isLoggingOut ? "Logging Out" : "Logout")}
+              {!isCollapsed && (isLoggingOut ? "Logging Out..." : "Logout")}
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

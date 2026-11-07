@@ -11,9 +11,9 @@ export function useLogout() {
     setIsLoggingOut(true);
 
     const res = await logout();
-    setIsLoggingOut(false);
 
     if (!res.success) {
+      setIsLoggingOut(false);
       toast.error(res.message);
       return;
     }

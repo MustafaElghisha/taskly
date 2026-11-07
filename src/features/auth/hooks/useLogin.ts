@@ -1,10 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import { login } from "../actions/login";
 import { LoginInput, loginInputSchema } from "../schemas/loginSchema";
 
 const useLogin = () => {
+  const [isRedirecting, setIsRedirecting] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -34,11 +37,15 @@ const useLogin = () => {
       return;
     }
 
+    setIsRedirecting(true);
+
     const redirect = searchParams.get("redirect");
     router.replace(redirect || "/projects");
   });
 
-  return { register, errors, isSubmitting, onSubmit };
+  const isLoading = isSubmitting || isRedirecting;
+
+  return { register, errors, isLoading, onSubmit };
 };
 
 export { useLogin };

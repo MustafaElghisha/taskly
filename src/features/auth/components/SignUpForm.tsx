@@ -15,8 +15,7 @@ import { useSignUp } from "../hooks/useSignUp";
 import ParamLink from "@/components/ui/ParamLink";
 
 export default function SignUpForm() {
-  const { register, errors, isSubmitting, watchPassword, onSubmit } =
-    useSignUp();
+  const { register, errors, isLoading, watchPassword, onSubmit } = useSignUp();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -108,8 +107,8 @@ export default function SignUpForm() {
           </Field>
         </div>
         <PasswordRequirements watchPassword={watchPassword} />
-        <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Creating..." : "Create Account"}
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? "Creating..." : "Create Account"}
         </Button>
         {errors.root && (
           <FieldError className="self-center">{errors.root.message}</FieldError>

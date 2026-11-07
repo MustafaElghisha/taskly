@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { signUp } from "../actions/signUp";
 import { SignUpInput, signUpInputSchema } from "../schemas/signUpSchema";
 
@@ -29,6 +29,8 @@ const useSignUp = () => {
 
   const watchPassword = watch("password");
 
+  const [isRedirecting, setIsRedirecting] = useState(false);
+
   useEffect(() => {
     if (getFieldState("confirmPassword").isDirty) {
       trigger("confirmPassword");
@@ -43,6 +45,7 @@ const useSignUp = () => {
 
     try {
       await signUp(data);
+      setIsRedirecting(true);
       const redirect = searchParams.get("redirect");
       router.push(redirect || "/login");
     } catch (error) {
@@ -53,7 +56,9 @@ const useSignUp = () => {
     }
   });
 
-  return { register, errors, isSubmitting, onSubmit, watchPassword };
+  const isLoading = isSubmitting || isRedirecting;
+
+  return { register, errors, isLoading, onSubmit, watchPassword };
 };
 
 export { useSignUp };

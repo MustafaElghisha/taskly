@@ -15,7 +15,7 @@ import { useLogin } from "../hooks/useLogin";
 import ParamLink from "@/components/ui/ParamLink";
 
 export default function LoginForm() {
-  const { register, errors, isSubmitting, onSubmit } = useLogin();
+  const { register, errors, isLoading, onSubmit } = useLogin();
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -93,8 +93,8 @@ export default function LoginForm() {
             Forgot Password?
           </Link>
         </div>
-        <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Logging In..." : "Log In"}
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? "Logging In..." : "Log In"}
         </Button>
         {errors.root && (
           <FieldError className="self-center">{errors.root.message}</FieldError>
