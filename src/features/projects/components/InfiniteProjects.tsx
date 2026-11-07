@@ -5,7 +5,7 @@ import { getProjects } from "../actions/getProjects";
 import ProjectCard from "./ProjectCard";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 
-export default function InfiniteProjectList({
+export default function InfiniteProjects({
   initialProjects,
   startPage,
   totalPages,

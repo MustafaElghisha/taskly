@@ -2,10 +2,9 @@ import Link from "next/link";
 
 import PlusIcon from "@/assets/icons/PlusIcon.svg";
 import { buttonVariants } from "@/components/ui/Button";
-import TruncatedPagination from "@/components/ui/TruncatedPagination";
 import { getProjects } from "@/features/projects/actions/getProjects";
 import EmptyProjects from "@/features/projects/components/EmptyProjects";
-import ProjectList from "@/features/projects/components/ProjectList";
+import ProjectsList from "@/features/projects/components/ProjectsList";
 
 export default async function ProjectPage({
   searchParams,
@@ -39,19 +38,11 @@ export default async function ProjectPage({
         </Link>
       </div>
 
-      <ProjectList
+      <ProjectsList
         projects={projects}
         currentPage={Number(page)}
         totalPages={totalPages}
       />
-
-      <div className="mt-auto hidden justify-end py-8 md:flex">
-        <TruncatedPagination
-          currentPage={Number(page)}
-          totalPages={totalPages}
-          getHref={(page: number) => `/projects?page=${page}`}
-        />
-      </div>
 
       <Link
         href="/projects/new"
