@@ -1,11 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { Epic } from "@/schemas/epicSchema";
-import EpicCard from "./EpicCard";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import InfiniteEpicList from "./InfiniteEpicList";
+import InfiniteEpics from "./InfiniteEpics";
 import { useSearchParams } from "next/navigation";
+import PaginatedEpics from "./PaginatedEpics";
 
 export default function EpicsList({
   epics,
@@ -25,7 +24,7 @@ export default function EpicsList({
   return (
     <>
       {isMobile ? (
-        <InfiniteEpicList
+        <InfiniteEpics
           key={`${projectId}-${searchTerm}`}
           projectId={projectId}
           initialEpics={epics}
@@ -34,15 +33,13 @@ export default function EpicsList({
           searchTerm={searchTerm}
         />
       ) : (
-        <ul className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4 md:grid-cols-[repeat(auto-fill,minmax(340px,1fr))]">
-          {epics.map((epic) => (
-            <li key={epic.id}>
-              <Link href={`/projects/${projectId}/epics/view/${epic.id}`}>
-                <EpicCard {...epic} />
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <PaginatedEpics
+          projectId={projectId}
+          initialEpics={epics}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          searchTerm={searchTerm}
+        />
       )}
     </>
   );

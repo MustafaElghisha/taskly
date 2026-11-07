@@ -7,7 +7,7 @@ import { getEpics } from "../actions/getEpics";
 import EpicCard from "./EpicCard";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 
-export default function InfiniteEpicList({
+export default function InfiniteEpics({
   projectId,
   searchTerm,
   initialEpics,

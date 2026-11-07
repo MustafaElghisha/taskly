@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/Button";
-import TruncatedPagination from "@/components/ui/TruncatedPagination";
 import { getEpics } from "@/features/epics/actions/getEpics";
 import EmptyEpics from "@/features/epics/components/EmptyEpics";
 import PlusIcon from "@/assets/icons/PlusIcon.svg";
@@ -49,26 +48,15 @@ export default async function EpicsPage({
       </div>
 
       {epics.length ? (
-        <>
-          <EpicsList
-            epics={epics}
-            currentPage={Number(page)}
-            totalPages={totalPages}
-            projectId={projectId}
-          />
-          <div className="mt-auto hidden justify-end py-8 md:flex">
-            <TruncatedPagination
-              totalPages={totalPages}
-              currentPage={Number(page)}
-              getHref={(page) =>
-                `/projects/${projectId}/epics?page=${page}${searchTerm.length ? `&searchTerm=${searchTerm}` : ``}`
-              }
-            />
-          </div>
-        </>
+        <EpicsList
+          epics={epics}
+          currentPage={Number(page)}
+          totalPages={totalPages}
+          projectId={projectId}
+        />
       ) : (
         <div className="flex h-full items-center justify-center">
-          <p className="text-lg leading-7.5 font-medium text-slate-600">
+          <p className="leading-7.5 font-medium text-slate-600">
             No epics found matching your search
           </p>
         </div>
