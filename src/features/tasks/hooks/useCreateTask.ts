@@ -48,6 +48,11 @@ const useCreateTask = () => {
 
     reset();
     toast.success(res.message);
+    window.dispatchEvent(
+      new CustomEvent("taskly:task-created", {
+        detail: { projectId },
+      }),
+    );
     router.back();
   });
 

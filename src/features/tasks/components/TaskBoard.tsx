@@ -1,27 +1,64 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { TASK_STATUSES, TaskStatus } from "@/features/tasks/constants/tasks";
 import TasksColumn from "@/features/tasks/components/TasksColumn";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import InfiniteTasksList from "./InfiniteTasksList";
-import { DragDropProvider } from "@dnd-kit/react";
+import { DragDropProvider, DragEndEvent } from "@dnd-kit/react";
 import { useTaskBoard } from "@/features/tasks/hooks/useTaskBoard";
 import { updateTaskStatus } from "@/features/tasks/actions/updateTaskStatus";
 import { toast } from "sonner";
-import { DragEndEvent } from "@dnd-kit/react";
 
 export default function TaskBoard({ projectId }: { projectId: string }) {
-  const isMobile = useIsMobile();
   const searchParams = useSearchParams();
   const searchTerm = searchParams.get("searchTerm") ?? "";
+
+  const [revision, setRevision] = useState(0);
+
+  useEffect(() => {
+    function handleTaskCreated(event: Event) {
+      const customEvent = event as CustomEvent<{
+        projectId: string;
+      }>;
+
+      if (customEvent.detail.projectId === projectId) {
+        setRevision((prev) => prev + 1);
+      }
+    }
+
+    window.addEventListener("taskly:task-created", handleTaskCreated);
+
+    return () => {
+      window.removeEventListener("taskly:task-created", handleTaskCreated);
+    };
+  }, [projectId]);
+
+  return (
+    <TaskBoardContent
+      key={`${projectId}-${searchTerm}-${revision}`}
+      projectId={projectId}
+      searchTerm={searchTerm}
+    />
+  );
+}
+
+function TaskBoardContent({
+  projectId,
+  searchTerm,
+}: {
+  projectId: string;
+  searchTerm: string;
+}) {
+  const isMobile = useIsMobile();
 
   const { columns, loading, getLastElementRef, moveTask } = useTaskBoard(
     projectId,
     searchTerm,
   );
 
-  function handleDragEnd(event: DragEndEvent) {
+  async function handleDragEnd(event: DragEndEvent) {
     if (event.canceled) return;
 
     const id = event.operation.source?.id as string;
@@ -29,8 +66,8 @@ export default function TaskBoard({ projectId }: { projectId: string }) {
 
     if (!id || !toStatus) return;
 
-    const fromStatus = (Object.keys(columns) as TaskStatus[]).find((s) =>
-      columns[s].some((t) => t.id === id),
+    const fromStatus = (Object.keys(columns) as TaskStatus[]).find((status) =>
+      columns[status].some((task) => task.id === id),
     );
 
     if (!fromStatus || fromStatus === toStatus) return;

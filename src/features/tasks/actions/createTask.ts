@@ -38,7 +38,6 @@ export async function createTask(
       };
     }
 
-    revalidatePath(`/projects/${projectId}/tasks`);
     revalidatePath(`/projects/${projectId}/epics/view/${epic_id}`);
     return {
       success: true,
