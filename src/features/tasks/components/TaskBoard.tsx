@@ -93,7 +93,7 @@ function TaskBoardContent({
 
   return (
     <DragDropProvider onDragEnd={handleDragEnd}>
-      <ul className="hidden h-full gap-6 overflow-x-auto overflow-y-hidden px-8 py-6 md:flex">
+      <ul className="hidden h-full gap-6 overflow-x-auto overflow-y-hidden px-8 pt-6 md:flex">
         {TASK_STATUSES.map((status) => (
           <li key={status}>
             <TasksColumn

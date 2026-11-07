@@ -13,7 +13,7 @@ export default async function TasksPage({
   const { projectId } = await params;
 
   return (
-    <div className="flex h-full flex-col px-4 pt-6 md:px-0">
+    <div className="flex h-full flex-col px-4 pt-4 md:px-0 md:pt-8">
       <div className="mb-7 flex flex-col flex-wrap gap-x-20 md:mb-0 md:flex-row md:items-end md:justify-between md:gap-y-4 md:px-8">
         <div className="flex flex-col md:gap-1">
           <h1 className="text-3xl leading-9 font-semibold tracking-tight text-slate-800">

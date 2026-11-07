@@ -27,7 +27,7 @@ export default function MainBreadCrumb() {
   if (routeSegments.length === 1) return null;
 
   return (
-    <BreadCrumb>
+    <BreadCrumb className="mt-6">
       <BreadCrumbList>
         {routeSegments.map((route) => {
           const isLast = route === routeSegments.at(-1);

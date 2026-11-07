@@ -51,7 +51,7 @@ export default async function StatisticsPage({ searchParams }: Props) {
   ]);
 
   return (
-    <div className="flex flex-col gap-6 p-4 md:gap-8 md:p-8 md:pt-0">
+    <div className="flex flex-col gap-6 p-4 md:gap-8 md:p-8">
       <div className="hidden md:block">
         <h1 className="text-3xl leading-9 font-bold tracking-tight text-slate-800">
           Weekly Planner
