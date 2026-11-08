@@ -1,288 +1,209 @@
-# Shared Components
+# Taskly
 
-## Overview
-
-This document lists the UI components identified as suitable for reuse after reviewing the existing Taskly screens.
-
-The review covers the current application screens and shared layouts, including:
-
-- Login
-- Sign Up
-- Projects
-- Add New Project
-- Projects loading state
-- Projects error state
-
-Components are considered shared when they are used across multiple screens or provide a common UI pattern that is intentionally reused with different variants or content.
+A collaborative project management app built with Next.js 16 and Supabase. Teams can create projects, organize work into epics, manage tasks on a drag-and-drop Kanban board, invite members via email, and track progress on a weekly statistics dashboard.
 
 ---
 
-## Shared Components
+## Table of Contents
 
-| #   | Component        | Description                                                                                 | Used In                                                         | Screenshot                                                         |
-| --- | ---------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------------------------------------ |
-| 1   | Logo             | Taskly brand/logo used in application navigation and authentication                         | Login, Sign Up, Projects, Add New Project, Project Epics        | ![Screenshot placeholder](./docs/screenshots/logo.png)             |
-| 2   | AuthHeader       | Authentication header containing the Taskly logo                                            | Login, Sign Up                                                  | ![Screenshot placeholder](./docs/screenshots/AuthHeader.png)       |
-| 3   | MainHeader       | Authenticated application header containing mobile navigation controls and user information | Projects, Add New Project, Project Epics                        | ![Screenshot placeholder](./docs/screenshots/MainHeader.png)       |
-| 4   | MainSidebar      | Primary desktop navigation for the authenticated application                                | Projects, Add New Project, Project Epics                        | ![Screenshot placeholder](./docs/screenshots/MainSidebar.png)      |
-| 5   | MobileNavigation | Bottom navigation used on small screens                                                     | Projects, Add New Project, Project Epics                        | ![Screenshot placeholder](./docs/screenshots/MobileNavigation.png) |
-| 6   | UserInfo         | Displays the authenticated user's name, job title, and avatar initials                      | Projects, Add New Project, Project Epics                        | ![Screenshot placeholder](./docs/screenshots/UserInfo.png)         |
-| 7   | MainBreadCrumb   | Route BreadCrumb navigation for nested authenticated pages                                  | Add New Project, Project Epics                                  | ![Screenshot placeholder](./docs/screenshots/MainBreadCrumb.png)   |
-| 8   | Button           | Reusable action button with multiple visual variants                                        | Login, Sign Up, Projects, Add New Project, Projects error state | ![Screenshot placeholder](./docs/screenshots/button.png)           |
-| 9   | Input            | Reusable text and checkbox input field                                                      | Login, Sign Up, Add New Project                                 | ![Screenshot placeholder](./docs/screenshots/input.png)            |
-| 10  | Field            | Reusable form field structure for labels, descriptions, and validation errors               | Login, Sign Up, Add New Project                                 | ![Screenshot placeholder](./docs/screenshots/field.png)            |
-| 11  | Separator        | Visual divider used to separate sections of the interface                                   | MainHeader, MainSidebar, Add New Project                        | ![Screenshot placeholder](./docs/screenshots/separator.png)        |
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Environment Variables](#environment-variables)
+- [Authentication](#authentication)
+- [Core Concepts](#core-concepts)
+- [Scripts](#scripts)
 
 ---
 
-## Component Details
+## Features
 
-### 1. Logo
-
-**Purpose:**  
-Provides the Taskly brand identity in places where application branding is required.
-
-**Used in:**
-
-- Authentication header on Login and Sign Up
-- Desktop sidebar on authenticated pages
-
-**Why reusable:**  
-The same brand mark is used in both authentication and application navigation. The component also supports the sidebar's collapsed state.
-
-**Component:** `src/components/Logo.tsx`
+- **Authentication** — Sign up, log in with "Remember Me", forgot password / reset password flow. Sessions are managed with short-lived access tokens (1 hour) and optional long-lived refresh tokens (30 days) stored in `httpOnly` cookies.
+- **Projects** — Create and edit projects with a name and description. Paginated project listing with infinite scroll.
+- **Epics** — Group related tasks under a named epic with a deadline and assignee. Epics are scoped to a project.
+- **Tasks** — Full Kanban board with 8 workflow statuses: `TO_DO`, `IN_PROGRESS`, `BLOCKED`, `IN_REVIEW`, `READY_FOR_QA`, `REOPENED`, `READY_FOR_PRODUCTION`, and `DONE`. Tasks support a title, description, due date, assignee, and optional epic link. Drag and drop between columns with [@dnd-kit/react](https://dndkit.com/). Each column loads tasks lazily via infinite scroll.
+- **Members** — Invite collaborators to a project by email. Invitations are sent via a Supabase RPC and accepted through a token link.
+- **Statistics** — Weekly planner dashboard with KPI tiles, a Recharts bar chart, and a per-project task count table. Filterable by date range, project, and task status.
+- **Responsive** — Full mobile layout with a bottom navigation bar and floating action button.
+- **Parallel routes & intercepting routes** — Task and epic detail modals intercept navigation so the board stays in view while a user reads or edits a record.
 
 ---
 
-### 2. AuthHeader
+## Tech Stack
 
-**Purpose:**  
-Provides a consistent header for authentication screens.
-
-**Used in:**
-
-- `/login`
-- `/sign-up`
-
-**Why reusable:**  
-Both authentication screens share the same top-level branding and header layout.
-
-**Component:** `src/app/(auth)/_components/AuthHeader.tsx`
-
----
-
-### 3. MainHeader
-
-**Purpose:**  
-Provides the top header for authenticated pages. It contains the mobile navigation trigger and the authenticated user's information.
-
-**Used in:**
-
-- `/project`
-- `/projects/new`
-- `/projects/[projectId]/epics`
-
-**Why reusable:**  
-The header is part of the authenticated application shell rather than being specific to one page.
-
-**Component:** `src/app/(dashboard)/_components/MainHeader.tsx`
-
-**Variants / behavior:**
-
-- Desktop: displays user information on the right.
-- Mobile: displays the navigation menu trigger and Taskly branding.
+| Layer               | Technology                                                |
+| ------------------- | --------------------------------------------------------- |
+| Framework           | [Next.js 16](https://nextjs.org/) (App Router, Turbopack) |
+| Language            | TypeScript 5                                              |
+| Styling & UI        | Tailwind CSS 4 & (CVA + Tailwind Merge)                   |
+| Backend / Auth / DB | [Supabase](https://supabase.com/) (REST API)              |
+| Forms               | React Hook Form + Zod                                     |
+| Drag & Drop         | @dnd-kit/react                                            |
+| Charts              | Recharts                                                  |
+| Date utilities      | date-fns                                                  |
+| Toasts              | Sonner                                                    |
+| Package manager     | pnpm 12                                                   |
 
 ---
 
-### 4. MainSidebar
+## Project Structure
 
-**Purpose:**  
-Provides primary navigation for the authenticated desktop application.
+```
+src/
+├── app/
+│   ├── (auth)/                   # Auth route group
+│   │   ├── login/
+│   │   ├── sign-up/
+│   │   ├── forgot-password/
+│   │   └── reset-password/
+│   └── (dashboard)/              # Protected route group
+│       ├── projects/
+│       │   ├── (list)/           # /projects — project listing
+│       │   └── [projectId]/
+│       │       ├── @modal/       # Parallel route: intercepted modals
+│       │       │   ├── (.)tasks/new/
+│       │       │   ├── (.)tasks/view/[taskId]/
+│       │       │   ├── (.)epics/view/[epicId]/
+│       │       │   └── (.)members/invite/
+│       │       ├── tasks/        # /projects/[id]/tasks — Kanban board
+│       │       ├── epics/        # /projects/[id]/epics — epic list + new
+│       │       ├── members/      # /projects/[id]/members — member list
+│       │       └── edit/         # /projects/[id]/edit — project settings
+│       └── statistics/           # /statistics — weekly planner
+│
+├── features/                     # Feature-sliced modules
+│   ├── auth/
+│   │   ├── actions/              # Server Actions: login, logout, signUp, resetPassword …
+│   │   ├── components/           # LoginForm, SignUpForm, etc.
+│   │   └── schemas/
+│   ├── projects/
+│   ├── epics/
+│   ├── tasks/
+│   ├── members/
+│   └── statistics/
+│
+├── components/
+│   ├── ui/                       # Button, Input, Field, Badge, Separator …
+│   └── layouts/
+│       └── dashboard/            # MainLayoutClient, MainSidebar, MainHeader …
+│
+├── hooks/                        # useInfiniteScroll, useSearch, useSidebar …
+├── lib/
+│   └── auth/
+│       ├── session.ts            # Cookie helpers (access + refresh tokens)
+│       └── authenticatedFetch.ts # Supabase REST wrapper
+├── schemas/                      # Shared Zod response schemas
+└── proxy.ts                      # Next.js proxy (route protection + token refresh)
+```
 
-**Used in:**
+Each feature folder follows the same layout:
 
-- Projects
-- Add New Project
-- Project Epics
-
-**Why reusable:**  
-Navigation remains consistent throughout the authenticated area. The sidebar also supports collapsed and expanded states and contains the active-project navigation.
-
-**Component:** `src/app/(dashboard)/_components/MainSidebar.tsx`
-
-**Variants / behavior:**
-
-- Expanded desktop sidebar
-- Collapsed desktop sidebar
-- Mobile drawer
-
----
-
-### 5. MobileNavigation
-
-**Purpose:**  
-Provides bottom navigation for authenticated users on small screens.
-
-**Used in:**
-
-- Projects
-- Add New Project
-- Project Epics
-
-**Why reusable:**  
-It belongs to the authenticated application shell and is displayed consistently across dashboard screens.
-
-**Component:** `src/app/(dashboard)/_components/MobileNavigation.tsx`
-
-**Variants / behavior:**
-
-- Active navigation item
-- Inactive navigation item
-
----
-
-### 6. UserInfo
-
-**Purpose:**  
-Displays the current user's identity, including their name, optional job title, and avatar initials.
-
-**Used in:**
-
-- Projects
-- Add New Project
-- Project Epics
-
-**Why reusable:**  
-User identity information is part of the shared authenticated header and can be reused anywhere the current user's information needs to be displayed.
-
-**Component:** `src/app/(dashboard)/_components/UserInfo.tsx`
-
-**Variants / behavior:**
-
-- Desktop: name, job title, and avatar
-- Mobile: avatar only
+```
+features/<name>/
+├── actions/     # Next.js Server Actions (data fetching + mutations)
+├── components/  # React components specific to this feature
+├── hooks/       # Client-side mutation hooks (React Hook Form + Server Action)
+└── schemas/     # Zod schemas for form inputs and API responses
+```
 
 ---
 
-### 7. MainBreadCrumb
+## Getting Started
 
-**Purpose:**  
-Displays the current route hierarchy for nested authenticated pages.
+### Prerequisites
 
-**Used in:**
+- Node.js ≥ 18
+- pnpm 12 (`npm install -g pnpm@12`)
+- A Supabase project with the matching database schema applied
 
-- Add New Project
-- Project Epics
+### Installation
 
-**Why reusable:**  
-The component derives its items from the current pathname, allowing it to work across different nested routes without page-specific breadcrumb markup.
+```bash
+# 1. Clone the repository
+git clone https://github.com/your-username/taskly.git
+cd taskly
 
-**Component:** `src/app/(dashboard)/_components/MainBreadCrumb.tsx`
+# 2. Install dependencies
+pnpm install
 
-**Note:**  
-The breadcrumb is hidden on the main `/project` screen because there is no nested route hierarchy to display.
+# 3. Configure environment variables (see section below)
+cp .env.example .env.local
+# edit .env.local with your Supabase credentials
 
----
+# 4. Start the development server
+pnpm dev
+```
 
-### 8. Button
-
-**Purpose:**  
-Provides the application's reusable action button styles and behavior.
-
-**Used in:**
-
-- Login
-- Sign Up
-- Add New Project
-- Projects error state
-- Project-related actions
-
-**Why reusable:**  
-Buttons appear throughout the application and use consistent styling while supporting different semantic purposes.
-
-**Component:** `src/components/ui/Button.tsx`
-
-**Variants / examples:**
-
-- Primary action
-- Secondary action
-- Ghost action
-- Loading/disabled state
-
-Examples include:
-
-- `Log In`
-- `Sign Up`
-- `Create Account`
-- `Create Project`
-- `Back`
-- `Retry Connection`
+The app will be available at [http://localhost:3000](http://localhost:3000).
 
 ---
 
-### 9. Input
+## Environment Variables
 
-**Purpose:**  
-Provides the base input control used for collecting user and project information.
+Create a `.env.local` file at the project root with the following keys:
 
-**Used in:**
+```env
+# Your Supabase project URL (found in Project Settings → API)
+NEXT_PUBLIC_SUPABASE_URL=https://<project-ref>.supabase.co
 
-- Login
-- Sign Up
-- Add New Project
+# Service role key — keep this server-side only, never expose to the browser
+SUPABASE_SECRET_KEY=<service_role_key>
 
-**Why reusable:**  
-The same input behavior and visual treatment is used for multiple form fields throughout the application.
+# The public URL of your deployed app, used for invitation email links
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
 
-**Component:** `src/components/ui/Input.tsx`
-
-**Variants / examples:**
-
-- Text input
-- Email input
-- Password input through `PasswordInput`
-- Checkbox
+> **Note:** `SUPABASE_SECRET_KEY` is the service role key, not the anon key. It is used exclusively in Server Actions and proxy, and is never sent to the client.
 
 ---
 
-### 10. Field
+## Authentication
 
-**Purpose:**  
-Provides the common structure around form controls, including labels, descriptions, and validation messages.
+Taskly uses Supabase Auth's password grant directly, without the Supabase JS client library. Token management is handled manually:
 
-**Used in:**
+| Token               | Storage                                                | Lifetime                          |
+| ------------------- | ------------------------------------------------------ | --------------------------------- |
+| `access_token`      | `httpOnly` cookie                                      | 1 hour                            |
+| `refresh_token`     | `httpOnly` cookie (only when "Remember Me" is checked) | 30 days                           |
+| `temp_access_token` | `httpOnly` cookie                                      | 1 hour (password-reset flow only) |
 
-- Login
-- Sign Up
-- Add New Project
+**Token refresh** happens in the proxy (`src/proxy.ts`). When a request arrives for a protected route without a valid access token, the proxy attempts a silent refresh using the refresh token before redirecting to login.
 
-**Why reusable:**  
-All application forms follow the same field structure and validation presentation.
+**Protected routes:** `/projects`, `/invite`, `/statistics`
 
-**Component:** `src/components/ui/Field.tsx`
-
-**Related elements:**
-
-- `FieldLabel`
-- `FieldDescription`
-- `FieldError`
+**Public routes:** `/`, `/login`, `/sign-up`, `/forgot-password`, `/reset-password`
 
 ---
 
-### 11. Separator
+## Core Concepts
 
-**Purpose:**  
-Provides a visual divider between related sections of the interface.
+### Kanban Board
 
-**Used in:**
+The board (`TaskBoard`) renders one column per status. Each column independently paginates its tasks (10 per page) using an `IntersectionObserver` — the last card in a column triggers the next page load. The `useTaskBoard` hook manages per-column state (task list, loading state, current/total page) and exposes a `moveTask` function that the dnd-kit drag-end handler calls to optimistically reorder tasks across columns.
 
-- MainHeader
-- MainSidebar
-- Add New Project form
+### Parallel Routes & Modals
 
-**Why reusable:**  
-The same divider pattern is used in different parts of the application to establish visual separation.
+Navigating to `/projects/[id]/tasks/new` or `/projects/[id]/tasks/view/[taskId]` from within the board renders the form in a modal overlay via Next.js parallel routes (`@modal`) and intercepting routes (`(.)tasks/...`). A direct URL visit (e.g., from a shared link or page refresh) renders the full page instead.
 
-**Component:** `src/components/ui/Separator.tsx`
+### Server Actions
+
+All data mutations are Next.js Server Actions. Client components call them directly; there is no separate API layer. Each action returns a `{ success: boolean; message: string }` result that the calling hook passes to Sonner for a toast notification. `revalidatePath` is called after writes to invalidate the Next.js cache for the affected route.
+
+### Invitation Flow
+
+1. A project admin submits the **Invite Member** form with a collaborator's email.
+2. The `inviteMember` Server Action calls a Supabase RPC (`invite_member`) that generates a signed token and sends an invitation email containing a link to `NEXT_PUBLIC_APP_URL/invite?token=<token>`.
+3. The recipient clicks the link, signs in (or signs up), and the `acceptInvitation` action calls the `accept_invitation` RPC to add them to the project.
 
 ---
+
+## Scripts
+
+| Command       | Description                                 |
+| ------------- | ------------------------------------------- |
+| `pnpm dev`    | Start the development server with Turbopack |
+| `pnpm build`  | Build for production                        |
+| `pnpm start`  | Start the production server                 |
+| `pnpm lint`   | Run ESLint                                  |
+| `pnpm format` | Format all files with Prettier              |
